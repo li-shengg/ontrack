@@ -107,7 +107,7 @@ module.exports.createUser = (req, res, next) => {
 };
 
 ///////////////////////////////////////////////////////////////////////////////////
-//Check if user exists
+//Check if user exists by email
 /////////////////////////////////////////////////////////////////////////////////////
 module.exports.checkUserExistsByEmail = (req, res, next) => {
   try {
@@ -141,6 +141,41 @@ module.exports.checkUserExistsByEmail = (req, res, next) => {
 };
 
 ///////////////////////////////////////////////////////////////////////////////////
+//Check if user exists by user id
+/////////////////////////////////////////////////////////////////////////////////////
+module.exports.checkUserExistsByUserId = (req,res,next) =>{
+  try{
+    const data = {
+      userId: req.params.userId
+    }
+
+    usersModel.readUserByUserId(data, (error,results)=>{
+      if(error){
+        console.log("Error reading user by user ID: ", error);
+        res.status(500).json({
+          message: "Internal Server Error reading user by user ID.",
+        });
+      }else{
+        if(results.length > 0){
+          //If user exists
+          next()
+        }else{
+          //If user doesnt exists
+          res.status(404).json({
+            message: "User not found",
+          });
+        }
+      }
+    })
+  }catch(error){
+    console.log("Internal Server Error: ", error);
+    res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
+}
+
+///////////////////////////////////////////////////////////////////////////////////
 // Read user by username
 /////////////////////////////////////////////////////////////////////////////////////
 module.exports.loginByEmail = (req, res, next) => {
@@ -171,3 +206,30 @@ module.exports.loginByEmail = (req, res, next) => {
     });
   }
 };
+
+///////////////////////////////////////////////////////////////////////////////////
+// Delete user by user ID
+/////////////////////////////////////////////////////////////////////////////////////
+module.exports.deleteUserByUserId = (req,res) => {
+  try{
+    const data = {
+      userId: req.params.userId
+    }
+
+    usersModel.deleteUserByUserId(data, (error,results)=>{
+      if(error){
+        console.log("Error deleting user by user ID: ", error);
+        res.status(500).json({
+          message: "Internal Server Error deleting user by user ID.",
+        });
+      }else{
+        res.status(204).send()
+      }
+    })
+  }catch(error){
+    console.log("Internal Server Error: ", error);
+    res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
+}

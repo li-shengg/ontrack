@@ -39,3 +39,23 @@ module.exports.readUserByEmail = (data, callback) => {
 
   pool.query(SQLSTATEMENT, VALUES, callback);
 };
+
+module.exports.readUserByUserId = (data, callback) => {
+  const SQLSTATEMENT = `
+  SELECT * FROM Users WHERE user_id = ?;
+  `;
+
+  const VALUES = [data.userId];
+
+  pool.query(SQLSTATEMENT, VALUES, callback);
+};
+
+module.exports.deleteUserByUserId = (data, callback) => {
+  const SQLSTATEMENT = `
+  DELETE FROM Users WHERE user_id = ?;
+  `;
+
+  const VALUES = [data.userId];
+
+  pool.query(SQLSTATEMENT, VALUES, callback);
+};
