@@ -1,32 +1,35 @@
 const usersModel = require("../models/usersModel");
 
 ///////////////////////////////////////////////////////////////////////////////////
-//Check duplicate username
+//Validate user request field
 /////////////////////////////////////////////////////////////////////////////////////
-module.exports.checkDuplicateUsername = (req, res, next) => {
+module.exports.validateUserRequestField = (req, res, next) => {
   try {
-    const data = {
-      username: req.body.username,
+    //Function to check for email regular expression
+    const validateEmail = (email) => {
+      return String(email)
+        .toLowerCase()
+        .match(
+          /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        );
     };
-    usersModel.readUserByUsername(data, (error, results) => {
-      if (error) {
-        console.log("Error reading user by username: ", error);
-        res.status(500).json({
-          message: "Internal Server Error reading user by username.",
-        });
-      } else {
-        //If user with the username exists
-        if (results.length > 0) {
-          res.status(409).json({
-            message:
-              "User with the provided username already exists. Please choose a different username.",
-          });
-        } else {
-          //If username dont exists
-          next();
-        }
-      }
-    });
+    //Checking for email input
+    //Username cannot be undefined nor A Integer | Email cannot be undefined and have to follow email regular expression | Password cannot be undefined
+    if (
+      req.body.username == undefined ||
+      req.body.email == undefined ||
+      req.body.password == undefined ||
+      !isNaN(req.body.username) ||
+      !validateEmail(req.body.email)
+    ) {
+      res.status(400).json({
+        message:
+          "Bad request. Please provide valid values for 'Username', 'Email' and 'Password'.",
+      });
+      return;
+    }
+    //If everything is ok
+    next();
   } catch (error) {
     console.log("Internal Server Error: ", error);
     res.status(500).json({
@@ -92,6 +95,72 @@ module.exports.createUser = (req, res, next) => {
         //Send locals and user id
         res.locals.message = `User created successfully`;
         res.locals.userId = results.insertId;
+        next();
+      }
+    });
+  } catch (error) {
+    console.log("Internal Server Error: ", error);
+    res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
+};
+
+///////////////////////////////////////////////////////////////////////////////////
+//Check if user exists
+/////////////////////////////////////////////////////////////////////////////////////
+module.exports.checkUserExistsByEmail = (req, res, next) => {
+  try {
+    const data = {
+      email: req.body.email,
+    };
+
+    usersModel.readUserByEmail(data, (error, results) => {
+      if (error) {
+        console.log("Error reading user by email: ", error);
+        res.status(500).json({
+          message: "Internal Server Error reading user by email.",
+        });
+      } else {
+        if (results.length > 0) {
+          //If user exists
+          next();
+        } else {
+          res.status(404).json({
+            message: "Wrong login credentials or password",
+          });
+        }
+      }
+    });
+  } catch (error) {
+    console.log("Internal Server Error: ", error);
+    res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
+};
+
+///////////////////////////////////////////////////////////////////////////////////
+// Read user by username
+/////////////////////////////////////////////////////////////////////////////////////
+module.exports.loginByEmail = (req, res, next) => {
+  try {
+    const data = {
+      email: req.body.email,
+    };
+
+    usersModel.readUserByEmail(data, (error, results) => {
+      if (error) {
+        console.log("Error reading user by email: ", error);
+        res.status(500).json({
+          message: "Internal Server Error reading user by email.",
+        });
+      } else {
+        //Put the userID into the res.locals
+        res.locals.userId = results[0].user_id;
+        //Put password into locals
+        res.locals.hash = results[0].password;
+        //If user exists
         next();
       }
     });

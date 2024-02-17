@@ -12,5 +12,5 @@ const PORT = 3000
 // START SERVER
 //////////////////////////////////////////////////////
 app.listen(PORT, () =>{
-    console.log(`App listening at port ${PORT}}`)
+    console.log(`App listening at port ${PORT}`)
 })

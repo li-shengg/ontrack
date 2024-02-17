@@ -6,15 +6,11 @@ const usersController = require("../controllers/usersController");
 const bcryptMiddleware = require("../middlewares/bcryptMiddleware");
 const jwtMiddleware = require("../middlewares/jwtMiddleware");
 
-///////////////////////////////////////////////////////////////////////////////////
-//Register
-/////////////////////////////////////////////////////////////////////////////////////
 router.post(
   "/",
-  usersController.validateUserRequestField,
-  usersController.checkDuplicateEmail,
-  bcryptMiddleware.hashPassword,
-  usersController.createUser,
+  usersController.checkUserExistsByEmail,
+  usersController.loginByEmail,
+  bcryptMiddleware.comparePassword,
   jwtMiddleware.generateToken,
   jwtMiddleware.sendToken
 );
