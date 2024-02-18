@@ -26,9 +26,10 @@ module.exports.comparePassword = (req,res,next)=>{
                 //If the password match, continue to next
                 next()
             }else{
+                let message = req.method === "POST" ? "Wrong login credentials or password" : "Password does not match";
                 //Wrong Password
                 res.status(401).json({
-                    message: "Wrong login credentials or password"
+                    message: message
                 })
             }
         }
@@ -41,8 +42,17 @@ module.exports.comparePassword = (req,res,next)=>{
 //////////////////////////////////////////////////////
 module.exports.hashPassword = (req,res,next)=>{
 
-    //Password to hash
-    const passwordToHash = req.body.password
+    //Passwords
+    //New password (Password to be updated)
+    const newPassword = req.body.new_password
+    //Password to hash (Default is password when registering)
+    let passwordToHash = req.body.password
+
+    //If both password exists means it is updating password
+    if(passwordToHash && newPassword){
+        //Make the password to hash as the new password
+        passwordToHash = newPassword
+    }
 
     //Hashing the password
     bcrypt.hash(passwordToHash, saltRounds, (error,hash)=>{

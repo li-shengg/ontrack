@@ -59,3 +59,25 @@ module.exports.deleteUserByUserId = (data, callback) => {
 
   pool.query(SQLSTATEMENT, VALUES, callback);
 };
+
+module.exports.updateUserDetailsByUserId = (data, callback) => {
+  const SQLSTATEMENT = `
+  UPDATE Users SET username = ?, email = ? 
+  WHERE user_id = ?;
+  `;
+
+  const VALUES = [data.username, data.email, data.userId];
+
+  pool.query(SQLSTATEMENT, VALUES, callback);
+};
+
+module.exports.updateUserPasswordByUserId = (data, callback) => {
+  const SQLSTATEMENT = `
+  UPDATE Users SET password = ?
+  WHERE user_id = ?;
+  `;
+
+  const VALUES = [data.password, data.userId];
+
+  pool.query(SQLSTATEMENT, VALUES, callback);
+};

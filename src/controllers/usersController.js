@@ -233,3 +233,93 @@ module.exports.deleteUserByUserId = (req,res) => {
     });
   }
 }
+
+
+///////////////////////////////////////////////////////////////////////////////////
+// Update user details by id user by user ID
+/////////////////////////////////////////////////////////////////////////////////////
+module.exports.updateUserDetailsByUserId = (req,res) =>{
+  try{
+    const data = {
+      userId: req.params.userId,
+      username: req.body.username,
+      email: req.body.email
+    }
+
+    usersModel.updateUserDetailsByUserId(data, (error,results)=>{
+      if(error){
+        console.log("Error updating user by user ID: ", error);
+        res.status(500).json({
+          message: "Internal Server Error updating user by user ID.",
+        });
+      }else{
+        res.status(200).json({
+          message:"User updated successfully"
+        })
+      }
+    })
+  }catch(error){
+    console.log("Internal Server Error: ", error);
+    res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
+}
+
+///////////////////////////////////////////////////////////////////////////////////
+// Get the current user password for validation
+/////////////////////////////////////////////////////////////////////////////////////
+module.exports.obtainCurrentUserPassword = (req,res,next) =>{
+  try{
+    const data = {
+      userId:req.params.userId
+    }
+
+    usersModel.readUserByUserId(data, (error,results)=>{
+      if(error){
+        console.log("Error obtaining current user password: ", error);
+        res.status(500).json({
+          message: "Internal Server Error obtaining current user password.",
+        });
+      }else{
+        res.locals.hash = results[0].password
+        next()
+      }
+    })
+  }catch(error){
+    console.log("Internal Server Error: ", error);
+    res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
+}
+
+///////////////////////////////////////////////////////////////////////////////////
+// Update user password
+/////////////////////////////////////////////////////////////////////////////////////
+module.exports.updateUserPasswordByUserId = (req,res) =>{
+  try{
+    const data = {
+      userId:req.params.userId,
+      password: res.locals.hash
+    }
+
+    usersModel.updateUserPasswordByUserId(data, (error,results)=>{
+      if(error){
+        console.log("Error updating user password by user ID: ", error);
+        res.status(500).json({
+          message: "Internal Server Error updating user password by user ID.",
+        });
+      }else{
+        res.status(200).json({
+          message:"Password updated successfully"
+        })
+      }
+    })
+  }catch(error){
+    console.log("Internal Server Error: ", error);
+    res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
+}
