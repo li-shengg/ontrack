@@ -1,0 +1,22 @@
+*{
+    padding:0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Lato', sans-serif;
+}
+
+a{
+    text-decoration: none;
+    color: inherit;
+}
+
+button{
+    border: none;
+    background: none;
+    font: inherit;
+    color: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    cursor: pointer;
+    outline: none;
+}
