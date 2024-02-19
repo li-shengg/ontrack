@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/register.css">
+    <title>Register</title>
+</head>
+<body>
+    <nav id="navbar">
+        <!--Nav Brand-->
+        <a href="index.html" id="navBrand">
+            <img src="images/on_track_logo.png" alt="On Track Logo" id="onTrackLogo"> On Track
+        </a>
+    </nav>
+    <main>
+        <div id="registerContainer">
+            <h1 id="registerHeader">Register</h1>
+            <form id="registerForm">
+                <div>
+                    <label for="usernameInput">Username</label>
+                    <input type="text" id="usernameInput" placeholder="Username..." required>
+                </div>
+                <div>
+                    <label for="emailInput">Email</label>
+                    <input type="text"  id="emailInput" placeholder="Email..." required>
+                </div>
+                <div>
+                    <label for="passwordInput">Password</label>
+                    <input type="password"  id="passwordInput" placeholder="Password..." required>
+                </div>
+                <div>
+                    <label for="confirmPasswordInput">Confirm Password</label>
+                    <input type="password"  id="confirmPasswordInput" placeholder="Confirm Password..." required>
+                </div>
+                <button type="submit" id="registerButton">Register</button>
+            </form>
+            <p id="orLabel">Or</p>
+            <p id="loginOption">Already have an account? <span><a href="login.html">Login</a></span></p>
+        </div>
+    </main>
+</body>
+</html>
