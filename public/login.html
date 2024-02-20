@@ -1,11 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--========================================================== CSS ==========================================================-->
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/login.css" />
+    <!--========================================================== Javascript ==========================================================-->
+    <script src="javascript/api/getCurrentUrl.js" defer></script>
+    <script src="javascript/api/queryCommands.js" defer></script>
+    <script src="javascript/api/loginQuery.js" defer></script>
+    <script src="javascript/dom/removeWarningCard.js" defer></script>
     <title>Login</title>
-</head>
-<body>
-    
-</body>
+  </head>
+  <body>
+    <!--====================================================== NAV BAR ======================================================-->
+    <nav id="navbar">
+      <!--Nav Brand-->
+      <a href="index.html" id="navBrand">
+        <img
+          src="images/on_track_logo.png"
+          alt="On Track Logo"
+          id="onTrackLogo"
+        />
+        On Track
+      </a>
+    </nav>
+
+    <!--====================================================== Login section ======================================================-->
+    <main>
+      <div id="loginContainer">
+        <h1 id="loginHeader">Login</h1>
+        <!--Warning card-->
+        <div id="warningCard">
+          <svg
+            width="24px"
+            height="24px"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M19.5 12C19.5 16.1421 16.1421 19.5 12 19.5C7.85786 19.5 4.5 16.1421 4.5 12C4.5 7.85786 7.85786 4.5 12 4.5C16.1421 4.5 19.5 7.85786 19.5 12ZM21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12ZM11.25 13.5V8.25H12.75V13.5H11.25ZM11.25 15.75V14.25H12.75V15.75H11.25Z"
+              fill="red"
+            />
+          </svg>
+          <p id="warningText"></p>
+          <!--Remove warning card button-->
+          <button id="removeWarningCardButton">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24px"
+              height="24px"
+              viewBox="0 0 24 24"
+              fill="none"
+            >
+              <path
+                d="M6.99486 7.00636C6.60433 7.39689 6.60433 8.03005 6.99486 8.42058L10.58 12.0057L6.99486 15.5909C6.60433 15.9814 6.60433 16.6146 6.99486 17.0051C7.38538 17.3956 8.01855 17.3956 8.40907 17.0051L11.9942 13.4199L15.5794 17.0051C15.9699 17.3956 16.6031 17.3956 16.9936 17.0051C17.3841 16.6146 17.3841 15.9814 16.9936 15.5909L13.4084 12.0057L16.9936 8.42059C17.3841 8.03007 17.3841 7.3969 16.9936 7.00638C16.603 6.61585 15.9699 6.61585 15.5794 7.00638L11.9942 10.5915L8.40907 7.00636C8.01855 6.61584 7.38538 6.61584 6.99486 7.00636Z"
+                fill="red"
+              />
+            </svg>
+          </button>
+        </div>
+
+        <!--Login form-->
+        <form id="loginForm">
+          <div>
+            <label for="emailLoginInput">Email</label>
+            <input
+              type="email"
+              id="emailLoginInput"
+              placeholder="Email..."
+              required
+            />
+          </div>
+          <div>
+            <label for="passwordLoginInput">Password</label>
+            <input
+              type="password"
+              id="passwordLoginInput"
+              placeholder="Password..."
+              required
+            />
+          </div>
+          <button type="submit" id="loginButton">Login</button>
+        </form>
+        <p id="orLabel">Or</p>
+        <p id="registerOption">
+          Don't have an account?
+          <span><a href="register.html">Register</a></span>
+        </p>
+      </div>
+    </main>
+  </body>
 </html>

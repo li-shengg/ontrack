@@ -3,7 +3,7 @@
 // This function uses the fetch API to make a request to the server.
 //=====================================================================================
 
-function fetchMehod(url, callback, method = "GET", data = null, token = null) {
+function fetchMethod(url, callback, method = "GET", data = null, token = null) {
   //Headers for verification
   const headers = {};
 
