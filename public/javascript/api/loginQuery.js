@@ -30,6 +30,9 @@ document.addEventListener("DOMContentLoaded", () => {
           localStorage.setItem("token", responseData.token);
           //Store user id into local storage
           localStorage.setItem("userId", responseData.loggedInUserId);
+
+          //Forward to all tasks page
+          window.location.href = 'tasks.html'
         }
       } else {
         //If error

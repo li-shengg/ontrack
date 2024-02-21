@@ -1,0 +1,121 @@
+/*===================================================================================================================================*/
+/*This css page is for the styles of the main application (After user has logged in)*/
+/*===================================================================================================================================*/
+
+/*==========================================================Navbar styles==========================================================*/
+#navbar {
+    background-color: #1175d3;
+    height: 48px;
+    display: flex;
+}
+
+#navBrand {
+    display: flex;
+    align-items: center;
+    width: 23%;
+    height: 100%;
+    padding: 10px 0 10px 3%;
+    gap: 0.7rem;
+    font-size: var(--fs-h5);
+    font-weight: var(--fw-semi-bold);
+    color: white;
+}
+
+#navBrand:hover {
+    text-decoration: underline;
+}
+
+#searchBarContainer {
+    width: 54%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#searchBar {
+    width: 90%;
+    display: flex;
+    align-items: center;
+    border-radius: 7px;
+    padding: 0 0 0 7px;
+    background-color: white;
+}
+
+#searchBarInput {
+    height: 32px;
+    border: transparent;
+    padding: 5px;
+    border-radius: 7px;
+    width: calc(100% - 20px);
+}
+
+#accountAndSettingsContainer {
+    display: flex;
+    justify-content: end;
+    padding: 0 20px 0 0;
+    width: 23%;
+}
+
+#settingsButton, #profileButton{
+    width: 52px;
+}
+
+#settingsButton:hover, #profileButton:hover{
+    background-color:  #0e5aa6;
+}
+
+
+/*==========================================================Side Bar styles==========================================================*/
+#sideBar{
+    float: left;
+    width: 68px;
+    height: calc(100vh - 48px);
+    background-color: #e4e4e4;
+}
+
+#sideBarNav a{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    padding: 8px 0 8px 0 ;
+    font-size: var(--fs-extra-small);
+}
+
+#sideBarNav a:hover{
+    background-color: #f0f0f0;
+    color: #1175d3;
+}
+/* chnage color of the svg*/
+#sideBarNav a:hover svg path {
+    fill: #1175d3; 
+    stroke: #1175d3;
+}
+/* Active nav bar*/
+.activeNav{
+    color: #1175d3;
+    position: relative;
+}
+.activeNav::before{
+    position: absolute;
+    content: "";
+    height: 93%;
+    width: 2.3px;
+    background-color: #1175d3;
+    border-radius: 7px;
+    left: 1.7px;
+    top: 50%; 
+    transform: translateY(-50%); 
+}
+.activeNav svg path {
+    fill: #1175d3; 
+    stroke: #1175d3;
+}
+
+/*==========================================================Main content styles==========================================================*/
+#mainContentContainer{
+    float: right;
+    width: calc(100% - 68px);
+}
+
