@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
           localStorage.setItem("userId", responseData.loggedInUserId);
 
           //Forward to all tasks page
-          window.location.href = 'tasks.html'
+          window.location.href = 'allTasks.html'
         }
       } else {
         //If error

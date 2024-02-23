@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
             //Store user id into local storage
             localStorage.setItem("userId", responseData.loggedInUserId);
             //Forward to all tasks page
-            window.location.href = "tasks.html";
+            window.location.href = "allTasks.html";
           }
         } else {
           //Diplay warning

@@ -1,0 +1,71 @@
+
+/* Header styles*/
+#taskAppHeader{
+    height: 61px;
+    display: flex;
+    align-items: center; 
+    padding: 0 0 0 16px;
+    border-bottom: solid 1px #CCCCCC;
+}
+#taskAppHeader h1{
+    font-size: var(--fs-h2);
+}
+/* Tool Bar styles*/
+#tasksToolBarContainer{
+    padding: 0px 15px;
+    height: 40px;
+    border-bottom: solid 1px #CCCCCC;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+#tasksToolBarMenu, #tasksToolBarSorting{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+#tasksToolBarMenu h2, #tasksToolBarSorting h2{
+    font-size: var(--fs-h5);
+}
+#tasksToolBarMenu:hover, #tasksToolBarSorting:hover{
+    color: #1175d3;
+}
+#tasksToolBarMenu:hover path, #tasksToolBarSorting:hover path{
+    stroke:#1175d3;
+    fill:#1175d3;
+}
+
+
+/* Main task app styles*/
+#mainTaskAppContainer{
+    height: calc(100vh - 48px - 61px - 40px)
+}
+/* Main task app styles: Sidebar*/
+#mainTaskAppSidebar{
+    float: left;
+    width: 300px;
+    height: 100%;
+    border-right: solid 1px #CCCCCC;
+}
+#defaultTaskTabsContainer{
+    margin: 20px 0 15px 0 ;
+    padding:0 10px 10px 0 ;
+    border-bottom: solid 1px #CCCCCC;
+}
+#defaultTaskTabsContainer li{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 7px 0 7px 20px;
+    cursor: pointer;
+}
+#defaultTaskTabsContainer li:hover{
+    background-color: #F0F0F0;
+}
+.activeTaskTab{
+    background-color: #F0F0F0;
+}
+#myListsTabContainer small{
+    margin-left: 20px;
+}

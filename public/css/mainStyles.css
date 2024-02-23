@@ -93,11 +93,11 @@
     stroke: #1175d3;
 }
 /* Active nav bar*/
-.activeNav{
+.activeSideBarNav{
     color: #1175d3;
     position: relative;
 }
-.activeNav::before{
+.activeSideBarNav::before{
     position: absolute;
     content: "";
     height: 93%;
@@ -108,7 +108,7 @@
     top: 50%; 
     transform: translateY(-50%); 
 }
-.activeNav svg path {
+.activeSideBarNav svg path {
     fill: #1175d3; 
     stroke: #1175d3;
 }

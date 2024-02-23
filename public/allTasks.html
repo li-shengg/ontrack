@@ -8,11 +8,12 @@
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/styles.css" />
     <link rel="stylesheet" href="css/mainStyles.css" />
-    <link rel="stylesheet" href="css/tasks.css" />
+    <link rel="stylesheet" href="css/tasksStyles.css" />
     <!--========================================================== Javascript ==========================================================-->
     <script src="javascript/api/getCurrentUrl.js" defer></script>
     <script src="javascript/api/queryCommands.js" defer></script>
   </head>
+
   <body>
     <!--========================================================== Navbar ==========================================================-->
     <nav id="navbar">
@@ -113,7 +114,7 @@
       <nav id="sideBar">
         <ul id="sideBarNav">
           <li>
-            <a href="#" class="activeNav">
+            <a href="#" class="activeSideBarNav">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="26px"
@@ -228,10 +229,171 @@
         </ul>
       </nav>
 
-      <!--Main page navbar-->
+      <!--================================================== Main page ==================================================-->
       <div id="mainContentContainer">
+        <!--Main page header-->
         <div id="taskAppHeader">
           <h1>Tasks</h1>
+        </div>
+
+        <!--Main page toolbar-->
+        <div id="tasksToolBarContainer">
+          <div id="tasksToolBarMenu">
+            <svg
+              height="24px"
+              width="24px"
+              viewBox="-0.5 0 25 25"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g
+                id="SVGRepo_tracerCarrier"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></g>
+              <g id="SVGRepo_iconCarrier">
+                <path
+                  d="M2 12.32H22"
+                  stroke="#000000"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M2 18.32H22"
+                  stroke="#000000"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M2 6.32001H22"
+                  stroke="#000000"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+              </g>
+            </svg>
+            <h2>Tasks</h2>
+          </div>
+          <div id="tasksToolBarSorting">
+            <svg
+              height="24px"
+              width="24px"
+              viewBox="0 0 1024 1024"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="#000000"
+            >
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g
+                id="SVGRepo_tracerCarrier"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></g>
+              <g id="SVGRepo_iconCarrier">
+                <path
+                  fill="#000000"
+                  d="M384 96a32 32 0 0 1 64 0v786.752a32 32 0 0 1-54.592 22.656L95.936 608a32 32 0 0 1 0-45.312h.128a32 32 0 0 1 45.184 0L384 805.632V96zm192 45.248a32 32 0 0 1 54.592-22.592L928.064 416a32 32 0 0 1 0 45.312h-.128a32 32 0 0 1-45.184 0L640 218.496V928a32 32 0 1 1-64 0V141.248z"
+                ></path>
+              </g>
+            </svg>
+            <h2>Sort</h2>
+          </div>
+        </div>
+
+        <!--Main task container-->
+        <div id="mainTaskAppContainer">
+          <!--Side bar-->
+          <div id="mainTaskAppSidebar">
+            <ul id="defaultTaskTabsContainer">
+              <li class="activeTaskTab">
+                <svg
+                  height="24px"
+                  width="24px"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g
+                    id="SVGRepo_tracerCarrier"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ></g>
+                  <g id="SVGRepo_iconCarrier">
+                    <path
+                      d="M12 15L12 18"
+                      stroke="#1C274C"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                    ></path>
+                    <path
+                      d="M22 12.2039V13.725C22 17.6258 22 19.5763 20.8284 20.7881C19.6569 22 17.7712 22 14 22H10C6.22876 22 4.34315 22 3.17157 20.7881C2 19.5763 2 17.6258 2 13.725V12.2039C2 9.91549 2 8.77128 2.5192 7.82274C3.0384 6.87421 3.98695 6.28551 5.88403 5.10813L7.88403 3.86687C9.88939 2.62229 10.8921 2 12 2C13.1079 2 14.1106 2.62229 16.116 3.86687L18.116 5.10812C20.0131 6.28551 20.9616 6.87421 21.4808 7.82274"
+                      stroke="#1C274C"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                    ></path>
+                  </g>
+                </svg>
+                Tasks
+              </li>
+              <li>
+                <svg
+                  height="24px"
+                  width="24px"
+                  fill="#000000"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g
+                    id="SVGRepo_tracerCarrier"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ></g>
+                  <g id="SVGRepo_iconCarrier">
+                    <path
+                      d="m11.289 23.287v-2.952c0-.394.319-.713.713-.713s.713.319.713.713v2.952c0 .394-.319.713-.713.713s-.713-.319-.713-.713zm8.19-2.804-2.087-2.086c-.136-.13-.22-.313-.22-.515 0-.394.319-.713.713-.713.202 0 .385.084.515.22l2.085 2.089c.107.124.172.286.172.464 0 .394-.319.713-.713.713-.179 0-.343-.066-.468-.175l.001.001zm-15.962 0c-.129-.129-.209-.307-.209-.504s.08-.375.209-.504l2.087-2.087c.129-.129.307-.209.504-.209.394 0 .713.319.713.713 0 .197-.08.375-.209.504l-2.087 2.086c-.129.129-.307.209-.504.209s-.375-.08-.504-.209zm2.803-8.485c0-3.138 2.544-5.683 5.683-5.683s5.683 2.544 5.683 5.683c0 3.138-2.544 5.683-5.683 5.683-3.138 0-5.683-2.544-5.683-5.683zm1.425 0c0 2.352 1.907 4.259 4.259 4.259s4.259-1.907 4.259-4.259-1.907-4.259-4.259-4.259c-2.352 0-4.259 1.907-4.259 4.259zm12.591.713c-.394 0-.713-.319-.713-.713s.319-.713.713-.713h2.952c.394 0 .713.319.713.713s-.319.713-.713.713zm-19.623 0c-.394 0-.713-.319-.713-.713s.319-.713.713-.713h2.953c.394 0 .713.319.713.713s-.319.713-.713.713zm16.677-6.103c-.129-.129-.209-.307-.209-.504s.08-.375.209-.504l2.087-2.087c.129-.129.307-.209.504-.209.394 0 .713.319.713.713 0 .197-.08.375-.209.504l-2.087 2.087c-.129.129-.307.209-.504.209s-.375-.08-.504-.209zm-11.788 0-2.085-2.085c-.129-.129-.209-.307-.209-.504 0-.394.319-.713.713-.713.197 0 .375.08.504.209l2.087 2.087c.129.129.209.307.209.504 0 .394-.319.713-.713.713-.197 0-.375-.08-.504-.209zm5.685-2.944v-2.951c0-.394.319-.713.713-.713s.713.319.713.713v2.952c0 .394-.319.713-.713.713s-.713-.319-.713-.713z"
+                    ></path>
+                  </g>
+                </svg>
+                Today
+              </li>
+              <li>
+                <svg
+                  height="24px"
+                  width="24px"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g
+                    id="SVGRepo_tracerCarrier"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ></g>
+                  <g id="SVGRepo_iconCarrier">
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M5 1.25C5.41421 1.25 5.75 1.58579 5.75 2V3.08515L7.32358 2.77043C9.11678 2.41179 10.9756 2.58245 12.6735 3.26161L12.8771 3.34307C14.2919 3.90898 15.849 4.01466 17.3273 3.64509C18.5579 3.33744 19.75 4.2682 19.75 5.53669V12.9037C19.75 13.8922 19.0773 14.7538 18.1183 14.9935L17.9039 15.0471C15.9814 15.5277 13.9563 15.3903 12.1164 14.6543C10.6886 14.0832 9.12562 13.9397 7.61776 14.2413L5.75 14.6149V22C5.75 22.4142 5.41421 22.75 5 22.75C4.58579 22.75 4.25 22.4142 4.25 22V2C4.25 1.58579 4.58579 1.25 5 1.25ZM5.75 13.0851L7.32358 12.7704C9.11678 12.4118 10.9756 12.5825 12.6735 13.2616C14.2206 13.8805 15.9235 13.996 17.5401 13.5919L17.7545 13.5383C18.0457 13.4655 18.25 13.2039 18.25 12.9037V5.53669C18.25 5.24405 17.975 5.02933 17.6911 5.10031C15.9069 5.54635 14.0276 5.4188 12.32 4.73578L12.1164 4.65433C10.6886 4.08323 9.12562 3.93973 7.61776 4.2413L5.75 4.61485V13.0851Z"
+                      fill="#1C274C"
+                    ></path>
+                  </g>
+                </svg>
+                Important
+              </li>
+            </ul>
+            <div id="myListsTabContainer">
+              <small>My Lists</small>
+            </div>
+          </div>
+
+          <!--Main App-->
+          <div id="mainTaskApp"></div>
         </div>
       </div>
     </main>
