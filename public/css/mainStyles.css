@@ -66,14 +66,14 @@
 
 
 /*==========================================================Side Bar styles==========================================================*/
-#sideBar{
+#sidebar{
     float: left;
     width: 68px;
     height: calc(100vh - 48px);
     background-color: #e4e4e4;
 }
 
-#sideBarNav a{
+#sidebarNav a{
     display: flex;
     flex-direction: column;
     justify-content: center;

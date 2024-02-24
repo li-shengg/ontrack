@@ -19,19 +19,19 @@
     align-items: center;
     justify-content: space-between;
 }
-#tasksToolBarMenu, #tasksToolBarSorting{
+#mainTaskAppSidebarToggler, #tasksToolBarSorting{
     display: flex;
     align-items: center;
     gap: 8px;
     cursor: pointer;
 }
-#tasksToolBarMenu h2, #tasksToolBarSorting h2{
-    font-size: var(--fs-h5);
+#mainTaskAppSidebarToggler h2, #tasksToolBarSorting h2{
+    font-size: var(--fs-normal);
 }
-#tasksToolBarMenu:hover, #tasksToolBarSorting:hover{
+#mainTaskAppSidebarToggler:hover, #tasksToolBarSorting:hover{
     color: #1175d3;
 }
-#tasksToolBarMenu:hover path, #tasksToolBarSorting:hover path{
+#mainTaskAppSidebarToggler:hover path, #tasksToolBarSorting:hover path{
     stroke:#1175d3;
     fill:#1175d3;
 }
@@ -43,6 +43,7 @@
 }
 /* Main task app styles: Sidebar*/
 #mainTaskAppSidebar{
+    display: block;
     float: left;
     width: 300px;
     height: 100%;
@@ -53,19 +54,48 @@
     padding:0 10px 10px 0 ;
     border-bottom: solid 1px #CCCCCC;
 }
-#defaultTaskTabsContainer li{
+.taskTabContainer li{
+    height: 36px;
+    padding: 0 0 0 20px;
+    cursor: pointer;
+}
+.taskTabContainer li a{
+    height: 100%;
+    width: 100%;
     display: flex;
     align-items: center;
     gap: 20px;
-    padding: 7px 0 7px 20px;
-    cursor: pointer;
 }
-#defaultTaskTabsContainer li:hover{
+#defaultTaskTabsContainer li:hover, #createdListTabsContainer li:hover{
     background-color: #F0F0F0;
 }
 .activeTaskTab{
     background-color: #F0F0F0;
 }
 #myListsTabContainer small{
-    margin-left: 20px;
+    margin:20px;
+}
+#newListInputContainer{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 0 0 0 20px;
+    height: 36px;
+    margin-top: 10px;
+}
+#newListInputContainer:hover, #newListInputContainer:hover input{
+    background-color: #F0F0F0;
+}
+#newListInputContainer input{
+    height: 100%;
+    width: 100%;
+    border: none;
+    font-size: var(--fs-normal);
+}
+#newListInputContainer input::placeholder{
+    color: #1175d3;
+}
+#createdListTabsContainer{
+    margin: 20px 0 0 0 ;
+    padding:0 10px 0 0 ;
 }

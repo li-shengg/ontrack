@@ -13,7 +13,7 @@ module.exports.insertSingleList = (data, callback) =>{
 
 module.exports.readListByListId = (data, callback) =>{
     const SQLSTATEMENT = `
-    SETECT * FROM Lists WHERE list_id = ?;
+    SELECT * FROM Lists WHERE list_id = ?;
     `
 
     const VALUES = [data.listId]
@@ -26,6 +26,16 @@ module.exports.deleteListByListId = (data, callback) =>{
     DELETE FROM Lists WHERE list_id = ?;
     `
     const VALUES = [data.listId]
+
+    pool.query(SQLSTATEMENT, VALUES, callback)
+}
+
+module.exports.readListByUserId = (data, callback) =>{
+    const SQLSTATEMENT = `
+    SELECT * FROM Lists WHERE user_id = ?;
+    `
+
+    const VALUES = [data.userId]
 
     pool.query(SQLSTATEMENT, VALUES, callback)
 }

@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const usersController = require("../controllers/usersController");
+const listsController = require("../controllers/listsController");
 const jwtMiddleware = require("../middlewares/jwtMiddleware");
 const bcryptMiddleware = require("../middlewares/bcryptMiddleware");
 
@@ -31,5 +32,12 @@ router.put(
   bcryptMiddleware.comparePassword,
   bcryptMiddleware.hashPassword,
   usersController.updateUserPasswordByUserId
+);
+
+//Read user lists
+router.get(
+  "/:userId/lists",
+  usersController.checkUserExistsByUserId,
+  listsController.readListByUserId
 );
 module.exports = router;

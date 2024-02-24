@@ -8,7 +8,7 @@ module.exports.createNewList = (req, res, next) => {
     const data = {
       //Get user id from the verify token
       userId: res.locals.userId,
-      listName: req.params.list_name,
+      listName: req.body.list_name,
     };
 
     listsModel.insertSingleList(data, (error, results) => {
@@ -89,4 +89,31 @@ module.exports.deleteListByListId = (req,res) =>{
           message: "Internal Server Error",
         });
     }
+}
+
+///////////////////////////////////////////////////////////////////////////////////
+// Get lists by user id
+/////////////////////////////////////////////////////////////////////////////////////
+module.exports.readListByUserId = (req,res) =>{
+  try{
+    const data = {
+      userId: req.params.userId
+    }
+
+    listsModel.readListByUserId(data, (error,results)=>{
+      if(error){
+        console.log("Error reading list by user id: ", error);
+        res.status(500).json({
+          message: "Internal Server Error reading list by user id.",
+        });
+      }else{
+        res.status(200).json(results)
+      }
+    })
+  }catch(error){
+    console.log("Internal Server Error: ", error);
+    res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
 }
