@@ -41,13 +41,16 @@ document.addEventListener("DOMContentLoaded", () => {
   ///////////////////////////////////////////////////////////////////////////////////
   // Display list by user id
   /////////////////////////////////////////////////////////////////////////////////////
-  const createdListTabsContainer = document.getElementById('createdListTabsContainer')
-  const callbackForDisplayAllUserLists = (responseStatus, responseData) =>{
-    if(responseStatus == 200){
-        responseData.forEach((list)=>{
-            const newList = document.createElement('li')
-            newList.innerHTML += `
-            <a href="#">
+  const createdListTabsContainer = document.getElementById(
+    "createdListTabsContainer"
+  );
+  const callbackForDisplayAllUserLists = (responseStatus, responseData) => {
+    if (responseStatus == 200) {
+      responseData.forEach((list) => {
+        const newList = document.createElement("li");
+        //Add list id into data
+        newList.innerHTML += `
+            <a href="#" data-list-id = ${list.list_id} class = 'createdList'>
                <svg
                  width="24px"
                  height="24px"
@@ -74,16 +77,40 @@ document.addEventListener("DOMContentLoaded", () => {
                ${list.list_name}
             </a>
 
-            `
-            //Appen new list to container
-            createdListTabsContainer.append(newList)
-        })
-    }else{
-        console.log(responseStatus)
-        alert(responseData.message);
+            `;
+        //Appen new list to container
+        createdListTabsContainer.append(newList);
+      });
+    } else {
+      alert(responseData.message);
     }
-  }
+  };
 
   //Make query to backend
-  fetchMethod(currentUrl + `/api/users/${userId}/lists`, callbackForDisplayAllUserLists)
+  fetchMethod(
+    currentUrl + `/api/users/${userId}/lists`,
+    callbackForDisplayAllUserLists
+  );
+
+  ///////////////////////////////////////////////////////////////////////////////////
+  // Delete list by list id
+  /////////////////////////////////////////////////////////////////////////////////////
+  const deleteListButton = document.getElementById('deleteListButton')
+  deleteListButton.addEventListener('click', ()=>{
+    //Get the list ID
+    const listId = deleteListButton.dataset.listId
+    console.log(listId)
+    const callbackForDeleteList = (responseStatus, responseData) =>{
+      if(responseStatus==204){
+        //If delete successfully
+        window.location.reload()
+      }else{
+        //If error
+        alert(responseData.message);
+      }
+    }
+
+    //Make query to backend to delete 
+    fetchMethod(currentUrl + `/api/lists/${listId}`, callbackForDeleteList, 'DELETE', null,token)
+  })
 });

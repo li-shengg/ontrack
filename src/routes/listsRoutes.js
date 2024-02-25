@@ -7,7 +7,7 @@ const { deleteListByListId } = require("../models/listsModel");
 //Create new list
 router.post("/", jwtMiddleware.verifyToken, listsController.createNewList);
 //Delete list by id
-router.delete("/:listId", jwtMiddleware.verifyToken, listsController.checkListBelongToUser, deleteListByListId)
+router.delete("/:listId", jwtMiddleware.verifyToken, listsController.checkListBelongToUser, listsController.deleteListByListId)
 
 
 module.exports = router;
