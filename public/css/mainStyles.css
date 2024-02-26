@@ -83,21 +83,21 @@
     font-size: var(--fs-extra-small);
 }
 
-#sideBarNav a:hover{
+#sidebarNav a:hover{
     background-color: #f0f0f0;
     color: #1175d3;
 }
 /* chnage color of the svg*/
-#sideBarNav a:hover svg path {
+#sidebarNav a:hover svg path {
     fill: #1175d3; 
     stroke: #1175d3;
 }
 /* Active nav bar*/
-.activeSideBarNav{
+.activeSidebarNav{
     color: #1175d3;
     position: relative;
 }
-.activeSideBarNav::before{
+.activeSidebarNav::before{
     position: absolute;
     content: "";
     height: 93%;
@@ -108,7 +108,7 @@
     top: 50%; 
     transform: translateY(-50%); 
 }
-.activeSideBarNav svg path {
+.activeSidebarNav svg path {
     fill: #1175d3; 
     stroke: #1175d3;
 }

@@ -39,7 +39,8 @@
 
 /* Main task app styles*/
 #mainTaskAppContainer{
-    height: calc(100vh - 48px - 61px - 40px)
+    height: calc(100vh - 48px - 61px - 40px);
+    display: flex;
 }
 /* Main task app styles: Sidebar*/
 #mainTaskAppSidebar{
@@ -55,7 +56,7 @@
     border-bottom: solid 1px #CCCCCC;
 }
 .taskTabContainer li{
-    height: 36px;
+    height: 45px;
     cursor: pointer;
 }
 .taskTabContainer li a{
@@ -124,4 +125,88 @@
 }
 #listActionsMenu button:hover{
     background-color: #F0F0F0;
+}
+/* Main task app*/
+#mainTaskApp{
+    display: flex;
+    flex-direction: column;
+    float: right;
+    flex-grow: 1;
+    height: 100%;
+}
+#mainTaskAppHeaderContainer{
+    height: 60px;
+}
+#mainTaskAppHeader{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    margin: 0 15px 0 15px;
+}
+
+#mainTaskAppHeader h2{
+    font-size: var(--fs-h2);
+    cursor: pointer;
+}
+#tasksContainer{
+    flex-grow: 1;
+    padding: 0 15px;
+    display: flex;
+    flex-direction: column;
+}
+#createTaskInputContainer{
+    width: 100%;
+    border: solid 1px #CCCCCC;
+    border-radius: 7px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    margin: 0 0 8px 0 ;
+}
+#createTaskInputIcon{
+    width: 2%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#createTaskInput{
+    width: 98%;
+    border: none;
+    padding: 10px;
+    flex-grow: 1;
+    font-size: var(--fs-normal);
+}
+#createTaskInput::placeholder{
+    color: #1175d3;
+}
+/* Task display styles*/
+#taskDisplayContainer{
+    flex-grow: 1;
+    overflow-y: auto;
+}
+.taskContainer{
+    width: 100%;
+    border: solid 1px #CCCCCC;
+    border-radius: 7px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    margin: 0 0 8px 0 ;
+}
+.taskBody{
+    width: 96%;
+    padding: 8px 14px;
+    display: flex;
+    justify-content: start;
+}
+.taskBodyTitle{
+    font-size: var(--fs-normal);
+}
+.taskCompleteButton, .markTaskAsImportantButton{
+    width: 2%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
