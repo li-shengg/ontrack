@@ -1,25 +1,25 @@
-const listsModel = require("../models/listsModel");
+const tasksModel = require("../models/tasksModel");
 
 ///////////////////////////////////////////////////////////////////////////////////
-// Create new list
+// Create non important task
 /////////////////////////////////////////////////////////////////////////////////////
-module.exports.createNewList = (req, res, next) => {
+module.exports.createNonImportantTask = (req, res, next) => {
   try {
     const data = {
-      //Get user id from the verify token (Default false as the list is newly created by user)
-      listName: req.body.list_name,
-      isDefault: "false",
+      userId: res.locals.userId,
+      taskTitle: req.body.task_title,
+      isImportant: "false",
+      status: "Incomplete",
     };
 
-    listsModel.insertSingleList(data, (error, results) => {
-      // Removed `next` from parameters
+    tasksModel.insertSingleTask(data, (error, results) => {
       if (error) {
-        console.log("Error creating new list: ", error);
+        console.log("Error creating new task: ", error);
         res.status(500).json({
-          message: "Internal Server Error creating new list.",
+          message: "Internal Server Error creating new task.",
         });
       } else {
-        res.locals.listId = results.insertId;
+        res.locals.taskId = results.insertId;
         next();
       }
     });
@@ -32,23 +32,23 @@ module.exports.createNewList = (req, res, next) => {
 };
 
 ///////////////////////////////////////////////////////////////////////////////////
-// Read list by list ID
+// Read task by id
 /////////////////////////////////////////////////////////////////////////////////////
-module.exports.readListByListId = (req, res) => {
+module.exports.readTaskByTaskId = (req, res) => {
   try {
     const data = {
-      listId: res.locals.listId,
+      taskId: res.locals.taskId,
     };
 
-    listsModel.readListByListId(data, (error, results) => {
+    tasksModel.readTaskByTaskId(data, (error, results) => {
       if (error) {
-        console.log("Error reading list by list id: ", error);
+        console.log("Error reading task by task id: ", error);
         res.status(500).json({
-          message: "Internal Server Error reading list by list id.",
+          message: "Internal Server Error reading task by task id.",
         });
       } else {
         res.status(201).json({
-          message: "List created",
+          message: "task created",
         });
       }
     });
@@ -61,21 +61,21 @@ module.exports.readListByListId = (req, res) => {
 };
 
 ///////////////////////////////////////////////////////////////////////////////////
-// Delete list by list id
+// Read task by user id
 /////////////////////////////////////////////////////////////////////////////////////
-module.exports.deleteListByListId = (req, res) => {
+module.exports.readTasksByUserId = (req, res) => {
   try {
     const data = {
-      listId: req.params.listId,
+      userId: req.params.userId,
     };
-    listsModel.deleteListByListId(data, (error, results) => {
+    tasksModel.readTaskByUserId(data, (error, results) => {
       if (error) {
-        console.log("Error deleting list by list id: ", error);
+        console.log("Error reading task by user id: ", error);
         res.status(500).json({
-          message: "Internal Server Error deleting list by list id.",
+          message: "Internal Server Error reading task by user id.",
         });
       } else {
-        res.status(204).send();
+        res.status(200).json(results);
       }
     });
   } catch (error) {
@@ -86,31 +86,30 @@ module.exports.deleteListByListId = (req, res) => {
   }
 };
 
+
 ///////////////////////////////////////////////////////////////////////////////////
-// Create daily list for new user
+// Delete task by task id
 /////////////////////////////////////////////////////////////////////////////////////
-module.exports.createDailyList = (req, res, next) => {
-  try {
-    //Default true as the list is default list
+module.exports.deleteTaskByTaskId = (req,res) =>{
+  try{
     const data = {
-      listName: "Daily",
-      isDefault: "true",
-    };
-    listsModel.insertSingleList(data, (error, results) => {
-      if (error) {
-        console.log("Error creating daily list: ", error);
+      taskId: req.params.taskId
+    }
+    tasksModel.deleteTaskByTaskId(data, (error,results)=>{
+      if(error){
+        console.log("Error deleting task by task id: ", error);
         res.status(500).json({
-          message: "Internal Server Error creating daily list.",
+          message: "Internal Server Error deleting task by task id.",
         });
-      } else {
-        res.locals.listId = results.insertId;
-        next();
+      }else{
+        //Upon successful deletion
+        res.status(204).send()
       }
-    });
-  } catch (error) {
+    })
+  }catch(error){
     console.log("Internal Server Error: ", error);
     res.status(500).json({
       message: "Internal Server Error",
     });
   }
-};
+}

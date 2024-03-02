@@ -3,6 +3,8 @@ const router = express.Router();
 
 //Controllers
 const usersController = require("../controllers/usersController");
+const listsController = require("../controllers/listsController");
+const userListController = require("../controllers/userListController");
 const bcryptMiddleware = require("../middlewares/bcryptMiddleware");
 const jwtMiddleware = require("../middlewares/jwtMiddleware");
 
@@ -15,6 +17,8 @@ router.post(
   usersController.checkDuplicateEmail,
   bcryptMiddleware.hashPassword,
   usersController.createUser,
+  listsController.createDailyList,
+  userListController.createUserListRelationship,
   jwtMiddleware.generateToken,
   jwtMiddleware.sendToken
 );

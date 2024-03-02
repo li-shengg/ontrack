@@ -3,6 +3,8 @@ const router = express.Router();
 
 const usersController = require("../controllers/usersController");
 const listsController = require("../controllers/listsController");
+const userListController = require("../controllers/userListController");
+const tasksController = require('../controllers/tasksController')
 const jwtMiddleware = require("../middlewares/jwtMiddleware");
 const bcryptMiddleware = require("../middlewares/bcryptMiddleware");
 
@@ -38,6 +40,13 @@ router.put(
 router.get(
   "/:userId/lists",
   usersController.checkUserExistsByUserId,
-  listsController.readListByUserId
+  userListController.readCustomListByUserId
 );
+
+//Read all user tasks
+router.get(
+  "/:userId/tasks/all",
+  tasksController.readTasksByUserId
+)
+
 module.exports = router;

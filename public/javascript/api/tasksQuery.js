@@ -99,7 +99,6 @@ document.addEventListener("DOMContentLoaded", () => {
   deleteListButton.addEventListener('click', ()=>{
     //Get the list ID
     const listId = deleteListButton.dataset.listId
-    console.log(listId)
     const callbackForDeleteList = (responseStatus, responseData) =>{
       if(responseStatus==204){
         //If delete successfully
@@ -112,5 +111,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //Make query to backend to delete 
     fetchMethod(currentUrl + `/api/lists/${listId}`, callbackForDeleteList, 'DELETE', null,token)
+  })
+
+
+  ///////////////////////////////////////////////////////////////////////////////////
+  // Delete task by list id
+  /////////////////////////////////////////////////////////////////////////////////////
+  const deleteTaskButton = document.getElementById('deleteTaskButton')
+  deleteTaskButton.addEventListener('click', ()=>{
+    //Get the task id
+    const taskId = deleteTaskButton.dataset.taskId
+
+    const callbackForDeleteTask = (responseStatus, responseData) =>{
+      if(responseStatus == 204){
+        //If delete is successful
+        window.location.reload()
+      }else{
+        //If there is error deleting
+        alert(responseData.message)
+      }
+    }
+
+    //Make query to delete task
+    fetchMethod(currentUrl + `/api/tasks/${taskId}`, callbackForDeleteTask, 'DELETE', null, token)
   })
 });
