@@ -289,6 +289,9 @@
   border-left: solid 1px #cccccc;
   width: 370px;
   padding: 20px 16px 0 16px;
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 #taskDetailsHeader {
@@ -327,10 +330,46 @@
   background-color: inherit;
   font-size: var(--fs-normal);
 }
-.taskDetailsUpdateTaskTitleInput::placeholder {
+#taskDetailsUpdateTaskTitleInput::placeholder {
   color: black;
 }
-.taskDetailsUpdateTaskTitleInput:focus {
+#taskDetailsUpdateTaskTitleInput:focus {
+  outline: none;
+  border-color: transparent;
+}
+#taskDetailsFooter{
+  border-top: solid 1px #cccccc;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+}
+#taskCreatedOnDisplay{
+font-size: var(--fs-small);
+}
+#hideTaskDetailsButton, #taskDetailsDeleteTaskButton{
+  border-radius: 7px;
+  padding: 3px;
+}
+#hideTaskDetailsButton:hover, #taskDetailsDeleteTaskButton:hover{
+  background-color: #f0f0f0;
+}
+#taskNotesTextAreaContainer{
+  border: solid 1px #cccccc;
+  border-radius: 7px;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+}
+#taskNotesTextArea{
+  width: 100%;
+  padding: 10px 16px;
+  resize: none;
+  border: none;
+  border-radius: 7px;
+  font-size: var(--fs-normal);
+}
+#taskNotesTextArea:focus{
   outline: none;
   border-color: transparent;
 }

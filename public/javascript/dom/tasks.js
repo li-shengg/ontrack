@@ -80,9 +80,9 @@ document.addEventListener("DOMContentLoaded", () => {
       } else {
         //Add the task id into the delete button
         const deleteTaskButton = document.getElementById("deleteTaskButton");
-        console.log(target);
+
         deleteTaskButton.dataset.taskId = target.dataset.taskId;
-        console.log(target.dataset.taskId);
+
         //If display is none, show the menu
         taskActionMenu.style.display = "block";
         taskActionMenu.style.left = event.pageX + "px";
@@ -96,7 +96,6 @@ document.addEventListener("DOMContentLoaded", () => {
   /////////////////////////////////////////////////////////////////////////////////////
   function hideUpdateTaskTitleInput(event) {
     const target = event.target;
-    console.log(target);
     const taskContainer = target.closest(".taskContainer");
     const updateTaskTitleInput = document.querySelector(
       ".updateTaskTitleInput"
@@ -131,6 +130,43 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Focus on the input
       updateTaskTitleInput.focus();
+
+      //Display task details
+      const taskDetailsContainer = document.getElementById(
+        "taskDetailsContainer"
+      );
+      if ((taskDetailsContainer.style.display = "none")) {
+        taskDetailsContainer.style.display = "flex";
+
+        //Reset the color of all other task container
+        const allTaskContainer = document.querySelectorAll(".taskContainer");
+        allTaskContainer.forEach((taskContainer) => {
+          taskContainer.style.backgroundColor = "";
+        });
+
+        //Set the background color of the clicked task container
+        taskContainer.style.backgroundColor = "#E4E4E4";
+      }
     }
+  });
+
+  ///////////////////////////////////////////////////////////////////////////////////
+  // Hide task details sidebar
+  /////////////////////////////////////////////////////////////////////////////////////
+  const hideTaskDetailsButton = document.getElementById(
+    "hideTaskDetailsButton"
+  );
+  hideTaskDetailsButton.addEventListener("click", () => {
+    const taskDetailsContainer = document.getElementById(
+      "taskDetailsContainer"
+    );
+    //Hide the details container
+    taskDetailsContainer.style.display = "none";
+
+    //Reset back the background color of the task container
+    const allTaskContainer = document.querySelectorAll(".taskContainer");
+    allTaskContainer.forEach((taskContainer) => {
+      taskContainer.style.backgroundColor = "";
+    });
   });
 });

@@ -32,12 +32,12 @@ module.exports.createNonImportantTask = (req, res, next) => {
 };
 
 ///////////////////////////////////////////////////////////////////////////////////
-// Read task by id
+// Read task by id task id
 /////////////////////////////////////////////////////////////////////////////////////
 module.exports.readTaskByTaskId = (req, res) => {
   try {
     const data = {
-      taskId: res.locals.taskId,
+      taskId:req.params.taskId || res.locals.taskId,
     };
 
     tasksModel.readTaskByTaskId(data, (error, results) => {
@@ -47,9 +47,8 @@ module.exports.readTaskByTaskId = (req, res) => {
           message: "Internal Server Error reading task by task id.",
         });
       } else {
-        res.status(201).json({
-          message: "task created",
-        });
+        const status = req.method === "POST" ? 201 : 200;
+        res.status(status).json(results[0]);
       }
     });
   } catch (error) {
@@ -86,24 +85,87 @@ module.exports.readTasksByUserId = (req, res) => {
   }
 };
 
-
 ///////////////////////////////////////////////////////////////////////////////////
 // Delete task by task id
 /////////////////////////////////////////////////////////////////////////////////////
-module.exports.deleteTaskByTaskId = (req,res) =>{
-  try{
+module.exports.deleteTaskByTaskId = (req, res) => {
+  try {
     const data = {
-      taskId: req.params.taskId
-    }
-    tasksModel.deleteTaskByTaskId(data, (error,results)=>{
-      if(error){
+      taskId: req.params.taskId,
+    };
+    tasksModel.deleteTaskByTaskId(data, (error, results) => {
+      if (error) {
         console.log("Error deleting task by task id: ", error);
         res.status(500).json({
           message: "Internal Server Error deleting task by task id.",
         });
-      }else{
+      } else {
         //Upon successful deletion
-        res.status(204).send()
+        res.status(204).send();
+      }
+    });
+  } catch (error) {
+    console.log("Internal Server Error: ", error);
+    res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
+};
+
+///////////////////////////////////////////////////////////////////////////////////
+// Check task important status by task id
+/////////////////////////////////////////////////////////////////////////////////////
+module.exports.checkTaskImportantStatusByTaskId = (req,res,next) =>{
+  try{
+    const data = {
+      taskId: req.params.taskId
+    }
+
+    tasksModel.readTaskByTaskId(data, (error,results)=>{
+      if(error){
+        console.log("Error reading task by task id: ", error);
+        res.status(500).json({
+          message: "Internal Server Error reading task by task id.",
+        });
+      }else{
+        if(results[0].is_important == 'false'){
+          //If task is originally not important
+          res.locals.isImportant = 'true'
+          next()
+        }else if(results[0].is_important == 'true'){
+          //If task is originally important
+          res.locals.isImportant = 'false'
+          next()
+        }
+      }
+    })
+  }catch(error){
+    console.log("Internal Server Error: ", error);
+    res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
+}
+
+///////////////////////////////////////////////////////////////////////////////////
+// Update task important status
+/////////////////////////////////////////////////////////////////////////////////////
+module.exports.upateTaskImportantStatusByTaskId = (req,res,next) =>{
+  try{
+    const data = {
+      taskId: req.params.taskId,
+      isImportant: res.locals.isImportant
+    }
+
+    tasksModel.upateTaskImportantStatusByTaskId(data, (error,results)=>{
+      if(error){
+        console.log("Error updating task important status by task id: ", error);
+        res.status(500).json({
+          message: "Internal Server Error updating task important status by task id.",
+        });
+      }else{
+        //If update is successful
+        next()
       }
     })
   }catch(error){

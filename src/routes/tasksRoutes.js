@@ -10,5 +10,9 @@ router.post('/all', jwtMiddleware.verifyToken, tasksController.createNonImportan
 // Delete task by task id
 router.delete('/:taskId', jwtMiddleware.verifyToken, tasksController.deleteTaskByTaskId)
 
+//Read task by task id
+router.get('/:taskId', tasksController.readTaskByTaskId)
 
+//Change task importance status
+router.patch('/:taskId/importance', jwtMiddleware.verifyToken, tasksController.checkTaskImportantStatusByTaskId, tasksController.upateTaskImportantStatusByTaskId,tasksController.readTaskByTaskId)
 module.exports = router
