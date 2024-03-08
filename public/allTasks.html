@@ -548,7 +548,7 @@
               </div>
 
               <!--Task display-->
-              <div>
+              <div id="taskListContainer">
                 <!--Task Action menu-->
                 <ul id="taskActionMenu" class="actionMenu">
                   <li>
@@ -596,7 +596,48 @@
                     </button>
                   </li>
                 </ul>
-                <ul id="taskDisplayContainer"></ul>
+                <div id="taskDisplayContainer">
+                  <ul id="incompleteTaskDisplayContainer">
+                    <!--For display of incomplete task-->
+                  </ul>
+                  <!--Incomplete task section-->
+                  <div id="completedTasksSection">
+                    <div id="completedTasksSectionHeader">
+                      <button id="openCloseCompletedTasksSectionButton">
+                        <svg
+                          height="20px"
+                          width="20px"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                          id="openCloseCompletedTasksSectionButtonSvg"
+                        >
+                          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                          <g
+                            id="SVGRepo_tracerCarrier"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          ></g>
+                          <g id="SVGRepo_iconCarrier">
+                            <path
+                              d="M8.91003 19.9201L15.43 13.4001C16.2 12.6301 16.2 11.3701 15.43 10.6001L8.91003 4.08008"
+                              stroke="#292D32"
+                              stroke-width="1.5"
+                              stroke-miterlimit="10"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            ></path>
+                          </g>
+                        </svg>
+                      </button>
+                      <span>Completed</span>
+                      <spanc id="completedTasksCount">10</span>
+                    </div>
+                    <ul id="completedTaskDisplayContainer" class="collapsed">
+                      <!--For display of completed task-->
+                    </ul>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -604,8 +645,7 @@
           <!--Task details-->
           <div id="taskDetailsContainer">
             <div id="taskDetailsBody">
-              <div id="taskDetailsHeader">
-              </div>
+              <div id="taskDetailsHeader"></div>
               <div id="taskNotesTextAreaContainer">
                 <textarea
                   rows="auto"

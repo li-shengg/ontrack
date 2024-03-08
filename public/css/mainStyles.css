@@ -48,7 +48,10 @@
     border-radius: 7px;
     width: calc(100% - 20px);
 }
-
+#searchBarInput:focus {
+    outline: none;
+    border-color: transparent;
+  }
 #accountAndSettingsContainer {
     display: flex;
     justify-content: end;

@@ -222,12 +222,31 @@
   border-color: transparent;
 }
 /* Task display styles*/
+#taskListContainer{
+  height: 72vh;
+  overflow-y: overlay;
+}
 #taskDisplayContainer {
   flex-grow: 1;
-  height: 60vh;
-  overflow-y: scroll;
 }
-
+#completedTasksSectionHeader{
+  height: 50px;
+  padding: 0 16px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid #cccccc;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+#completedTaskDisplayContainer{
+  overflow: hidden;
+}
+#openCloseCompletedTasksSectionButtonSvg{
+  transition: 0.2s;
+}
+.collapsed{
+  height: 0px;
+}
 .taskContainer {
   width: 100%;
   border: solid 1px #cccccc;
@@ -270,18 +289,17 @@
   outline: none;
   border-color: transparent;
 }
-.taskCompleteButton,
-.markTaskAsImportantButton {
+.taskContainer button {
   width: 2%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.completeTaskButtonTickSvg {
+.incompleteTaskButtonTickSvg {
   display: none;
 }
-.taskCompleteButton:hover .completeTaskButtonTickSvg {
+.taskCompleteButton:hover .incompleteTaskButtonTickSvg {
   display: block;
 }
 /* Task details styles*/

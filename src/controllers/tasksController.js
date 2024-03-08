@@ -115,7 +115,7 @@ module.exports.deleteTaskByTaskId = (req, res) => {
 ///////////////////////////////////////////////////////////////////////////////////
 // Check task important status by task id
 /////////////////////////////////////////////////////////////////////////////////////
-module.exports.checkTaskImportantStatusByTaskId = (req,res,next) =>{
+module.exports.checkTaskImportanceByTaskId = (req,res,next) =>{
   try{
     const data = {
       taskId: req.params.taskId
@@ -150,18 +150,111 @@ module.exports.checkTaskImportantStatusByTaskId = (req,res,next) =>{
 ///////////////////////////////////////////////////////////////////////////////////
 // Update task important status
 /////////////////////////////////////////////////////////////////////////////////////
-module.exports.upateTaskImportantStatusByTaskId = (req,res,next) =>{
+module.exports.upateTaskImportanceByTaskId = (req,res,next) =>{
   try{
     const data = {
       taskId: req.params.taskId,
       isImportant: res.locals.isImportant
     }
 
-    tasksModel.upateTaskImportantStatusByTaskId(data, (error,results)=>{
+    tasksModel.upateTaskImportanceByTaskId(data, (error,results)=>{
       if(error){
         console.log("Error updating task important status by task id: ", error);
         res.status(500).json({
           message: "Internal Server Error updating task important status by task id.",
+        });
+      }else{
+        //If update is successful
+        next()
+      }
+    })
+  }catch(error){
+    console.log("Internal Server Error: ", error);
+    res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
+}
+
+///////////////////////////////////////////////////////////////////////////////////
+// Check task status
+/////////////////////////////////////////////////////////////////////////////////////
+module.exports.checkTaskStatusByTaskId = (req,res,next) =>{
+  try{
+    const data = {
+      taskId: req.params.taskId
+    }
+
+    tasksModel.readTaskByTaskId(data, (error,results)=>{
+      if(error){
+        console.log("Error reading task by task id: ", error);
+        res.status(500).json({
+          message: "Internal Server Error reading task by task id.",
+        });
+      }else{
+        if(results[0].status == 'Completed'){
+          //If task is mark as completed then update back to incomplete
+          res.locals.status = 'Incomplete'
+          next()
+        }else if(results[0].status == 'Incomplete'){
+          //If task is mark as incomplete then update completed
+          res.locals.status = 'Completed'
+          next()
+        }
+      }
+    })
+  }catch(error){
+    console.log("Internal Server Error: ", error);
+    res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
+}
+
+///////////////////////////////////////////////////////////////////////////////////
+// Update task status by task id
+/////////////////////////////////////////////////////////////////////////////////////
+module.exports.updateTaskStatusByTaskId = (req,res,next) => {
+  try{
+    const data = {
+      taskId: req.params.taskId,
+      status: res.locals.status
+    }
+
+    tasksModel.updateTaskStatusByTaskId(data, (error,results)=>{
+      if(error){
+        console.log("Error updating task status by task id: ", error);
+        res.status(500).json({
+          message: "Internal Server Error updating task status by task id.",
+        });
+      }else{
+        //If update is successful
+        next()
+      }
+    })
+  }catch(error){
+    console.log("Internal Server Error: ", error);
+    res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
+}
+
+///////////////////////////////////////////////////////////////////////////////////
+// Update task title by task id
+/////////////////////////////////////////////////////////////////////////////////////
+module.exports.updateTaskTitleByTaskId = (req,res,next) =>{
+  try{
+    const data = {
+      taskId: req.params.taskId,
+      taskTitle: req.body.task_title
+    }
+
+    tasksModel.updateTaskTitleByTaskId(data, (error,results)=>{
+      if(error){
+        console.log("Error updating task title by task id: ", error);
+        res.status(500).json({
+          message: "Internal Server Error updating task title by task id.",
         });
       }else{
         //If update is successful

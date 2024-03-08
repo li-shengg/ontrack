@@ -252,41 +252,58 @@ document.addEventListener("DOMContentLoaded", () => {
   ////////////////////////////////////////////////////////////////////////////////////
   // Update task importance (Task container)
   /////////////////////////////////////////////////////////////////////////////////////
-  function updateTaskImportantStatus(event) {
+  function updateTaskImportance(event) {
     const target = event.target;
-    const taskContainer = target.closest(".taskContainer");
-    console.log(target.classList);
-    if (taskContainer) {
-      //Task ID of the clicked task
-      const taskId = taskContainer.dataset.taskId;
+    // Check if the clicked element has the class "markTaskAsImportantButton"
+    if (target.closest(".markTaskAsImportantButton")) {
+      const taskId = target.closest(".taskContainer").dataset.taskId;
 
-      //Mark as important button of the clicked task container
-      const markTaskAsImportantButton = taskContainer.querySelector(
-        ".markTaskAsImportantButton"
+      const callbackForUpdateTaskImportance = (
+        responseStatus,
+        responseData
+      ) => {
+        console.log(responseData);
+        if (responseStatus == 200) {
+          window.location.reload();
+        } else {
+          alert(responseData.message);
+        }
+      };
+
+      fetchMethod(
+        currentUrl + `/api/tasks/${taskId}/importance`,
+        callbackForUpdateTaskImportance,
+        "PATCH",
+        null,
+        token
       );
+    }
+  }
+  ////////////////////////////////////////////////////////////////////////////////////
+  // Mark task as complete (Task container)
+  /////////////////////////////////////////////////////////////////////////////////////
+  function updateTaskStatus(event) {
+    const target = event.target;
 
-      //Event listener to update task status
-      markTaskAsImportantButton.addEventListener("click", () => {
-        const callbackForUpdateTaskImportantStatus = (
-          responseStatus,
-          responseData
-        ) => {
-          console.log(responseData);
-          if (responseStatus == 200) {
-            window.location.reload();
-          } else {
-            alert(responseData.message);
-          }
-        };
+    if (target.closest(".taskCompleteButton")) {
+      const taskId = target.closest(".taskContainer").dataset.taskId;
 
-        fetchMethod(
-          currentUrl + `/api/tasks/${taskId}/importance`,
-          callbackForUpdateTaskImportantStatus,
-          "PATCH",
-          null,
-          token
-        );
-      });
+      const callbackForUpdateTaskStatus = (responseStatus, responseData) => {
+        if (responseStatus == 200) {
+          window.location.reload();
+        } else {
+          alert(responseData.message);
+        }
+      };
+
+      //Query to patch task status
+      fetchMethod(
+        currentUrl + `/api/tasks/${taskId}/status`,
+        callbackForUpdateTaskStatus,
+        "PATCH",
+        null,
+        token
+      );
     }
   }
   ////////////////////////////////////////////////////////////////////////////////////
@@ -294,8 +311,9 @@ document.addEventListener("DOMContentLoaded", () => {
   /////////////////////////////////////////////////////////////////////////////////////
   const taskDisplayContainer = document.getElementById("taskDisplayContainer");
   taskDisplayContainer.addEventListener("click", (event) => {
-    updateTaskImportantStatus(event);
+    updateTaskImportance(event);
     displayTaskDetails(event);
+    updateTaskStatus(event)
   });
 
   ///////////////////////////////////////////////////////////////////////////////////

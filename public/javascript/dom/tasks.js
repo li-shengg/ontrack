@@ -92,32 +92,40 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   ///////////////////////////////////////////////////////////////////////////////////
-  // Toggle edit task input
+  // Hide task title input
   /////////////////////////////////////////////////////////////////////////////////////
   function hideUpdateTaskTitleInput(event) {
     const target = event.target;
     const taskContainer = target.closest(".taskContainer");
-    const updateTaskTitleInput = document.querySelector(
+    const updateTaskTitleInputs = document.querySelectorAll(
       ".updateTaskTitleInput"
     );
-    const taskBodyTitle = document.querySelector(".taskBodyTitle");
-
-    // Check if the click target is not inside a .taskContainer element and the input is visible
+    const taskBodyTitles = document.querySelectorAll(".taskBodyTitle");
+  
+    // Check if the click target is not inside a .taskContainer element and the inputs are visible
     if (
       !taskContainer &&
-      updateTaskTitleInput &&
-      updateTaskTitleInput.style.display === "block"
+      updateTaskTitleInputs &&
+      taskBodyTitles &&
+      updateTaskTitleInputs.length === taskBodyTitles.length
     ) {
-      // Hide the input and show the task title
-      updateTaskTitleInput.style.display = "none";
-      taskBodyTitle.style.display = "block";
+      // Iterate over each updateTaskTitleInput element and hide it
+      updateTaskTitleInputs.forEach((input, index) => {
+        if (input.style.display === "block") {
+          input.style.display = "none";
+          taskBodyTitles[index].style.display = "block";
+        }
+      });
     }
   }
-
+  ///////////////////////////////////////////////////////////////////////////////////
+  // Toggle edit task input
+  /////////////////////////////////////////////////////////////////////////////////////
   taskDisplayContainer.addEventListener("click", (event) => {
     const target = event.target;
     const taskContainer = target.closest(".taskContainer");
-    if (taskContainer) {
+    //If task container is clicked but when clicked is complete task button or is mark as complete button, don't show task details
+    if (taskContainer && !(target.closest('.taskCompleteButton') || target.closest('.markTaskAsImportantButton'))) {
       const updateTaskTitleInput = taskContainer.querySelector(
         ".updateTaskTitleInput"
       );
@@ -169,4 +177,22 @@ document.addEventListener("DOMContentLoaded", () => {
       taskContainer.style.backgroundColor = "";
     });
   });
+
+
+  
+  ///////////////////////////////////////////////////////////////////////////////////
+  // Show/ Hide completed tasks
+  /////////////////////////////////////////////////////////////////////////////////////
+  const openCloseCompletedTasksSectionButton = document.getElementById('openCloseCompletedTasksSectionButton')
+  openCloseCompletedTasksSectionButton.addEventListener('click', ()=>{
+    const completedTaskDisplayContainer = document.getElementById('completedTaskDisplayContainer')
+    const openCloseCompletedTasksSectionButtonSvg = document.getElementById('openCloseCompletedTasksSectionButtonSvg')
+    if(completedTaskDisplayContainer.classList.contains('collapsed')){
+      completedTaskDisplayContainer.classList.remove('collapsed')
+      openCloseCompletedTasksSectionButtonSvg.style.transform = 'rotate(90deg)'
+    }else{
+      completedTaskDisplayContainer.classList.add('collapsed')
+      openCloseCompletedTasksSectionButtonSvg.style.transform = 'rotate(0deg)'
+    }
+  })
 });

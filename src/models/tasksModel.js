@@ -37,12 +37,32 @@ module.exports.deleteTaskByTaskId = (data, callback) =>{
     pool.query(SQLSTATEMENT, VALUES, callback)
 }
 
-module.exports.upateTaskImportantStatusByTaskId = (data, callback) =>{
+module.exports.upateTaskImportanceByTaskId = (data, callback) =>{
     const SQLSTATEMENT = `
     UPDATE Tasks SET is_important = ? WHERE task_id = ?;
     `
 
     const VALUES = [data.isImportant, data.taskId]
+
+    pool.query(SQLSTATEMENT, VALUES, callback)
+}
+
+module.exports.updateTaskStatusByTaskId = (data, callback) =>{
+    const SQLSTATEMENT = `
+    UPDATE Tasks SET status = ? WHERE task_id = ?;
+    `
+
+    const VALUES = [data.status, data.taskId]
+
+    pool.query(SQLSTATEMENT, VALUES, callback)
+}
+
+
+module.exports.updateTaskTitleByTaskId = (data, callback) =>{
+    const SQLSTATEMENT = `
+    UPDATE Tasks SET task_title = ? WHERE task_id = ?;
+    `
+    const VALUES = [data.taskTitle, data.taskId]
 
     pool.query(SQLSTATEMENT, VALUES, callback)
 }
