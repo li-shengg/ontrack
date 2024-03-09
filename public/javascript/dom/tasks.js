@@ -121,10 +121,9 @@ document.addEventListener("DOMContentLoaded", () => {
   ///////////////////////////////////////////////////////////////////////////////////
   // Toggle edit task input
   /////////////////////////////////////////////////////////////////////////////////////
-  taskDisplayContainer.addEventListener("click", (event) => {
+  function toggleEditTaskInput(event){
     const target = event.target;
     const taskContainer = target.closest(".taskContainer");
-    //If task container is clicked but when clicked is complete task button or is mark as complete button, don't show task details
     if (taskContainer && !(target.closest('.taskCompleteButton') || target.closest('.markTaskAsImportantButton'))) {
       const updateTaskTitleInput = taskContainer.querySelector(
         ".updateTaskTitleInput"
@@ -138,12 +137,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Focus on the input
       updateTaskTitleInput.focus();
+    }
+  }
 
+  ///////////////////////////////////////////////////////////////////////////////////
+  // Toggle task details container
+  /////////////////////////////////////////////////////////////////////////////////////
+  function toggleTaskDetailsContainer(event){
+    const target = event.target;
+    const taskContainer = target.closest(".taskContainer");
+    if (taskContainer && !(target.closest('.taskCompleteButton') || target.closest('.markTaskAsImportantButton'))) {
       //Display task details
       const taskDetailsContainer = document.getElementById(
         "taskDetailsContainer"
       );
-      if ((taskDetailsContainer.style.display = "none")) {
+
+      if ((taskDetailsContainer.style.display = 'none')) {
         taskDetailsContainer.style.display = "flex";
 
         //Reset the color of all other task container
@@ -156,6 +165,13 @@ document.addEventListener("DOMContentLoaded", () => {
         taskContainer.style.backgroundColor = "#E4E4E4";
       }
     }
+  }
+  ///////////////////////////////////////////////////////////////////////////////////
+  // EVent listener for task display container
+  /////////////////////////////////////////////////////////////////////////////////////
+  taskDisplayContainer.addEventListener("click", (event) => {
+    toggleEditTaskInput(event)
+    toggleTaskDetailsContainer(event)
   });
 
   ///////////////////////////////////////////////////////////////////////////////////

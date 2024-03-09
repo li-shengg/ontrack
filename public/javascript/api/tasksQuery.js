@@ -5,119 +5,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const token = localStorage.getItem("token");
   const userId = localStorage.getItem("userId");
 
-  ///////////////////////////////////////////////////////////////////////////////////
-  // Create lists
-  /////////////////////////////////////////////////////////////////////////////////////
-  const newListInput = document.getElementById("newListInput");
-  const mainTaskAppSidebar = document.getElementById("mainTaskAppSidebar");
-  newListInput.addEventListener("keypress", (event) => {
-    if (event.key == "Enter") {
-      const data = {
-        userId: userId,
-        list_name: newListInput.value,
-      };
-
-      const callbackForCreateNewList = (responseStatus, responseData) => {
-        if (responseStatus == 201) {
-          //If create successfully
-          window.location.reload();
-        } else {
-          //If there is an error
-          alert(responseData.message);
-        }
-      };
-
-      //Make query to backend to create new lists
-      fetchMethod(
-        currentUrl + `/api/lists`,
-        callbackForCreateNewList,
-        "POST",
-        data,
-        token
-      );
-    }
-  });
-
-  ///////////////////////////////////////////////////////////////////////////////////
-  // Display list by user id
-  /////////////////////////////////////////////////////////////////////////////////////
-  const createdListTabsContainer = document.getElementById(
-    "createdListTabsContainer"
-  );
-  const callbackForDisplayAllUserLists = (responseStatus, responseData) => {
-    if (responseStatus == 200) {
-      responseData.forEach((list) => {
-        const newList = document.createElement("li");
-        //Add list id into data
-        newList.innerHTML += `
-            <a href="#" data-list-id = ${list.list_id} class = 'createdList'>
-               <svg
-                 width="24px"
-                 height="24px"
-                 viewBox="0 0 24 24"
-                 fill="none"
-                 xmlns="http://www.w3.org/2000/svg"
-               >
-                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                 <g
-                   id="SVGRepo_tracerCarrier"
-                   stroke-linecap="round"
-                   stroke-linejoin="round"
-                 ></g>
-                 <g id="SVGRepo_iconCarrier">
-                   <path
-                     d="M8 6.00067L21 6.00139M8 12.0007L21 12.0015M8 18.0007L21 18.0015M3.5 6H3.51M3.5 12H3.51M3.5 18H3.51M4 6C4 6.27614 3.77614 6.5 3.5 6.5C3.22386 6.5 3 6.27614 3 6C3 5.72386 3.22386 5.5 3.5 5.5C3.77614 5.5 4 5.72386 4 6ZM4 12C4 12.2761 3.77614 12.5 3.5 12.5C3.22386 12.5 3 12.2761 3 12C3 11.7239 3.22386 11.5 3.5 11.5C3.77614 11.5 4 11.7239 4 12ZM4 18C4 18.2761 3.77614 18.5 3.5 18.5C3.22386 18.5 3 18.2761 3 18C3 17.7239 3.22386 17.5 3.5 17.5C3.77614 17.5 4 17.7239 4 18Z"
-                     stroke="#000000"
-                     stroke-width="2"
-                     stroke-linecap="round"
-                     stroke-linejoin="round"
-                   ></path>
-                 </g>
-               </svg>
-               ${list.list_name}
-            </a>
-
-            `;
-        //Appen new list to container
-        createdListTabsContainer.append(newList);
-      });
-    } else {
-      alert(responseData.message);
-    }
-  };
-
-  //Make query to backend
-  fetchMethod(
-    currentUrl + `/api/users/${userId}/lists`,
-    callbackForDisplayAllUserLists
-  );
-
-  ///////////////////////////////////////////////////////////////////////////////////
-  // Delete list by list id
-  /////////////////////////////////////////////////////////////////////////////////////
-  const deleteListButton = document.getElementById("deleteListButton");
-  deleteListButton.addEventListener("click", () => {
-    //Get the list ID
-    const listId = deleteListButton.dataset.listId;
-    const callbackForDeleteList = (responseStatus, responseData) => {
-      if (responseStatus == 204) {
-        //If delete successfully
-        window.location.reload();
-      } else {
-        //If error
-        alert(responseData.message);
-      }
-    };
-
-    //Make query to backend to delete
-    fetchMethod(
-      currentUrl + `/api/lists/${listId}`,
-      callbackForDeleteList,
-      "DELETE",
-      null,
-      token
-    );
-  });
 
   ///////////////////////////////////////////////////////////////////////////////////
   // Delete task by task id (Delete context menu)
@@ -154,30 +41,26 @@ document.addEventListener("DOMContentLoaded", () => {
     const target = event.target;
     const taskContainer = target.closest(".taskContainer");
     if (taskContainer) {
-      const taskDetailsHeader = document.getElementById("taskDetailsHeader");
+      console.log(1);
+      //Task ID of the clicked task
+      const taskId = taskContainer.dataset.taskId;
       const taskCreatedAtDisplay = document.getElementById(
         "taskCreatedAtDisplay"
       );
-      //Task ID of the clicked task
-      const taskId = taskContainer.dataset.taskId;
       const callbackForDisplayTaskDetails = (responseStatus, responseData) => {
         //Decide what color to fill when the task is important or not
         if (responseStatus === 200) {
-          let importantTaskSvgIconFill;
-          if (responseData.is_important == "true") {
-            //If task is important
-            importantTaskSvgIconFill = "#1175d3";
-          } else {
-            importantTaskSvgIconFill = "none";
-          }
           //Assign task ID to the delete task button
           document.getElementById(
             "taskDetailsDeleteTaskButton"
           ).dataset.taskId = taskContainer.dataset.taskId;
-          //Display task title
-          taskDetailsHeader.innerHTML = `
-          <button id="taskDetailsMarkTaskAsCompleteButton" data-task-id = ${responseData.task_id}>
-            <svg
+
+          //Display style of the update task status button
+          let updateTaskStatusSvg;
+          if (responseData.status == "Incomplete") {
+            //If task is incomplete
+            updateTaskStatusSvg = `
+             <svg
               height="21px"
               width="21px"
               viewBox="0 0 1024 1024"
@@ -197,21 +80,63 @@ document.addEventListener("DOMContentLoaded", () => {
                 ></path>
               </g>
             </svg>
-          </button>
-          <!--Task Body-->
-          <div id="taskDetailsTaskBody">
-            <span id="taskDetailsTaskBodyTitle">${responseData.task_title}</span>
-            <input
-              type="text"
-              id="taskDetailsUpdateTaskTitleInput"
-              placeholder="${responseData.task_title}"
-            />
-          </div>
-          <!--Button to mark task as important-->
-          <button id="taskDetailsMarkTaskAsImportantButton" data-task-id = ${responseData.task_id}>
+             `;
+          } else if (responseData.status == "Completed") {
+            updateTaskStatusSvg = `
+            <svg
+            height="21px"
+            width="21px"
+            viewBox="0 0 1024 1024"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="#000000"
+          >
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g
+              id="SVGRepo_tracerCarrier"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></g>
+            <g id="SVGRepo_iconCarrier">
+              <circle cx="512" cy="512" r="448" fill="#1175d3"></circle>
+              <path
+              fill="#FFFFFF"
+              d="M745.344 361.344a32 32 0 0145.312 45.312l-288 288a32 32 0 01-45.312 0l-160-160a32 32 0 1145.312-45.312L480 626.752l265.344-265.408z"
+              ></path>
+            </g>
+          </svg>
+            `;
+          }
+          //Attribites for the update task status button
+          const taskDetailsUpdateTaskStatusButton = document.getElementById(
+            "taskDetailsUpdateTaskStatusButton"
+          );
+          taskDetailsUpdateTaskStatusButton.innerHTML = updateTaskStatusSvg;
+          taskDetailsUpdateTaskStatusButton.setAttribute(
+            "data-task-id",
+            responseData.task_id
+          );
+
+          //Attributes for the task body
+          const taskDetailsTaskBodyTitle = document.getElementById(
+            "taskDetailsTaskBodyTitle"
+          );
+          taskDetailsTaskBodyTitle.innerText = responseData.task_title;
+          const taskDetailsUpdateTaskTitleInput = document.getElementById(
+            "taskDetailsUpdateTaskTitleInput"
+          );
+          taskDetailsUpdateTaskTitleInput.setAttribute(
+            "placeholder",
+            responseData.task_title
+          );
+
+          //Attribute for the update task importance button
+          const taskDetailsUpdateTaskImportanceButton = document.getElementById(
+            "taskDetailsUpdateTaskImportanceButton"
+          );
+          taskDetailsUpdateTaskImportanceButton.innerHTML = `
           <svg
           viewBox="0 0 24 24"
-          fill = ${importantTaskSvgIconFill}
+          fill = ${responseData.is_important === "true" ? "#1175d3" : "none"}
           width="21px"
           height="21px"
           xmlns="http://www.w3.org/2000/svg"
@@ -231,8 +156,11 @@ document.addEventListener("DOMContentLoaded", () => {
               ></path>
             </g>
           </svg>
-          </button>
           `;
+          taskDetailsUpdateTaskImportanceButton.setAttribute(
+            "data-task-id",
+            responseData.task_id
+          );
           //Display date whereby task is created
           taskCreatedAtDisplay.innerText = responseData.created_at;
         } else {
@@ -254,17 +182,33 @@ document.addEventListener("DOMContentLoaded", () => {
   /////////////////////////////////////////////////////////////////////////////////////
   function updateTaskImportance(event) {
     const target = event.target;
+    const markTaskAsImportantButton = target.closest(
+      ".markTaskAsImportantButton"
+    );
     // Check if the clicked element has the class "markTaskAsImportantButton"
-    if (target.closest(".markTaskAsImportantButton")) {
+    if (markTaskAsImportantButton) {
+      console.log(2);
       const taskId = target.closest(".taskContainer").dataset.taskId;
 
       const callbackForUpdateTaskImportance = (
         responseStatus,
         responseData
       ) => {
-        console.log(responseData);
         if (responseStatus == 200) {
-          window.location.reload();
+          console.log(responseData);
+          let markTaskAsImportantSvg = markTaskAsImportantButton.querySelector(
+            ".markTaskAsImportantSvg"
+          );
+          if (responseData.is_important === "true") {
+            //If task is updated as important
+            markTaskAsImportantSvg.setAttribute("fill", "#1175d3");
+          } else if (responseData.is_important === "false") {
+            //If task is updated as not important
+            markTaskAsImportantSvg.setAttribute("fill", "none");
+          }
+
+          // Call displayTaskDetails again to sync SVG color
+          displayTaskDetails(event);
         } else {
           alert(responseData.message);
         }
@@ -280,17 +224,61 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
   ////////////////////////////////////////////////////////////////////////////////////
-  // Mark task as complete (Task container)
+  // Update task status (Task container)
   /////////////////////////////////////////////////////////////////////////////////////
   function updateTaskStatus(event) {
     const target = event.target;
 
     if (target.closest(".taskCompleteButton")) {
-      const taskId = target.closest(".taskContainer").dataset.taskId;
-
+      const taskContainer = target.closest(".taskContainer");
+      const taskId = taskContainer.dataset.taskId;
+      //Update task status button
+      const taskCompleteButton = taskContainer.querySelector(
+        ".taskCompleteButton"
+      );
+      //Container for Completed task
+      const completedTaskDisplayContainer = document.getElementById(
+        "completedTaskDisplayContainer"
+      );
+      //Container for incomplete task
+      const incompleteTaskDisplayContainer = document.getElementById(
+        "incompleteTaskDisplayContainer"
+      );
       const callbackForUpdateTaskStatus = (responseStatus, responseData) => {
         if (responseStatus == 200) {
-          window.location.reload();
+          // Call displayTaskDetails again to sync SVG color
+          displayTaskDetails(event);
+          if (responseData.status == "Incomplete") {
+            const taskCompleteSvg = `
+            <svg height="21px" width="21px" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" fill="#000000">
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+            <g id="SVGRepo_iconCarrier">
+                <path fill="#1175d3" d="M512 896a384 384 0 100-768 384 384 0 000 768zm0 64a448 448 0 110-896 448 448 0 010 896z"></path>
+                <path fill="#1175d3" d="M745.344 361.344a32 32 0 0145.312 45.312l-288 288a32 32 0 01-45.312 0l-160-160a32 32 0 1145.312-45.312L480 626.752l265.344-265.408z" class="incompleteTaskButtonTickSvg"></path>
+            </g>
+            </svg>
+            `;
+            //If task is incomplete as the complete button is clicked, move task to the incomplete container
+            incompleteTaskDisplayContainer.appendChild(taskContainer);
+            //Change the svg color
+            taskCompleteButton.innerHTML = taskCompleteSvg;
+          } else if (responseData.status == "Completed") {
+            const taskCompleteSvg = `
+            <svg height="21px" width="21px" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" fill="#000000">
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+            <g id="SVGRepo_iconCarrier">
+                <circle cx="512" cy="512" r="448" fill="#1175d3"></circle>
+                <path fill="#FFFFFF" d="M745.344 361.344a32 32 0 0145.312 45.312l-288 288a32 32 0 01-45.312 0l-160-160a32 32 0 1145.312-45.312L480 626.752l265.344-265.408z"></path>
+            </g>
+            </svg>
+            `;
+            //If task is completed as the complete button is clicked, move task to the completed container
+            completedTaskDisplayContainer.appendChild(taskContainer);
+            //Change the svg color
+            taskCompleteButton.innerHTML = taskCompleteSvg;
+          }
         } else {
           alert(responseData.message);
         }
@@ -306,14 +294,52 @@ document.addEventListener("DOMContentLoaded", () => {
       );
     }
   }
+
+  ///////////////////////////////////////////////////////////////////////////////////
+  // Update task title  by task id (Task details)
+  /////////////////////////////////////////////////////////////////////////////////////
+  function updateTaskTitle(event) {
+    const target = event.target;
+    const taskContainer = target.closest(".taskContainer");
+    const taskId = taskContainer.dataset.taskId;
+    const updateTaskTitleInput = taskContainer.querySelector(
+      ".updateTaskTitleInput"
+    );
+    const taskBodyTitle = taskContainer.querySelector(".taskBodyTitle");
+    //Everytime when a user input on the update task input, a query willl be sent 
+    updateTaskTitleInput.addEventListener("input", (event) => {
+      const data = {
+        task_title:  updateTaskTitleInput.value
+      }
+      const callbackForUpdateTaskTitle = (responseStatus, responseData) => {
+        if (responseStatus == 200) {
+          //Set the placeholder to the value of the updated input
+          updateTaskTitleInput.setAttribute(
+            "placeholder",
+            updateTaskTitleInput.value
+          );
+          //Set the task title to the value of the updated input
+          taskBodyTitle.innerText = updateTaskTitleInput.value;
+
+          displayTaskDetails(event)
+        }else{
+          alert(responseData.message)
+        }
+      };
+
+      //Query to update task title
+      fetchMethod(currentUrl + `/api/tasks/${taskId}/title`, callbackForUpdateTaskTitle, 'PATCH', data, token)
+    });
+  }
   ////////////////////////////////////////////////////////////////////////////////////
   // Event listener for task display container
   /////////////////////////////////////////////////////////////////////////////////////
   const taskDisplayContainer = document.getElementById("taskDisplayContainer");
-  taskDisplayContainer.addEventListener("click", (event) => {
+  taskDisplayContainer.addEventListener("click", async (event) => {
+    updateTaskStatus(event);
     updateTaskImportance(event);
+    updateTaskTitle(event);
     displayTaskDetails(event);
-    updateTaskStatus(event)
   });
 
   ///////////////////////////////////////////////////////////////////////////////////
@@ -337,6 +363,33 @@ document.addEventListener("DOMContentLoaded", () => {
       currentUrl + `/api/tasks/${taskId}`,
       callbackForDeleteTask,
       "DELETE",
+      null,
+      token
+    );
+  });
+
+  ///////////////////////////////////////////////////////////////////////////////////
+  // Update task status  by task id (Task details)
+  /////////////////////////////////////////////////////////////////////////////////////
+  const taskDetailsUpdateTaskStatusButton = document.getElementById(
+    "taskDetailsUpdateTaskStatusButton"
+  );
+  taskDetailsUpdateTaskStatusButton.addEventListener("click", () => {
+    const taskId = taskDetailsUpdateTaskStatusButton.dataset.taskId;
+    const callbackForUpdateTaskStatus = (responseStatus, responseData) => {
+      console.log(responseStatus);
+      if (responseStatus == 200) {
+        window.location.reload();
+      } else {
+        alert(responseData.message);
+      }
+    };
+
+    //Fetch query to update task status
+    fetchMethod(
+      currentUrl + `/api/tasks/${taskId}/status`,
+      callbackForUpdateTaskStatus,
+      "PATCH",
       null,
       token
     );

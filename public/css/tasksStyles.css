@@ -256,8 +256,11 @@
   align-items: center;
   padding: 0 16px;
   margin: 0 0 8px 0;
+  cursor: pointer;
 }
-
+.taskContainer:hover{
+  background-color: #E4E4E4;
+}
 .taskBody {
   width: 96%;
   height: 100%;
@@ -304,10 +307,10 @@
 }
 /* Task details styles*/
 #taskDetailsContainer {
+  display: none;
   border-left: solid 1px #cccccc;
   width: 370px;
   padding: 20px 16px 0 16px;
-  display: none;
   flex-direction: column;
   justify-content: space-between;
 }
