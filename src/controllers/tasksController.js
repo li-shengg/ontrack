@@ -30,6 +30,37 @@ module.exports.createNonImportantTask = (req, res, next) => {
     });
   }
 };
+///////////////////////////////////////////////////////////////////////////////////
+// Create important
+/////////////////////////////////////////////////////////////////////////////////////
+module.exports.createImportantTask = (req,res,next) =>{
+  try{
+    const data = {
+      userId: res.locals.userId,
+      taskTitle: req.body.task_title,
+      isImportant: "true",
+      status: "Incomplete",
+    };
+
+    tasksModel.insertSingleTask(data, (error, results) => {
+      if (error) {
+        console.log("Error creating new task: ", error);
+        res.status(500).json({
+          message: "Internal Server Error creating new task.",
+        });
+      } else {
+        res.locals.taskId = results.insertId;
+        next();
+      }
+    });
+  }catch(error){
+    console.log("Internal Server Error: ", error);
+    res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////////
 // Read task by id task id
@@ -84,6 +115,33 @@ module.exports.readTasksByUserId = (req, res) => {
     });
   }
 };
+///////////////////////////////////////////////////////////////////////////////////
+// Read important task by user id
+/////////////////////////////////////////////////////////////////////////////////////
+module.exports.readImportantTasksByUserId = (req,res) =>{
+  try{
+    const data = {
+      userId: req.params.userId,
+      isImportant: 'true'
+    };
+
+    tasksModel.readTaskByTaskImportanceAndUserId(data, (error, results) => {
+      if (error) {
+        console.log("Error reading important task by user id: ", error);
+        res.status(500).json({
+          message: "Internal Server Error reading important task by user id.",
+        });
+      } else {
+        res.status(200).json(results);
+      }
+    });
+  }catch(error){
+    console.log("Internal Server Error: ", error);
+    res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
+}
 
 ///////////////////////////////////////////////////////////////////////////////////
 // Delete task by task id

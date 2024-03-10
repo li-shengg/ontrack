@@ -11,6 +11,13 @@ router.post(
   tasksController.createNonImportantTask,
   tasksController.readTaskByTaskId
 );
+// Create a task for the "important" list
+router.post(
+  "/important",
+  jwtMiddleware.verifyToken,
+  tasksController.createImportantTask,
+  tasksController.readTaskByTaskId
+);
 
 // Delete task by task id
 router.delete(

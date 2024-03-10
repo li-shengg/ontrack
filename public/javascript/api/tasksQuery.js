@@ -41,7 +41,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const target = event.target;
     const taskContainer = target.closest(".taskContainer");
     if (taskContainer) {
-      console.log(1);
       //Task ID of the clicked task
       const taskId = taskContainer.dataset.taskId;
       const taskCreatedAtDisplay = document.getElementById(
@@ -187,7 +186,6 @@ document.addEventListener("DOMContentLoaded", () => {
     );
     // Check if the clicked element has the class "markTaskAsImportantButton"
     if (markTaskAsImportantButton) {
-      console.log(2);
       const taskId = target.closest(".taskContainer").dataset.taskId;
 
       const callbackForUpdateTaskImportance = (

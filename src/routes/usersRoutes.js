@@ -48,5 +48,10 @@ router.get(
   "/:userId/tasks/all",
   tasksController.readTasksByUserId
 )
+//Read all user important tasks
+router.get(
+  "/:userId/tasks/important",
+  tasksController.readImportantTasksByUserId
+)
 
 module.exports = router;

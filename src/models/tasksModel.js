@@ -28,6 +28,16 @@ module.exports.readTaskByUserId = (data,callback) =>{
     pool.query(SQLSTATEMENT, VALUES, callback)
 }
 
+module.exports.readTaskByTaskImportanceAndUserId = (data, callback) =>{
+    const SQLSTATEMENT = `
+    SELECT * FROM Tasks WHERE is_important = ? AND user_id = ?;
+    `
+    const VALUES = [data.isImportant, data.userId]
+
+    pool.query(SQLSTATEMENT, VALUES, callback)
+}
+
+
 module.exports.deleteTaskByTaskId = (data, callback) =>{
     const SQLSTATEMENT = `
     DELETE FROM Tasks WHERE task_id = ?;

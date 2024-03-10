@@ -47,9 +47,7 @@ module.exports.readListByListId = (req, res) => {
           message: "Internal Server Error reading list by list id.",
         });
       } else {
-        res.status(201).json({
-          message: "List created",
-        });
+        res.status(201).json(results[0]);
       }
     });
   } catch (error) {
