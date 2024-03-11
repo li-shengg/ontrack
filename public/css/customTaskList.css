@@ -1,0 +1,7 @@
+#updateCustomListNameInput{
+    display: none;
+    padding: 6px 8px;
+    font-size: var(--fs-h2);
+    border: solid 1px;
+    border-radius: 7px;
+}

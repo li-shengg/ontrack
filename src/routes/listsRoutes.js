@@ -19,5 +19,8 @@ router.delete(
   userListController.checkListBelongToUser,
   listsController.deleteListByListId
 );
+//Read list by list id
+router.get('/:listId', listsController.readListByListId)
+
 
 module.exports = router;

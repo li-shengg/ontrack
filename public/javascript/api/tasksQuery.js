@@ -5,7 +5,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const token = localStorage.getItem("token");
   const userId = localStorage.getItem("userId");
 
-
   ///////////////////////////////////////////////////////////////////////////////////
   // Delete task by task id (Delete context menu)
   /////////////////////////////////////////////////////////////////////////////////////
@@ -304,11 +303,11 @@ document.addEventListener("DOMContentLoaded", () => {
       ".updateTaskTitleInput"
     );
     const taskBodyTitle = taskContainer.querySelector(".taskBodyTitle");
-    //Everytime when a user input on the update task input, a query willl be sent 
+    //Everytime when a user input on the update task input, a query willl be sent
     updateTaskTitleInput.addEventListener("input", (event) => {
       const data = {
-        task_title:  updateTaskTitleInput.value
-      }
+        task_title: updateTaskTitleInput.value,
+      };
       const callbackForUpdateTaskTitle = (responseStatus, responseData) => {
         if (responseStatus == 200) {
           //Set the placeholder to the value of the updated input
@@ -319,14 +318,22 @@ document.addEventListener("DOMContentLoaded", () => {
           //Set the task title to the value of the updated input
           taskBodyTitle.innerText = updateTaskTitleInput.value;
 
-          displayTaskDetails(event)
-        }else{
-          alert(responseData.message)
+          displayTaskDetails(event);
+
+         
+        } else {
+          alert(responseData.message);
         }
       };
 
       //Query to update task title
-      fetchMethod(currentUrl + `/api/tasks/${taskId}/title`, callbackForUpdateTaskTitle, 'PATCH', data, token)
+      fetchMethod(
+        currentUrl + `/api/tasks/${taskId}/title`,
+        callbackForUpdateTaskTitle,
+        "PATCH",
+        data,
+        token
+      );
     });
   }
   ////////////////////////////////////////////////////////////////////////////////////

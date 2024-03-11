@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
           createdListTabsContainer.innerHTML += `
           <li>
-          <a href="#" data-list-id = ${responseData.list_id} class = 'createdList'>
+          <a href="customTaskList.html?list_id=${responseData.list_id}" data-list-id = ${responseData.list_id} class = 'createdList'>
           <svg
             width="24px"
             height="24px"
@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
           const newList = document.createElement("li");
           //Add list id into data
           newList.innerHTML += `
-              <a href="#" data-list-id = ${list.list_id} class = 'createdList'>
+              <a href="customTaskList.html?list_id=${list.list_id}" data-list-id = ${list.list_id} class = 'createdList'>
                  <svg
                    width="24px"
                    height="24px"
