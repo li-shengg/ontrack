@@ -37,7 +37,7 @@ module.exports.createNewList = (req, res, next) => {
 module.exports.readListByListId = (req, res) => {
   try {
     const data = {
-      listId: res.locals.listId,
+      listId: res.locals.listId || req.params.listId,
     };
 
     listsModel.readListByListId(data, (error, results) => {
@@ -47,7 +47,8 @@ module.exports.readListByListId = (req, res) => {
           message: "Internal Server Error reading list by list id.",
         });
       } else {
-        res.status(201).json(results[0]);
+        const status = req.method === 'POST'?201:200
+        res.status(status).json(results[0]);
       }
     });
   } catch (error) {
@@ -83,6 +84,33 @@ module.exports.deleteListByListId = (req, res) => {
     });
   }
 };
+///////////////////////////////////////////////////////////////////////////////////
+// Update list by list id
+/////////////////////////////////////////////////////////////////////////////////////
+module.exports.updateListByListId = (req,res, next) =>{
+  try{
+    const data = {
+      listId: req.params.listId,
+      listName: req.body.list_name
+    };
+
+    listsModel.updateListByListId(data, (error,results)=>{
+      if(error){
+        console.log("Error updating list by list id: ", error);
+        res.status(500).json({
+          message: "Internal Server Error updating list by list id.",
+        });
+      }else{
+        next()
+      }
+    })
+  }catch(error){
+    console.log("Internal Server Error: ", error);
+    res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
+}
 
 ///////////////////////////////////////////////////////////////////////////////////
 // Create daily list for new user

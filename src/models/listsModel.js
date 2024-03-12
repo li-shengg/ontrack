@@ -29,3 +29,13 @@ module.exports.deleteListByListId = (data, callback) =>{
 
     pool.query(SQLSTATEMENT, VALUES, callback)
 }
+
+module.exports.updateListByListId = (data, callback) =>{
+    const SQLSTATEMENT = `
+    UPDATE Lists SET list_name = ? WHERE list_id = ?;
+    `
+
+    const VALUES = [data.listName, data.listId]
+
+    pool.query(SQLSTATEMENT, VALUES, callback)
+}

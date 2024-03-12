@@ -15,23 +15,50 @@ document.addEventListener("DOMContentLoaded", () => {
   ///////////////////////////////////////////////////////////////////////////////////
   // Display list name
   /////////////////////////////////////////////////////////////////////////////////////
-  function displayListDetails(){
-    const customListName = document.getElementById('customListName')
-    const callbackForDisplayListName = (responseStatus, responseData) =>{
-        console.log(responseStatus)
-        if(responseStatus == 200){
-            customListName.innerText = responseData.list_name
-        }else{
-            alert(responseData.message)
-        }
+  function displayCustomListName(){
+    const callbackForDisplayCustomListName = (responseStatus, responseData) =>{
+      if(responseStatus == 200){
+        const customListName = document.getElementById('customListName')
+        const updateCustomListNameInput = document.getElementById('updateCustomListNameInput')
+        //Display current list name
+        customListName.innerHTML = responseData.list_name
+        //Set the value of the update input to the current list name
+        updateCustomListNameInput.value = responseData.list_name
+      }else{
+        alert(responseData.message)
+      }
     }
-
-     //Make query to backend
-     fetchMethod(
-        currentUrl + `/api/lists/${listId}`,
-        callbackForDisplayListName
-      );
+  
+    //Make query ti backend
+    fetchMethod(currentUrl + `/api/lists/${listId}`, callbackForDisplayCustomListName)
   }
 
-  displayListDetails()
+  displayCustomListName()
+
+  ///////////////////////////////////////////////////////////////////////////////////
+  // Update List Name by List Id
+  /////////////////////////////////////////////////////////////////////////////////////
+  const updateCustomListNameInput = document.getElementById('updateCustomListNameInput')
+  updateCustomListNameInput.addEventListener('input', ()=>{
+    const data = {
+      list_name: updateCustomListNameInput.value
+    }
+
+    const callbackForUpdateCustomListName = (responseStatus, responseData) =>{
+      if(responseStatus == 200){
+        const customListName = document.getElementById('customListName')
+        const updateCustomListNameInput = document.getElementById('updateCustomListNameInput')
+        //Display current list name
+        customListName.innerHTML = responseData.list_name
+        //Set the value of the update input to the current list name
+        updateCustomListNameInput.value = responseData.list_name
+      }else{
+        alert(responseData.message)
+      }
+    }
+
+    // Make query to update list name
+    fetchMethod(currentUrl + `/api/lists/${listId}`, callbackForUpdateCustomListName, 'PUT' ,data, token)
+  })
+
 });
