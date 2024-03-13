@@ -13,9 +13,9 @@ module.exports.createUserListRelationship = (req, res, next) => {
 
     userListsModel.insertSingleUserListRelationship(data, (error,results)=>{
         if(error){
-            console.log("Error creating new list: ", error);
+            console.log("Error creating new user list relationship: ", error);
             res.status(500).json({
-              message: "Internal Server Error creating new list.",
+              message: "Internal Server Error creating new user list relationship.",
             });
         }else{
            next()

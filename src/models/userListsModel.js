@@ -2,7 +2,7 @@ const pool = require('../services/db')
 
 module.exports.insertSingleUserListRelationship = (data, callback) =>{
     const SQLSTATEMENT = `
-    INSERT INTO UserLists (user_id, list_id) VALUES
+    INSERT INTO UserList (user_id, list_id) VALUES
     (?, ?);
     `
 
@@ -15,7 +15,7 @@ module.exports.insertSingleUserListRelationship = (data, callback) =>{
 module.exports.readNonDefaultListByUserId  = (data, callback) =>{
     const SQLSTATEMENT = `
     SELECT * FROM Lists
-    INNER JOIN UserLists ON Lists.list_id = UserLists.list_id
+    INNER JOIN UserList ON Lists.list_id = UserList.list_id
     WHERE user_id = ? AND is_default = ?;
     `
 
@@ -27,7 +27,7 @@ module.exports.readNonDefaultListByUserId  = (data, callback) =>{
 
 module.exports.readUserListsByUserIdAndListId = (data, callback) =>{
     const SQLSTATEMENT = `
-    SELECT * FROM UserLists
+    SELECT * FROM UserList
     WHERE user_id = ? AND list_id = ?
     `
 

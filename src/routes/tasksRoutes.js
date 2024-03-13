@@ -3,7 +3,8 @@ const router = express.Router();
 
 const tasksController = require("../controllers/tasksController");
 const jwtMiddleware = require("../middlewares/jwtMiddleware");
-
+const userListController = require("../controllers/userListController");
+const taskListController = require("../controllers/taskListController");
 // Create a task for the "all tasks" list
 router.post(
   "/all",
@@ -16,6 +17,16 @@ router.post(
   "/important",
   jwtMiddleware.verifyToken,
   tasksController.createImportantTask,
+  tasksController.readTaskByTaskId
+);
+
+// Create a task for the custom list user created
+router.post(
+  "/lists/:listId",
+  jwtMiddleware.verifyToken,
+  userListController.checkListBelongToUser,
+  tasksController.createNonImportantTask,
+  taskListController.createTaskListRelationship,
   tasksController.readTaskByTaskId
 );
 

@@ -3,8 +3,7 @@ const router = express.Router();
 const jwtMiddleware = require("../middlewares/jwtMiddleware");
 const listsController = require("../controllers/listsController");
 const userListController = require("../controllers/userListController");
-const { readListByListId } = require("../models/listsModel");
-
+const taskListController = require("../controllers/taskListController");
 //Create new list
 router.post(
   "/",
@@ -32,4 +31,6 @@ router.put(
   listsController.readListByListId
 );
 
+//Get task under the list
+router.get("/:listId/tasks", taskListController.readTasksByListId);
 module.exports = router;

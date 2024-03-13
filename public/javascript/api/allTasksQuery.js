@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
             </button>
           </li>
           `;
-          createTaskInput.value = ''
+          createTaskInput.value = "";
         } else {
           alert(responseData.message);
         }
@@ -219,6 +219,16 @@ document.addEventListener("DOMContentLoaded", () => {
             completedTaskDisplayContainer.append(completedTask);
           }
         });
+
+        //Deciding to display completed task or not
+        if (completedTaskDisplayContainer.children.length == 0) {
+          console.log(completedTaskDisplayContainer.children.length);
+          document.getElementById("completedTasksSection").style.display =
+            "none";
+        } else {
+          document.getElementById("completedTasksSection").style.display =
+            "block";
+        }
       } else {
         console.log(responseData);
       }

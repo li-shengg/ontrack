@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", () => {
     hideUpdateTaskTitleInput(event);
   });
 
-
   ///////////////////////////////////////////////////////////////////////////////////
   // Hide task action menu
   /////////////////////////////////////////////////////////////////////////////////////
@@ -25,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
   taskDisplayContainer.addEventListener("contextmenu", (event) => {
     event.preventDefault();
     const target = event.target;
-    const taskContainer = target.closest(".taskContainer")
+    const taskContainer = target.closest(".taskContainer");
     if (taskContainer) {
       const taskActionMenu = document.getElementById("taskActionMenu");
       if (taskActionMenu.style.display == "block") {
@@ -55,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
       ".updateTaskTitleInput"
     );
     const taskBodyTitles = document.querySelectorAll(".taskBodyTitle");
-  
+
     // Check if the click target is not inside a .taskContainer element and the inputs are visible
     if (
       !taskContainer &&
@@ -75,10 +74,16 @@ document.addEventListener("DOMContentLoaded", () => {
   ///////////////////////////////////////////////////////////////////////////////////
   // Toggle edit task input
   /////////////////////////////////////////////////////////////////////////////////////
-  function toggleEditTaskInput(event){
+  function toggleEditTaskInput(event) {
     const target = event.target;
     const taskContainer = target.closest(".taskContainer");
-    if (taskContainer && !(target.closest('.taskCompleteButton') || target.closest('.markTaskAsImportantButton'))) {
+    if (
+      taskContainer &&
+      !(
+        target.closest(".taskCompleteButton") ||
+        target.closest(".markTaskAsImportantButton")
+      )
+    ) {
       const updateTaskTitleInput = taskContainer.querySelector(
         ".updateTaskTitleInput"
       );
@@ -97,16 +102,22 @@ document.addEventListener("DOMContentLoaded", () => {
   ///////////////////////////////////////////////////////////////////////////////////
   // Toggle task details container
   /////////////////////////////////////////////////////////////////////////////////////
-  function toggleTaskDetailsContainer(event){
+  function toggleTaskDetailsContainer(event) {
     const target = event.target;
     const taskContainer = target.closest(".taskContainer");
-    if (taskContainer && !(target.closest('.taskCompleteButton') || target.closest('.markTaskAsImportantButton'))) {
+    if (
+      taskContainer &&
+      !(
+        target.closest(".taskCompleteButton") ||
+        target.closest(".markTaskAsImportantButton")
+      )
+    ) {
       //Display task details
       const taskDetailsContainer = document.getElementById(
         "taskDetailsContainer"
       );
 
-      if ((taskDetailsContainer.style.display = 'none')) {
+      if ((taskDetailsContainer.style.display = "none")) {
         taskDetailsContainer.style.display = "flex";
 
         //Reset the color of all other task container
@@ -124,8 +135,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // EVent listener for task display container
   /////////////////////////////////////////////////////////////////////////////////////
   taskDisplayContainer.addEventListener("click", (event) => {
-    toggleEditTaskInput(event)
-    toggleTaskDetailsContainer(event)
+    toggleEditTaskInput(event);
+    toggleTaskDetailsContainer(event);
   });
 
   ///////////////////////////////////////////////////////////////////////////////////
@@ -148,21 +159,25 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-
-  
   ///////////////////////////////////////////////////////////////////////////////////
   // Show/ Hide completed tasks
   /////////////////////////////////////////////////////////////////////////////////////
-  const openCloseCompletedTasksSectionButton = document.getElementById('openCloseCompletedTasksSectionButton')
-  openCloseCompletedTasksSectionButton.addEventListener('click', ()=>{
-    const completedTaskDisplayContainer = document.getElementById('completedTaskDisplayContainer')
-    const openCloseCompletedTasksSectionButtonSvg = document.getElementById('openCloseCompletedTasksSectionButtonSvg')
-    if(completedTaskDisplayContainer.classList.contains('collapsed')){
-      completedTaskDisplayContainer.classList.remove('collapsed')
-      openCloseCompletedTasksSectionButtonSvg.style.transform = 'rotate(90deg)'
-    }else{
-      completedTaskDisplayContainer.classList.add('collapsed')
-      openCloseCompletedTasksSectionButtonSvg.style.transform = 'rotate(0deg)'
+  const openCloseCompletedTasksSectionButton = document.getElementById(
+    "openCloseCompletedTasksSectionButton"
+  );
+  openCloseCompletedTasksSectionButton.addEventListener("click", () => {
+    const completedTaskDisplayContainer = document.getElementById(
+      "completedTaskDisplayContainer"
+    );
+    const openCloseCompletedTasksSectionButtonSvg = document.getElementById(
+      "openCloseCompletedTasksSectionButtonSvg"
+    );
+    if (completedTaskDisplayContainer.classList.contains("collapsed")) {
+      completedTaskDisplayContainer.classList.remove("collapsed");
+      openCloseCompletedTasksSectionButtonSvg.style.transform = "rotate(90deg)";
+    } else {
+      completedTaskDisplayContainer.classList.add("collapsed");
+      openCloseCompletedTasksSectionButtonSvg.style.transform = "rotate(0deg)";
     }
-  })
+  });
 });

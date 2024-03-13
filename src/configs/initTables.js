@@ -1,8 +1,8 @@
 const pool = require("../services/db");
 
 const SQLSTATEMENT = `
-DROP TABLE IF EXISTS UserLists;
-DROP TABLE IF EXISTS TasksLists;
+DROP TABLE IF EXISTS UserList;
+DROP TABLE IF EXISTS TaskList;
 DROP TABLE IF EXISTS Tasks;
 DROP TABLE IF EXISTS Lists;
 DROP TABLE IF EXISTS Users;
@@ -30,7 +30,7 @@ CREATE TABLE Tasks(
   FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE
 );
 
-CREATE TABLE UserLists (
+CREATE TABLE UserList (
   user_id INT,
   list_id INT,
   PRIMARY KEY (user_id, list_id),
@@ -38,7 +38,7 @@ CREATE TABLE UserLists (
   FOREIGN KEY (list_id) REFERENCES Lists(list_id) ON DELETE CASCADE
 );
 
-CREATE TABLE TasksLists(
+CREATE TABLE TaskList(
   task_id INT,
   list_id INT,
   PRIMARY KEY (task_id, list_id),
