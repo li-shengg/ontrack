@@ -115,6 +115,35 @@ module.exports.readTasksByUserId = (req, res) => {
     });
   }
 };
+
+///////////////////////////////////////////////////////////////////////////////////
+// Search all user tasks
+/////////////////////////////////////////////////////////////////////////////////////
+module.exports.searchAllUsersTasks = (req,res,next) =>{
+  try{
+    const data = {
+      userId: res.locals.userId,
+    }
+
+    tasksModel.readTaskByUserId(data, (error, results) => {
+      if (error) {
+        console.log("Error reading task by user id: ", error);
+        res.status(500).json({
+          message: "Internal Server Error reading task by user id.",
+        });
+      } else {
+        res.locals.allUserTasks = results
+        next()
+      }
+    });
+  }catch(error){
+    console.log("Internal Server Error: ", error);
+    res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
+}
+
 ///////////////////////////////////////////////////////////////////////////////////
 // Read important task by user id
 /////////////////////////////////////////////////////////////////////////////////////

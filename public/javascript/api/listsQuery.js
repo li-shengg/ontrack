@@ -6,6 +6,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const userId = localStorage.getItem("userId");
 
   ///////////////////////////////////////////////////////////////////////////////////
+  // Get list id from the url
+  /////////////////////////////////////////////////////////////////////////////////////
+  url = new URL(document.URL);
+  const urlParams = url.searchParams;
+  const listId = urlParams.get("list_id");
+  ///////////////////////////////////////////////////////////////////////////////////
   // Create lists
   /////////////////////////////////////////////////////////////////////////////////////
   const newListInput = document.getElementById("newListInput");
@@ -52,8 +58,8 @@ document.addEventListener("DOMContentLoaded", () => {
           ${responseData.list_name}
        </a>
        </li>
-          `
-          newListInput.value = ''
+          `;
+          newListInput.value = "";
         } else {
           //If there is an error
           alert(responseData.message);
@@ -82,6 +88,12 @@ document.addEventListener("DOMContentLoaded", () => {
       if (responseStatus == 200) {
         responseData.forEach((list) => {
           const newList = document.createElement("li");
+          //If the list id match the current url list id, make the list active
+          if(listId){
+            if(listId == list.list_id){
+              newList.classList+='activeTaskTab'
+            }
+          }
           //Add list id into data
           newList.innerHTML += `
               <a href="customTaskList.html?list_id=${list.list_id}" data-list-id = ${list.list_id} class = 'createdList'>
@@ -115,6 +127,8 @@ document.addEventListener("DOMContentLoaded", () => {
           //Appen new list to container
           createdListTabsContainer.append(newList);
         });
+
+        console.log(6);
       } else {
         alert(responseData.message);
       }
