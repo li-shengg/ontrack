@@ -25,36 +25,30 @@ document.addEventListener("DOMContentLoaded", () => {
       const callbackForCreateNewList = (responseStatus, responseData) => {
         if (responseStatus == 201) {
           //If create successfully
-          const createdListTabsContainer = document.getElementById(
-            "createdListTabsContainer"
+          const customListsContainer = document.getElementById(
+            "customListsContainer"
           );
 
-          createdListTabsContainer.innerHTML += `
+          customListsContainer.innerHTML += `
           <li>
           <a href="customTaskList.html?list_id=${responseData.list_id}" data-list-id = ${responseData.list_id} class = 'createdList'>
           <svg
-            width="24px"
-            height="24px"
-            viewBox="0 0 24 24"
-            fill="none"
+            class="w-6 h-6 text-gray-800 dark:text-white"
+            aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="none"
+            viewBox="0 0 24 24"
           >
-            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-            <g
-              id="SVGRepo_tracerCarrier"
+            <path
+              stroke="currentColor"
               stroke-linecap="round"
-              stroke-linejoin="round"
-            ></g>
-            <g id="SVGRepo_iconCarrier">
-              <path
-                d="M8 6.00067L21 6.00139M8 12.0007L21 12.0015M8 18.0007L21 18.0015M3.5 6H3.51M3.5 12H3.51M3.5 18H3.51M4 6C4 6.27614 3.77614 6.5 3.5 6.5C3.22386 6.5 3 6.27614 3 6C3 5.72386 3.22386 5.5 3.5 5.5C3.77614 5.5 4 5.72386 4 6ZM4 12C4 12.2761 3.77614 12.5 3.5 12.5C3.22386 12.5 3 12.2761 3 12C3 11.7239 3.22386 11.5 3.5 11.5C3.77614 11.5 4 11.7239 4 12ZM4 18C4 18.2761 3.77614 18.5 3.5 18.5C3.22386 18.5 3 18.2761 3 18C3 17.7239 3.22386 17.5 3.5 17.5C3.77614 17.5 4 17.7239 4 18Z"
-                stroke="#000000"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              ></path>
-            </g>
+              stroke-width="0.8"
+              d="M9 8h10M9 12h10M9 16h10M4.99 8H5m-.02 4h.01m0 4H5"
+            />
           </svg>
+
           ${responseData.list_name}
        </a>
        </li>
@@ -81,8 +75,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // Display list by user id
   /////////////////////////////////////////////////////////////////////////////////////
   function displayAllUserLists() {
-    const createdListTabsContainer = document.getElementById(
-      "createdListTabsContainer"
+    const customListsContainer = document.getElementById(
+      "customListsContainer"
     );
     const callbackForDisplayAllUserLists = (responseStatus, responseData) => {
       if (responseStatus == 200) {
@@ -97,38 +91,30 @@ document.addEventListener("DOMContentLoaded", () => {
           //Add list id into data
           newList.innerHTML += `
               <a href="customTaskList.html?list_id=${list.list_id}" data-list-id = ${list.list_id} class = 'createdList'>
-                 <svg
-                   width="24px"
-                   height="24px"
-                   viewBox="0 0 24 24"
-                   fill="none"
-                   xmlns="http://www.w3.org/2000/svg"
-                 >
-                   <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                   <g
-                     id="SVGRepo_tracerCarrier"
-                     stroke-linecap="round"
-                     stroke-linejoin="round"
-                   ></g>
-                   <g id="SVGRepo_iconCarrier">
-                     <path
-                       d="M8 6.00067L21 6.00139M8 12.0007L21 12.0015M8 18.0007L21 18.0015M3.5 6H3.51M3.5 12H3.51M3.5 18H3.51M4 6C4 6.27614 3.77614 6.5 3.5 6.5C3.22386 6.5 3 6.27614 3 6C3 5.72386 3.22386 5.5 3.5 5.5C3.77614 5.5 4 5.72386 4 6ZM4 12C4 12.2761 3.77614 12.5 3.5 12.5C3.22386 12.5 3 12.2761 3 12C3 11.7239 3.22386 11.5 3.5 11.5C3.77614 11.5 4 11.7239 4 12ZM4 18C4 18.2761 3.77614 18.5 3.5 18.5C3.22386 18.5 3 18.2761 3 18C3 17.7239 3.22386 17.5 3.5 17.5C3.77614 17.5 4 17.7239 4 18Z"
-                       stroke="#000000"
-                       stroke-width="2"
-                       stroke-linecap="round"
-                       stroke-linejoin="round"
-                     ></path>
-                   </g>
-                 </svg>
+              <svg
+                class="w-6 h-6 text-gray-800 dark:text-white"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-width="0.8"
+                  d="M9 8h10M9 12h10M9 16h10M4.99 8H5m-.02 4h.01m0 4H5"
+                />
+              </svg>
+  
                  ${list.list_name}
               </a>
   
               `;
           //Appen new list to container
-          createdListTabsContainer.append(newList);
+          customListsContainer.append(newList);
         });
-
-        console.log(6);
       } else {
         alert(responseData.message);
       }

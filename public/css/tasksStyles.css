@@ -1,149 +1,39 @@
-
-/* Tool Bar styles*/
-#tasksToolBarContainer {
-  padding: 0px 15px;
-  height: 40px;
-  border-bottom: solid 1px #cccccc;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-#mainTaskAppSidebarToggler,
-#tasksToolBarSorting {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  cursor: pointer;
-}
-
-#mainTaskAppSidebarToggler h2,
-#tasksToolBarSorting h2 {
-  font-size: var(--fs-normal);
-}
-
-#mainTaskAppSidebarToggler:hover,
-#tasksToolBarSorting:hover {
-  color: #1175d3;
-}
-
-#mainTaskAppSidebarToggler:hover path,
-#tasksToolBarSorting:hover path {
-  stroke: #1175d3;
-  fill: #1175d3;
-}
-
 /* Main task app styles*/
 #mainTaskAppContainer {
   height: calc(100vh - 48px - 41px);
   display: flex;
 }
 
-/* Main task app styles: Sidebar*/
-#mainTaskAppSidebar {
-  display: block;
-  float: left;
-  width: 300px;
-  height: 100%;
-  border-right: solid 1px #cccccc;
-}
-
-#defaultTaskTabsContainer {
-  margin: 20px 0 15px 0;
-  padding: 0 10px 10px 0;
-  border-bottom: solid 1px #cccccc;
-}
-
-.taskTabContainer li {
-  height: 45px;
-  cursor: pointer;
-}
-
-.taskTabContainer li a {
-  height: 100%;
-  width: 100%;
-  padding: 0 0 0 20px;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-#defaultTaskTabsContainer li:hover,
-#createdListTabsContainer li:hover {
-  background-color: #f0f0f0;
-}
-
-.activeTaskTab {
-  background-color: #f0f0f0;
-}
-
-#myListsTabContainer small {
-  margin: 20px;
-}
-
-#newListInputContainer {
-  display: flex;
-  align-items: center;
-  padding: 0 0 0 20px;
-  height: 36px;
-  margin-top: 10px;
-}
-
-#newListInputContainer:hover,
-#newListInputContainer:hover input {
-  background-color: #f0f0f0;
-}
-
-#newListInputContainer input {
-  padding: 0 0 0 22px;
-  height: 100%;
-  width: 100%;
-  border: none;
-  font-size: var(--fs-normal);
-}
-
-#newListInputContainer input::placeholder {
-  color: #1175d3;
-}
-#newListInputContainer input:focus {
-  outline: none;
-  border-color: transparent;
-}
-#createdListTabsContainer {
-  margin: 20px 0 0 0;
-  padding: 0 10px 0 0;
-}
-
-/* List action menu*/
-.actionMenu {
-  display: none;
-  position: absolute;
-  background-color: white;
-  border: solid 1px #cccccc;
-  border-radius: 7px;
-  padding: 5px 0;
-  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-}
-
-.actionMenu li {
-  width: 160px;
-  height: 35px;
-}
-
-.actionMenu button {
-  width: 100%;
-  height: 100%;
-  font-size: var(--fs-small);
-  display: flex;
-  align-items: center;
-  gap: 17px;
-  color: red;
-}
-
-.actionMenu button:hover {
-  background-color: #f0f0f0;
-}
-
+  /* List action menu*/
+  .actionMenu {
+    display: none;
+    position: absolute;
+    background-color: white;
+    border: solid 1px #cccccc;
+    border-radius: 7px;
+    padding: 5px 0;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  }
+  
+  .actionMenu li {
+    width: 160px;
+    height: 35px;
+  }
+  
+  .actionMenu button {
+    width: 100%;
+    height: 100%;
+    font-size: var(--fs-small);
+    display: flex;
+    align-items: center;
+    gap: 17px;
+    color: red;
+  }
+  
+  .actionMenu button:hover {
+    background-color: #f0f0f0;
+  }
+  
 /* Main task app*/
 #mainTaskApp {
   display: flex;

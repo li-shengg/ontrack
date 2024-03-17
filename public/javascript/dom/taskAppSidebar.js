@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   ///////////////////////////////////////////////////////////////////////////////////
   // Toggle main task app sidebar
   /////////////////////////////////////////////////////////////////////////////////////
+  /*
   const mainTaskAppSidebarToggler = document.getElementById(
     "mainTaskAppSidebarToggler"
   );
@@ -14,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
       //If display is none, click will become block
       mainTaskAppSidebar.style.display = "block";
   });
-
+*/
   ///////////////////////////////////////////////////////////////////////////////////
   // Hide items when any part of the document is clicked
   /////////////////////////////////////////////////////////////////////////////////////
@@ -23,11 +24,49 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   ///////////////////////////////////////////////////////////////////////////////////
+  // Change length of sidebar
+  /////////////////////////////////////////////////////////////////////////////////////
+  const sidebarResizeDraggable = document.getElementById(
+    "sidebarResizeDraggable"
+  );
+  let isMouseDown = false;
+  sidebarResizeDraggable.addEventListener("mousedown", (event) => {
+  const sidebarNav = document.getElementById('sidebarNav')
+   //Change the isMouseDown to true to indicate mouse is pressed
+   isMouseDown = true
+  //Get the initial X axis of the sidebar
+   const initialX = event.pageX
+   //Get the initial width of the sidebar
+   const initialWidth = sidebarNav.offsetWidth
+   function onMouseDown(event){
+    if(isMouseDown){
+      //If mouse is pressed, calculate new width of the sidebar
+      const newWidth = initialWidth + (event.pageX - initialX)
+
+      //Apply new width of sidebar
+      sidebarNav.style.width = newWidth + 'px'
+    }
+   }
+
+   function onMouseUp(){
+    //set the is mouse down to false to indicate that mouse is up
+    isMouseDown = false
+    //Remove all event listner to calculate width
+    document.removeEventListener('mouseover', onMouseUp)
+    document.removeEventListener('mousemove', onMouseDown)
+  }
+
+  //Event Listener for mouse move
+  document.addEventListener('mousemove', onMouseDown)
+  //Event Listener for mouse up
+  document.addEventListener('mouseup', onMouseUp )
+
+  });
+
+  ///////////////////////////////////////////////////////////////////////////////////
   // Hide list action menu
   /////////////////////////////////////////////////////////////////////////////////////
-  const createdListTabsContainerWrapper = document.getElementById(
-    "createdListTabsContainerWrapper"
-  );
+  const customListsContainer = document.getElementById("customListsContainer");
   //Function to hide the menu
   function hideListActionMenu() {
     //Set display to none
@@ -37,7 +76,8 @@ document.addEventListener("DOMContentLoaded", () => {
   ///////////////////////////////////////////////////////////////////////////////////
   // Toggle list action menu
   /////////////////////////////////////////////////////////////////////////////////////
-  createdListTabsContainerWrapper.addEventListener("contextmenu", (event) => {
+  customListsContainer.addEventListener("contextmenu", (event) => {
+    console.log("dadasdas");
     event.preventDefault();
     const target = event.target;
     //If clicked element is the list that is created
