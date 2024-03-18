@@ -15,6 +15,7 @@
     <script src="javascript/api/queryCommands.js" defer></script>
     <script src="javascript/api/listsQuery.js" defer></script>
     <script src="javascript/api/searchQuery.js" defer></script>
+    <script src="javascript/dom/sidebarNav.js" defer></script>
   </head>
   <body>
     <main>
@@ -23,7 +24,7 @@
         <nav id="sidebarNav">
           <!--Account and settings-->
           <div id="sidebarNavHeader">
-            <a href="#" >
+            <a href="#">
               <svg
                 fill="#000000"
                 height="24px"
@@ -283,6 +284,9 @@
               <span id="usernameDisplay"><!--Display username-->LS</span>
             </button>
           </div>
+
+          <!--sidebar resize indicator-->
+          <div id="sidebarResizeDraggable"></div>
         </nav>
 
         <!--Search results container-->

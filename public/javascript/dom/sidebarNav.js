@@ -1,4 +1,17 @@
 document.addEventListener("DOMContentLoaded", () => {
+
+
+  ///////////////////////////////////////////////////////////////////////////////////
+  //  Load sidebar width
+  /////////////////////////////////////////////////////////////////////////////////////
+  function loadSidebarNavWidth(){
+    const sidebarNavWidth = localStorage.getItem('sidebarNavWidth')
+
+    //Load the most recent sidebar width
+    document.getElementById('sidebarNav').style.width = sidebarNavWidth + 'px'
+  }
+  loadSidebarNavWidth()
+
   ///////////////////////////////////////////////////////////////////////////////////
   // Toggle main task app sidebar
   /////////////////////////////////////////////////////////////////////////////////////
@@ -45,6 +58,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
       //Apply new width of sidebar
       sidebarNav.style.width = newWidth + 'px'
+
+      //Store the sidebar width into the local storage, so that when page loads, sidebar width remians the same
+      localStorage.setItem('sidebarNavWidth', newWidth)
     }
    }
 

@@ -1,3 +1,12 @@
+///////////////////////////////////////////////////////////////////////////////////
+// Import Necessary JS files
+/////////////////////////////////////////////////////////////////////////////////////
+import { actionMenuDeleteTask } from "./deleteTaskQuery.js";
+import { taskDetailsDeleteTask } from "./deleteTaskQuery.js";
+import { taskContainerUpdateTaskImportance } from "./updateTaskImportanceQuery.js";
+import { taskContainerUpdateTaskTitle } from "./updateTaskTitleQuery.js";
+import { displayTaskDetails } from "./displayTaskDetailsQuery.js";
+
 document.addEventListener("DOMContentLoaded", () => {
   ///////////////////////////////////////////////////////////////////////////////////
   // Get user info from local storage
@@ -165,4 +174,19 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   displayAllUserImportantTask();
+
+  ///////////////////////////////////////////////////////////////////////////////////
+  // Call Imported functions
+  /////////////////////////////////////////////////////////////////////////////////////
+  actionMenuDeleteTask(token);
+  taskDetailsDeleteTask(token);
+  ///////////////////////////////////////////////////////////////////////////////////
+  // Event Listener for task container
+  /////////////////////////////////////////////////////////////////////////////////////
+  const taskDisplayContainer = document.getElementById("taskDisplayContainer");
+  taskDisplayContainer.addEventListener("click", (event) => {
+    taskContainerUpdateTaskImportance(event, token);
+    displayTaskDetails(event);
+    taskContainerUpdateTaskTitle(event, token);
+  });
 });

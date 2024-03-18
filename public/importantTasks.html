@@ -13,16 +13,20 @@
     <script src="javascript/api/getCurrentUrl.js" defer></script>
     <script src="javascript/api/queryCommands.js" defer></script>
     <script src="javascript/api/listsQuery.js" defer></script>
-    <script src="javascript/api/tasksQuery.js" defer></script>
-    <script src="javascript/api/importantTasksQuery.js" defer></script>
-    <script src="javascript/dom/taskAppSidebar.js" defer></script>
+    <script type="module" src="javascript/api/updateTaskImportanceQuery.js" defer></script>
+    <script type="module" src="javascript/api/updateTaskStatus.js" defer></script>
+    <script type="module" src="javascript/api/updateTaskTitleQuery.js" defer></script>
+    <script type="module" src="javascript/api/deleteTaskQuery.js" defer></script>
+    <script type="module" src="javascript/api/displayTaskDetailsQuery.js" defer></script>
+    <script type="module" src="javascript/api/importantTasksQuery.js" defer></script>
+    <script src="javascript/dom/sidebarNav.js" defer></script>
     <script src="javascript/dom/tasks.js" defer></script>
   </head>
   <body>
     <main>
       <!--Main task container-->
       <div id="mainTaskAppContainer">
-          <!--====================================================Side bar========================================-->
+        <!--====================================================Side bar========================================-->
         <nav id="sidebarNav">
           <!--Account and settings-->
           <div id="sidebarNavHeader">
@@ -286,6 +290,9 @@
               <span id="usernameDisplay"><!--Display username-->LS</span>
             </button>
           </div>
+
+          <!--sidebar resize indicator-->
+          <div id="sidebarResizeDraggable"></div>
         </nav>
 
         <!--================================================================= Main App =================================================================-->
@@ -413,43 +420,6 @@
                 <ul id="incompleteTaskDisplayContainer">
                   <!--For display of incomplete task-->
                 </ul>
-                <!--Incomplete task section-->
-                <div id="completedTasksSection">
-                  <div id="completedTasksSectionHeader">
-                    <button id="openCloseCompletedTasksSectionButton">
-                      <svg
-                        height="20px"
-                        width="20px"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                        id="openCloseCompletedTasksSectionButtonSvg"
-                      >
-                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                        <g
-                          id="SVGRepo_tracerCarrier"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        ></g>
-                        <g id="SVGRepo_iconCarrier">
-                          <path
-                            d="M8.91003 19.9201L15.43 13.4001C16.2 12.6301 16.2 11.3701 15.43 10.6001L8.91003 4.08008"
-                            stroke="#292D32"
-                            stroke-width="1.5"
-                            stroke-miterlimit="10"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          ></path>
-                        </g>
-                      </svg>
-                    </button>
-                    <span>Completed</span>
-                    <span id="completedTasksCount">10</span>
-                  </div>
-                  <ul id="completedTaskDisplayContainer" class="collapsed">
-                    <!--For display of completed task-->
-                  </ul>
-                </div>
               </div>
             </div>
           </div>
