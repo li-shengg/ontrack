@@ -32,8 +32,9 @@ document.addEventListener("DOMContentLoaded", () => {
   ///////////////////////////////////////////////////////////////////////////////////
   // Hide items when any part of the document is clicked
   /////////////////////////////////////////////////////////////////////////////////////
-  document.addEventListener("click", () => {
+  document.addEventListener("click", (event) => {
     hideListActionMenu();
+    hideUserActionMenu(event)
   });
 
   ///////////////////////////////////////////////////////////////////////////////////
@@ -114,4 +115,38 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
   });
+
+
+  ///////////////////////////////////////////////////////////////////////////////////
+  // Hide User action menu
+  /////////////////////////////////////////////////////////////////////////////////////
+  function hideUserActionMenu(event){
+    const target = event.target
+    const userActionMenu = document.getElementById('userActionMenu');
+    if(userActionMenu.style.display == 'block' && !target.closest('#profileControlsButton')){
+      //Reset the button and action menu
+      document.getElementById('profileControlsButton').style.backgroundColor = ''
+      document.getElementById('userActionMenu').style.display = 'none'
+    }
+  }
+
+
+  ///////////////////////////////////////////////////////////////////////////////////
+  // Toggle user action menu
+  /////////////////////////////////////////////////////////////////////////////////////
+  const profileControlsButton = document.getElementById('profileControlsButton')
+  const userActionMenu = document.getElementById('userActionMenu');
+  profileControlsButton.addEventListener('click', ()=>{
+      // Calculate the position of the button relative to the document
+      const buttonRect = profileControlsButton.getBoundingClientRect();
+      const buttonTop = buttonRect.top + window.scrollY;
+      const buttonLeft = buttonRect.left + window.scrollX;
+  
+      //Set the profile controls button background color
+      profileControlsButton.style.backgroundColor = '#f0f0f0'
+      // Set the position of the action menu
+      userActionMenu.style.display = 'block';
+      userActionMenu.style.top = `${buttonTop - userActionMenu.offsetHeight}px`; // Adjust as needed
+      userActionMenu.style.left = `${buttonLeft}px`; // Adjust as needed
+  })
 });

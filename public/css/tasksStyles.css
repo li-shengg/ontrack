@@ -1,39 +1,46 @@
+#calloutContainer {
+  height: 0;
+  width: 100%;
+  overflow: hidden;
+}
+
 /* Main task app styles*/
 #mainTaskAppContainer {
   height: 100vh;
   display: flex;
 }
 
-  /* List action menu*/
-  .actionMenu {
-    display: none;
-    position: absolute;
-    background-color: white;
-    border: solid 1px #cccccc;
-    border-radius: 7px;
-    padding: 5px 0;
-    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-  }
-  
-  .actionMenu li {
-    width: 160px;
-    height: 35px;
-  }
-  
-  .actionMenu button {
-    width: 100%;
-    height: 100%;
-    font-size: var(--fs-small);
-    display: flex;
-    align-items: center;
-    gap: 17px;
-    color: red;
-  }
-  
-  .actionMenu button:hover {
-    background-color: #f0f0f0;
-  }
-  
+/* List action menu*/
+.actionMenu {
+  display: none;
+  position: absolute;
+  z-index: 10;
+  background-color: white;
+  border: solid 1px #cccccc;
+  border-radius: 7px;
+  padding: 5px 0;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.actionMenu li {
+  width: 160px;
+  height: 35px;
+}
+
+.actionMenu button {
+  width: 100%;
+  height: 100%;
+  font-size: var(--fs-small);
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  color: red;
+}
+
+.actionMenu button:hover {
+  background-color: #f0f0f0;
+}
+
 /* Main task app*/
 #mainTaskApp {
   display: flex;
@@ -43,23 +50,38 @@
   height: 100%;
 }
 
-#mainTaskAppHeaderContainer {
+#mainTaskAppHeader {
   height: 60px;
+  padding: 20px 20px;
+  display: flex;
+  justify-content: space-between;
 }
 
-#mainTaskAppHeader {
+#mainTaskAppHeaderLeft {
   height: 100%;
   display: flex;
   align-items: center;
-  margin: 0 15px 0 15px;
+  gap: 10px;
 }
 
-#mainTaskAppHeader h2 {
+#mainTaskAppHeaderLeft h2 {
   font-size: var(--fs-h2);
   cursor: pointer;
-  padding: 6px 8px;
+}
+#listOptionsButton {
+  border-radius: 7px;
+}
+#listOptionsButton:hover {
+  background-color: #f0f0f0;
+}
+#sortingOptionsButton {
+  border-radius: 7px;
+  padding: 0 5px;
 }
 
+#sortingOptionsButton:hover {
+  background-color: #f0f0f0;
+}
 #tasksContainer {
   flex-grow: 1;
   padding: 0 15px;
@@ -101,14 +123,12 @@
   border-color: transparent;
 }
 /* Task display styles*/
-#taskListContainer{
-  height: calc(100vh - 100px);
-  overflow-y: overlay;
-}
 #taskDisplayContainer {
+  height: calc(100vh - 122px);
+  overflow-y: overlay;
   flex-grow: 1;
 }
-#completedTasksSectionHeader{
+#completedTasksSectionHeader {
   height: 50px;
   padding: 0 16px;
   margin-bottom: 8px;
@@ -117,13 +137,13 @@
   align-items: center;
   gap: 10px;
 }
-#completedTaskDisplayContainer{
+#completedTaskDisplayContainer {
   overflow: hidden;
 }
-#openCloseCompletedTasksSectionButtonSvg{
+#openCloseCompletedTasksSectionButtonSvg {
   transition: 0.2s;
 }
-.collapsed{
+.collapsed {
   height: 0px;
 }
 .taskContainer {
@@ -137,8 +157,8 @@
   margin: 0 0 8px 0;
   cursor: pointer;
 }
-.taskContainer:hover{
-  background-color: #E4E4E4;
+.taskContainer:hover {
+  background-color: #e4e4e4;
 }
 .taskBody {
   width: 96%;
@@ -237,31 +257,33 @@
   outline: none;
   border-color: transparent;
 }
-#taskDetailsFooter{
+#taskDetailsFooter {
   border-top: solid 1px #cccccc;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 16px 0;
 }
-#taskCreatedOnDisplay{
-font-size: var(--fs-small);
+#taskCreatedOnDisplay {
+  font-size: var(--fs-small);
 }
-#hideTaskDetailsButton, #taskDetailsDeleteTaskButton{
+#hideTaskDetailsButton,
+#taskDetailsDeleteTaskButton {
   border-radius: 7px;
   padding: 3px;
 }
-#hideTaskDetailsButton:hover, #taskDetailsDeleteTaskButton:hover{
+#hideTaskDetailsButton:hover,
+#taskDetailsDeleteTaskButton:hover {
   background-color: #f0f0f0;
 }
-#taskNotesTextAreaContainer{
+#taskNotesTextAreaContainer {
   border: solid 1px #cccccc;
   border-radius: 7px;
   margin-top: 10px;
   display: flex;
   align-items: center;
 }
-#taskNotesTextArea{
+#taskNotesTextArea {
   width: 100%;
   padding: 10px 16px;
   resize: none;
@@ -269,7 +291,7 @@ font-size: var(--fs-small);
   border-radius: 7px;
   font-size: var(--fs-normal);
 }
-#taskNotesTextArea:focus{
+#taskNotesTextArea:focus {
   outline: none;
   border-color: transparent;
 }

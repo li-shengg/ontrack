@@ -323,3 +323,35 @@ module.exports.updateUserPasswordByUserId = (req,res) =>{
     });
   }
 }
+
+
+///////////////////////////////////////////////////////////////////////////////////
+// Read user credentials
+/////////////////////////////////////////////////////////////////////////////////////
+module.exports.readUserCredentialsByUserId = (req,res) =>{
+  try{
+    const data = {
+      userId:req.params.userId,
+    }
+
+    usersModel.readUserByUserId(data, (error,results)=>{
+      if(error){
+        console.log("Error reading user by user ID: ", error);
+        res.status(500).json({
+          message: "Internal Server Error reading user by user ID.",
+        });
+      }else{
+       res.status(200).json({
+        user_id: results[0].user_id,
+        username: results[0].username,
+        email: results[0].email
+       })
+      }
+    })
+  }catch(error){
+    console.log("Internal Server Error: ", error);
+    res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
+}

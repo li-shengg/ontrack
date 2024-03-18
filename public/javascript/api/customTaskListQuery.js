@@ -5,7 +5,7 @@ import { actionMenuDeleteTask } from "./deleteTaskQuery.js";
 import { taskDetailsDeleteTask } from "./deleteTaskQuery.js";
 import { taskContainerUpdateTaskImportance } from "./updateTaskImportanceQuery.js";
 import { taskContainerUpdateTaskTitle } from "./updateTaskTitleQuery.js";
-import { twoContainerTaskContainerUpdateTaskStatus } from "./updateTaskStatus.js";
+import { twoContainerTaskContainerUpdateTaskStatus } from "./updateTaskStatusQuery.js";
 import { displayTaskDetails } from "./displayTaskDetailsQuery.js";
 
 document.addEventListener("DOMContentLoaded", () => {

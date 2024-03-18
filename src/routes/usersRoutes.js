@@ -36,6 +36,10 @@ router.put(
   usersController.updateUserPasswordByUserId
 );
 
+
+//Read user credentials
+router.get('/:userId/credentials',   usersController.checkUserExistsByUserId, usersController.readUserCredentialsByUserId)
+
 //Read user lists
 router.get(
   "/:userId/lists",

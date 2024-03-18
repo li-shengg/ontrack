@@ -1,5 +1,5 @@
 ////////////////////////////////////////////////////////////////////////////////////
-// Update task status (Task container)
+// Update task status (Two Task container)
 /////////////////////////////////////////////////////////////////////////////////////
 export function twoContainerTaskContainerUpdateTaskStatus(event, token) {
   const target = event.target;
@@ -79,34 +79,64 @@ export function twoContainerTaskContainerUpdateTaskStatus(event, token) {
   }
 }
 
+////////////////////////////////////////////////////////////////////////////////////
+// Update task status (Single Task container)
+/////////////////////////////////////////////////////////////////////////////////////
+export function singleContainerTaskContainerUpdateTaskStatus(event, token) {
+  const target = event.target;
 
+  if (target.closest(".taskCompleteButton")) {
+    const taskContainer = target.closest(".taskContainer");
+    const taskId = taskContainer.dataset.taskId;
+    //Container for incomplete task
+    const incompleteTaskDisplayContainer = document.getElementById(
+      "incompleteTaskDisplayContainer"
+    );
+    const callbackForUpdateTaskStatus = (responseStatus, responseData) => {
+      if (responseStatus == 200) {
+        //Remove the container (Don't display it)
+        incompleteTaskDisplayContainer.removeChild(taskContainer);
+      } else {
+        alert(responseData.message);
+      }
+    };
 
-  ///////////////////////////////////////////////////////////////////////////////////
-  // Update task status  by task id (Task details)
-  /////////////////////////////////////////////////////////////////////////////////////
-  export function taskDetailsUpdateTaskStatus(){
-    const taskDetailsUpdateTaskStatusButton = document.getElementById(
-        "taskDetailsUpdateTaskStatusButton"
-      );
-      taskDetailsUpdateTaskStatusButton.addEventListener("click", () => {
-        const taskId = taskDetailsUpdateTaskStatusButton.dataset.taskId;
-        const callbackForUpdateTaskStatus = (responseStatus, responseData) => {
-          console.log(responseStatus);
-          if (responseStatus == 200) {
-            window.location.reload();
-          } else {
-            alert(responseData.message);
-          }
-        };
-    
-        //Fetch query to update task status
-        fetchMethod(
-          currentUrl + `/api/tasks/${taskId}/status`,
-          callbackForUpdateTaskStatus,
-          "PATCH",
-          null,
-          token
-        );
-      });
+    //Query to patch task status
+    fetchMethod(
+      currentUrl + `/api/tasks/${taskId}/status`,
+      callbackForUpdateTaskStatus,
+      "PATCH",
+      null,
+      token
+    );
   }
-  
+}
+
+///////////////////////////////////////////////////////////////////////////////////
+// Update task status  by task id (Task details)
+/////////////////////////////////////////////////////////////////////////////////////
+export function taskDetailsUpdateTaskStatus() {
+  const taskDetailsUpdateTaskStatusButton = document.getElementById(
+    "taskDetailsUpdateTaskStatusButton"
+  );
+  taskDetailsUpdateTaskStatusButton.addEventListener("click", () => {
+    const taskId = taskDetailsUpdateTaskStatusButton.dataset.taskId;
+    const callbackForUpdateTaskStatus = (responseStatus, responseData) => {
+      console.log(responseStatus);
+      if (responseStatus == 200) {
+        window.location.reload();
+      } else {
+        alert(responseData.message);
+      }
+    };
+
+    //Fetch query to update task status
+    fetchMethod(
+      currentUrl + `/api/tasks/${taskId}/status`,
+      callbackForUpdateTaskStatus,
+      "PATCH",
+      null,
+      token
+    );
+  });
+}
