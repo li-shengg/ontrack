@@ -8,9 +8,9 @@ document.addEventListener("DOMContentLoaded", () => {
   ///////////////////////////////////////////////////////////////////////////////////
   // Search tasks
   /////////////////////////////////////////////////////////////////////////////////////
-  const searchBarInput = document.getElementById("searchBarInput");
+  const searchInput = document.getElementById("searchInput");
 
-  searchBarInput.addEventListener("input", () => {
+  searchInput.addEventListener("input", () => {
     const callbackForSearchUserTasks = (responseStatus, responseData) => {
       const searchResultTaskDisplayContainer = document.getElementById(
         "searchResultTaskDisplayContainer"
@@ -161,7 +161,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //Make query to backend
     fetchMethod(
-      currentUrl + `/api/search?q=${searchBarInput.value}`,
+      currentUrl + `/api/search?q=${searchInput.value}`,
       callbackForSearchUserTasks,
       "GET",
       null,
