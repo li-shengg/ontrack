@@ -13,12 +13,12 @@ document.addEventListener("DOMContentLoaded", () => {
       )
     ) {
       //Display task details
-      const taskDetailSidebar = document.getElementById(
-        "taskDetailSidebar"
+      const detail = document.querySelector(
+        ".detail"
       );
 
-      if ((taskDetailSidebar.style.display = "none")) {
-        taskDetailSidebar.style.display = "flex";
+      if ((detail.style.display = "none")) {
+        detail.style.display = "flex";
 
         //Reset the color of all other task container
         const allTaskContainer = document.querySelectorAll(".taskContainer");
@@ -35,15 +35,15 @@ document.addEventListener("DOMContentLoaded", () => {
   ///////////////////////////////////////////////////////////////////////////////////
   // Hide task details sidebar
   /////////////////////////////////////////////////////////////////////////////////////
-  const hideTaskDetailSidebarButton = document.getElementById(
-    "hideTaskDetailSidebarButton"
+  const detail__footerCloseButton = document.querySelector(
+    ".detail__footer-close-button"
   );
-  hideTaskDetailSidebarButton.addEventListener("click", () => {
-    const taskDetailSidebar = document.getElementById(
-      "taskDetailSidebar"
+  detail__footerCloseButton.addEventListener("click", () => {
+    const detail = document.querySelector(
+      ".detail"
     );
     //Hide the details container
-    taskDetailSidebar.style.display = "none";
+    detail.style.display = "none";
 
     //Reset back the background color of the task container
     const allTaskContainer = document.querySelectorAll(".taskContainer");
@@ -55,7 +55,8 @@ document.addEventListener("DOMContentLoaded", () => {
    ///////////////////////////////////////////////////////////////////////////////////
   // Event Listener
   /////////////////////////////////////////////////////////////////////////////////////
-  document.addEventListener('click', (event)=>{
+  const taskList = document.querySelector('.task-list')
+  taskList.addEventListener('click', (event)=>{
     toggleTaskDetailsContainer(event)
   })
 });

@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
   ///////////////////////////////////////////////////////////////////////////////////
   // Hide task action menu
   /////////////////////////////////////////////////////////////////////////////////////
-  const taskDisplayContainer = document.getElementById("taskDisplayContainer");
+  const taskList = document.querySelector(".task-list");
   //Function to hide the menu
   function hideTaskActionMenu() {
     //Set display to none
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
   ///////////////////////////////////////////////////////////////////////////////////
   // Toggle task action menu
   /////////////////////////////////////////////////////////////////////////////////////
-  taskDisplayContainer.addEventListener("contextmenu", (event) => {
+  taskList.addEventListener("contextmenu", (event) => {
     event.preventDefault();
     const target = event.target;
     const taskContainer = target.closest(".taskContainer");
@@ -103,7 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
   ///////////////////////////////////////////////////////////////////////////////////
   // EVent listener for task display container
   /////////////////////////////////////////////////////////////////////////////////////
-  taskDisplayContainer.addEventListener("click", (event) => {
+  taskList.addEventListener("click", (event) => {
     toggleEditTaskInput(event);
   });
 
@@ -111,22 +111,22 @@ document.addEventListener("DOMContentLoaded", () => {
   ///////////////////////////////////////////////////////////////////////////////////
   // Show/ Hide completed tasks
   /////////////////////////////////////////////////////////////////////////////////////
-  const openCloseCompletedTasksSectionButton = document.getElementById(
-    "openCloseCompletedTasksSectionButton"
+  const taskList__toggleCompleted = document.querySelector (
+    ".task-list__toggle-completed"
   );
-  openCloseCompletedTasksSectionButton.addEventListener("click", () => {
-    const completedTaskDisplayContainer = document.getElementById(
-      "completedTaskDisplayContainer"
+  taskList__toggleCompleted.addEventListener("click", () => {
+    const taskList__completed  = document.querySelector(
+      ".task-list__completed "
     );
-    const openCloseCompletedTasksSectionButtonSvg = document.getElementById(
-      "openCloseCompletedTasksSectionButtonSvg"
+    const taskList__toggleCompletedIcon = document.querySelector(
+      ".task-list__toggle-completed-icon"
     );
-    if (completedTaskDisplayContainer.classList.contains("collapsed")) {
-      completedTaskDisplayContainer.classList.remove("collapsed");
-      openCloseCompletedTasksSectionButtonSvg.style.transform = "rotate(90deg)";
+    if (taskList__completed.classList.contains("collapsed")) {
+      taskList__completed.classList.remove("collapsed");
+      taskList__toggleCompletedIcon.style.transform = "rotate(90deg)";
     } else {
-      completedTaskDisplayContainer.classList.add("collapsed");
-      openCloseCompletedTasksSectionButtonSvg.style.transform = "rotate(0deg)";
+      taskList__completed.classList.add("collapsed");
+      taskList__toggleCompletedIcon.style.transform = "rotate(0deg)";
     }
   });
 });

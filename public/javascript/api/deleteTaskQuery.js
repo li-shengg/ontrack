@@ -33,11 +33,11 @@ const deleteTaskButton = document.getElementById("deleteTaskButton");
   // Delete task by task id (Task details delete button)
   /////////////////////////////////////////////////////////////////////////////////////
 export function taskDetailsDeleteTask(token){
-    const taskDetailsDeleteTaskButton = document.getElementById(
-        "taskDetailsDeleteTaskButton"
+    const detail__footerDeleteButton = document.querySelector(
+        ".detail__footer-delete-button"
       );
-      taskDetailsDeleteTaskButton.addEventListener("click", () => {
-        const taskId = taskDetailsDeleteTaskButton.dataset.taskId;
+      detail__footerDeleteButton.addEventListener("click", () => {
+        const taskId = detail__footerDeleteButton.dataset.taskId;
         const callbackForDeleteTask = (responseStatus, responseData) => {
           if (responseStatus == 204) {
             window.location.reload();

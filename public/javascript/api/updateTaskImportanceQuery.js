@@ -27,8 +27,6 @@ export  function taskContainerUpdateTaskImportance(event, token) {
             markTaskAsImportantSvg.setAttribute("fill", "none");
           }
 
-          // Call displayTaskDetails again to sync SVG color
-          displayTaskDetails(event);
         } else {
           alert(responseData.message);
         }

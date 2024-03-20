@@ -14,9 +14,11 @@ export function displayTaskDetails(event) {
       //Decide what color to fill when the task is important or not
       if (responseStatus === 200) {
         //Assign task ID to the delete task button
-        document.getElementById("taskDetailsDeleteTaskButton").dataset.taskId =
+        document.querySelector(".detail__footer-delete-button").dataset.taskId =
           taskContainer.dataset.taskId;
-
+        //Assign task ID to the update task details button
+        document.querySelector(".detail__header-update-status-button").dataset.taskId =
+          taskContainer.dataset.taskId;
         //Display style of the update task status button
         let updateTaskStatusSvg;
         if (responseData.status == "Incomplete") {
@@ -69,33 +71,33 @@ export function displayTaskDetails(event) {
             `;
         }
         //Attribites for the update task status button
-        const taskDetailsUpdateTaskStatusButton = document.getElementById(
-          "taskDetailsUpdateTaskStatusButton"
+        const detail__headerUpdateStatusButton = document.querySelector(
+          ".detail__header-update-status-button"
         );
-        taskDetailsUpdateTaskStatusButton.innerHTML = updateTaskStatusSvg;
-        taskDetailsUpdateTaskStatusButton.setAttribute(
+        detail__headerUpdateStatusButton.innerHTML = updateTaskStatusSvg;
+        detail__headerUpdateStatusButton.setAttribute(
           "data-task-id",
           responseData.task_id
         );
 
         //Attributes for the task body
-        const taskDetailsTaskBodyTitle = document.getElementById(
-          "taskDetailsTaskBodyTitle"
+        const detail__headerTitle__text = document.querySelector(
+          ".detail__header-title__text"
         );
-        taskDetailsTaskBodyTitle.innerText = responseData.task_title;
-        const taskDetailsUpdateTaskTitleInput = document.getElementById(
-          "taskDetailsUpdateTaskTitleInput"
+        detail__headerTitle__text.innerText = responseData.task_title;
+        const detail__headerTitle__input = document.querySelector(
+          ".detail__header-title__input"
         );
-        taskDetailsUpdateTaskTitleInput.setAttribute(
+        detail__headerTitle__input.setAttribute(
           "placeholder",
           responseData.task_title
         );
 
         //Attribute for the update task importance button
-        const taskDetailsUpdateTaskImportanceButton = document.getElementById(
-          "taskDetailsUpdateTaskImportanceButton"
+        const detail__headerUpdateImportanceButton = document.querySelector(
+          ".detail__header-update-importance-button"
         );
-        taskDetailsUpdateTaskImportanceButton.innerHTML = `
+        detail__headerUpdateImportanceButton.innerHTML = `
           <svg
           viewBox="0 0 24 24"
           fill = ${responseData.is_important === "true" ? "#1175d3" : "none"}
@@ -119,7 +121,7 @@ export function displayTaskDetails(event) {
             </g>
           </svg>
           `;
-        taskDetailsUpdateTaskImportanceButton.setAttribute(
+        detail__headerUpdateImportanceButton.setAttribute(
           "data-task-id",
           responseData.task_id
         );

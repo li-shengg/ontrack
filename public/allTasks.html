@@ -108,9 +108,6 @@
         </li>
       </ul>
     </div>
-
-
-
   </div>
   <main>
     <!--====================================================Side bar========================================-->
@@ -266,9 +263,7 @@
 
       <!--Tasks-->
       <div id="mainBackground">
-
-
-       <div id="createTask">
+        <div id="createTask">
           <div id="createTaskInputContainer">
             <div id="createTaskInputIcon">
               <svg height="21px" width="21px" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" fill="#1175d3">
@@ -283,20 +278,19 @@
             </div>
             <input type="text" placeholder="New Task" id="createTaskInput" class="createTaskInput" />
           </div>
-       </div>
-
+        </div>
 
         <!--Task display-->
-        <div id="taskDisplayContainer">
-          <ul id="incompleteTaskDisplayContainer">
+        <div class="task-list">
+          <ul class="task-list__incomplete">
             <!--For display of incomplete task-->
           </ul>
           <!--Incomplete task section-->
-          <div id="completedTasksSection">
-            <div id="completedTasksSectionHeader">
-              <button id="openCloseCompletedTasksSectionButton">
+          <div class="task-list__completed-container">
+            <div class="task-list__completed-header">
+              <button class="task-list__toggle-completed">
                 <svg height="20px" width="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-                  id="openCloseCompletedTasksSectionButtonSvg">
+                  class="task-list__toggle-completed-icon">
                   <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                   <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                   <g id="SVGRepo_iconCarrier">
@@ -307,9 +301,9 @@
                 </svg>
               </button>
               <span>Completed</span>
-              <span id="completedTasksCount">10</span>
+              <span class="task-list__completed-count">10</span>
             </div>
-            <ul id="completedTaskDisplayContainer" class="collapsed">
+            <ul class="task-list__completed  collapsed">
               <!--For display of completed task-->
             </ul>
           </div>
@@ -318,25 +312,25 @@
     </div>
 
     <!--Task detail Sideabr-->
-    <div id="taskDetailSidebar">
-      <div id="taskDetailSidebarHeader">
-        <button id="taskDetailSidebarUpdateTaskStatusButton"></button>
+    <div class="detail">
+      <div class="detail__header">
+        <button class="detail__header-update-status-button updateTaskStatusButton"></button>
         <!--Task Body-->
-        <div id="taskDetailsTaskBody">
-          <span id="taskDetailsTaskBodyTitle"></span>
-          <input type="text" id="taskDetailsUpdateTaskTitleInput" />
+        <div class="detail__header-title">
+          <span class="detail__header-title__text"></span>
+          <input type="text" class="detail__header-title__input" />
         </div>
         <!--Button to mark task as important-->
-        <button id="taskDetailSidebarUpdateTaskImportanceButton"></button>
+        <button class="detail__header-update-importance-button"></button>
       </div>
-      <div id="taskDetailSidebarBody">
+      <div class="detail__body">
         <div id="taskNotesTextAreaContainer">
           <textarea rows="auto" placeholder="Add Notes" id="taskNotesTextArea"></textarea>
         </div>
       </div>
 
-      <div id="taskDetailSidebarFooter">
-        <button id="hideTaskDetailSidebarButton" class="taskDetailSidebarFooterButton">
+      <div class="detail__footer">
+        <button class="detail__footer-close-button">
           <svg height="18px" width="18px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
             <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -351,10 +345,10 @@
             </g>
           </svg>
         </button>
-        <div>
+        <div class="detail__footer-info">
           <span id="taskCreatedAtDisplay"></span>
         </div>
-        <button id="taskDetailSidebarDeleteTaskButton" class="taskDetailSidebarFooterButton">
+        <button class="detail__footer-delete-button">
           <svg height="18px" width="18px" viewBox="0 0 24.00 24.00" fill="none" xmlns="http://www.w3.org/2000/svg"
             stroke="#000000" stroke-width="0.00024000000000000003">
             <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -377,7 +371,6 @@
         </button>
       </div>
     </div>
-
   </main>
 </body>
 

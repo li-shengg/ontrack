@@ -301,14 +301,16 @@ main {
     border-color: transparent;
 }
 
-/* Task display styles*/
-#taskDisplayContainer {
+/*=================================================================================================================*/
+/*============================================== Task List Styles =================================================*/
+/*=================================================================================================================*/
+.task-list {
     padding: 0 15px;
     max-height: calc(100vh - 122px);
     overflow-y: overlay;
 }
 
-#completedTasksSectionHeader {
+.task-list__completed-header {
     height: 50px;
     padding: 0 16px;
     margin-bottom: 8px;
@@ -318,11 +320,11 @@ main {
     gap: 10px;
 }
 
-#completedTaskDisplayContainer {
+.task-list__completed {
     overflow: hidden;
 }
 
-#openCloseCompletedTasksSectionButtonSvg {
+.task-list__toggle-completed-icon {
     transition: 0.2s;
 }
 
@@ -330,6 +332,10 @@ main {
     height: 0px;
 }
 
+
+/*=================================================================================================================*/
+/*============================================== Task Container Styles ============================================*/
+/*=================================================================================================================*/
 .taskContainer {
     width: 100%;
     border: solid 1px #cccccc;
@@ -397,10 +403,10 @@ main {
 }
 
 /*=================================================================================================================*/
-/*============================================== Task Detail Sidebar Styles =======================================*/
+/*============================================== Detail styles ====================================================*/
 /*=================================================================================================================*/
 /* Task details styles*/
-#taskDetailSidebar {
+.detail {
     display: none;
     border-left: solid 1px #cccccc;
     width: 370px;
@@ -409,7 +415,7 @@ main {
 }
 
 /* Task details Header*/
-#taskDetailSidebarHeader {
+.detail__header {
     border: solid 1px #cccccc;
     border-radius: 7px;
     height: 52px;
@@ -418,18 +424,17 @@ main {
     padding: 0 16px;
 }
 
-#taskDetailSidebarBody {
-    flex: 1;
-}
-
-#taskDetailsMarkTaskAsCompleteButton,
-#taskDetailsMarkTaskAsImportantButton {
+.detail__header button {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-#taskDetailsTaskBody {
+.detail__body {
+    flex: 1;
+}
+
+.detail__header-title {
     width: 96%;
     height: 100%;
     display: flex;
@@ -438,14 +443,14 @@ main {
     flex-direction: column;
 }
 
-#taskDetailsTaskBodyTitle {
+.detail__header-title__text {
     margin-left: 8px;
     height: fit-content;
     font-size: var(--fs-normal);
     cursor: pointer;
 }
 
-#taskDetailsUpdateTaskTitleInput {
+.detail__header-title__input {
     display: none;
     width: 100%;
     padding: 10px;
@@ -454,17 +459,17 @@ main {
     font-size: var(--fs-normal);
 }
 
-#taskDetailsUpdateTaskTitleInput::placeholder {
+.detail__header-title__input::placeholder {
     color: black;
 }
 
-#taskDetailsUpdateTaskTitleInput:focus {
+.detail__header-title__input:focus {
     outline: none;
     border-color: transparent;
 }
 
 /* Task details Footer*/
-#taskDetailSidebarFooter {
+.detail__footer {
     border-top: solid 1px #cccccc;
     display: flex;
     justify-content: space-between;
@@ -476,12 +481,12 @@ main {
     font-size: var(--fs-small);
 }
 
-.taskDetailSidebarFooterButton {
+.detail__footer button {
     border-radius: 7px;
     padding: 3px;
 }
 
-.taskDetailSidebarFooterButton:hover {
+.detail__footer button:hover {
     background-color: #f0f0f0;
 }
 
@@ -511,12 +516,15 @@ main {
 /*=================================================================================================================*/
 /*============================================== Search ======================================================*/
 /*=================================================================================================================*/
-#taskSearchResultContainer {
+.search-result {
     flex-grow: 1;
     overflow-y: overlay;
-    padding: 8px 16px 0 16px;
+    padding: 8px 0 0 0;
 }
 
+.task-list--search-results {
+    max-height: calc(100vh - 68px);
+}
 
 #searchInputContainer {
     display: flex;
