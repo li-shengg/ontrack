@@ -23,7 +23,16 @@ export function twoContainerTaskContainerUpdateTaskStatus(event, token) {
     );
     const callbackForUpdateTaskStatus = (responseStatus, responseData) => {
       if (responseStatus == 200) {
-        //displayTaskDetails(event);
+        //Detail header update importance button
+        const detail__headerUpdateStatusButton = document.querySelector(
+          ".detail__header-update-status-button"
+        );
+
+        //Task container update importance SVG
+        let taskContainerStatusButton = currentTaskContainer.querySelector(
+          ".updateTaskStatusButton"
+        );
+
         if (responseData.status == "Incomplete") {
           const taskCompleteSvg = `
           <svg height="21px" width="21px" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" fill="#000000">
@@ -37,8 +46,18 @@ export function twoContainerTaskContainerUpdateTaskStatus(event, token) {
           `;
           //If task is incomplete as the complete button is clicked, move task to the incomplete container
           taskList__incomplete.appendChild(currentTaskContainer);
+
+          //Decrease completed count
+          let taskList__completedCount = document.querySelector(
+            ".task-list__completed-count"
+          );
+          taskList__completedCount.innerText = parseInt(taskList__completedCount.innerText) - 1;
           //Change the svg color
-          updateTaskStatusButton.innerHTML = taskCompleteSvg;
+          if (detail__headerUpdateStatusButton.dataset.taskId == taskId) {
+            //If task details is opened and is displaying current task
+            detail__headerUpdateStatusButton.innerHTML = taskCompleteSvg;
+          }
+          taskContainerStatusButton.innerHTML = taskCompleteSvg;
         } else if (responseData.status == "Completed") {
           const taskCompleteSvg = `
           <svg height="21px" width="21px" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" fill="#000000">
@@ -52,8 +71,19 @@ export function twoContainerTaskContainerUpdateTaskStatus(event, token) {
           `;
           //If task is completed as the complete button is clicked, move task to the completed container
           taskList__completed.appendChild(currentTaskContainer);
+
+          //Increment completed count
+          let taskList__completedCount = document.querySelector(
+            ".task-list__completed-count"
+          );
+          taskList__completedCount.innerText = parseInt(taskList__completedCount.innerText) + 1;
+
           //Change the svg color
-          updateTaskStatusButton.innerHTML = taskCompleteSvg;
+          if (detail__headerUpdateStatusButton.dataset.taskId == taskId) {
+            //If task details is opened and is displaying current task
+            detail__headerUpdateStatusButton.innerHTML = taskCompleteSvg;
+          }
+          taskContainerStatusButton.innerHTML = taskCompleteSvg;
         }
 
         //Check if completed task container is empty
@@ -128,8 +158,8 @@ export function singleContainerTaskContainerUpdateTaskStatus(event, token) {
 export function updateTaskStatus(event, token) {
   const target = event.target;
   const updateTaskStatusButton = target.closest(".updateTaskStatusButton");
-  const taskId = updateTaskStatusButton.dataset.taskId;
   if (updateTaskStatusButton) {
+    const taskId = updateTaskStatusButton.dataset.taskId;
     //Determine which task container is being updated
     const allTaskContainer = document.querySelectorAll(".taskContainer");
     let currentTaskContainer;
@@ -138,9 +168,17 @@ export function updateTaskStatus(event, token) {
         currentTaskContainer = taskContainer;
       }
     });
-
     const callbackForUpdateTaskStatus = (responseStatus, responseData) => {
       if (responseStatus == 200) {
+        //Detail header update importance button
+        const detail__headerUpdateStatusButton = document.querySelector(
+          ".detail__header-update-status-button"
+        );
+
+        //Task container update importance SVG
+        let taskContainerStatusButton = currentTaskContainer.querySelector(
+          ".updateTaskStatusButton"
+        );
         //displayTaskDetails(event);
         if (responseData.status == "Incomplete") {
           const taskCompleteSvg = `
@@ -154,7 +192,11 @@ export function updateTaskStatus(event, token) {
           </svg>
           `;
           //Change the svg color
-          updateTaskStatusButton.innerHTML = taskCompleteSvg;
+          if (detail__headerUpdateStatusButton.dataset.taskId == taskId) {
+            //If task details is opened and is displaying current task
+            detail__headerUpdateStatusButton.innerHTML = taskCompleteSvg;
+          }
+          taskContainerStatusButton.innerHTML = taskCompleteSvg;
         } else if (responseData.status == "Completed") {
           const taskCompleteSvg = `
           <svg height="21px" width="21px" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" fill="#000000">
@@ -167,18 +209,11 @@ export function updateTaskStatus(event, token) {
           </svg>
           `;
           //Change the svg color
-          updateTaskStatusButton.innerHTML = taskCompleteSvg;
-        }
-
-        //Check if completed task container is empty
-        if (taskList__completed.children.length === 0) {
-          document.querySelector(
-            ".task-list__completed-container"
-          ).style.display = "none";
-        } else {
-          document.querySelector(
-            ".task-list__completed-container"
-          ).style.display = "block";
+          if (detail__headerUpdateStatusButton.dataset.taskId == taskId) {
+            //If task details is opened and is displaying current task
+            detail__headerUpdateStatusButton.innerHTML = taskCompleteSvg;
+          }
+          taskContainerStatusButton.innerHTML = taskCompleteSvg;
         }
       } else {
         alert(responseData.message);

@@ -8,14 +8,12 @@ document.addEventListener("DOMContentLoaded", () => {
     if (
       taskContainer &&
       !(
-        target.closest(".taskCompleteButton") ||
-        target.closest(".markTaskAsImportantButton")
+        target.closest(".updateTaskImportanceButton") ||
+        target.closest(".updateTaskStatusButton")
       )
     ) {
       //Display task details
-      const detail = document.querySelector(
-        ".detail"
-      );
+      const detail = document.querySelector(".detail");
 
       if ((detail.style.display = "none")) {
         detail.style.display = "flex";
@@ -39,9 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ".detail__footer-close-button"
   );
   detail__footerCloseButton.addEventListener("click", () => {
-    const detail = document.querySelector(
-      ".detail"
-    );
+    const detail = document.querySelector(".detail");
     //Hide the details container
     detail.style.display = "none";
 
@@ -52,11 +48,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-   ///////////////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////////////
   // Event Listener
   /////////////////////////////////////////////////////////////////////////////////////
-  const taskList = document.querySelector('.task-list')
-  taskList.addEventListener('click', (event)=>{
-    toggleTaskDetailsContainer(event)
-  })
+  const taskList = document.querySelector(".task-list");
+  taskList.addEventListener("click", (event) => {
+    toggleTaskDetailsContainer(event);
+  });
 });

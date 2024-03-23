@@ -5,7 +5,7 @@ import { displayAllUserTask } from "./displayTasksQuery.js";
 import { createTaskInAllTask } from "./createTaskQuery.js";
 import { actionMenuDeleteTask } from "./deleteTaskQuery.js";
 import { taskDetailsDeleteTask } from "./deleteTaskQuery.js";
-import { taskContainerUpdateTaskImportance } from "./updateTaskImportanceQuery.js";
+import { updateTaskImportance } from "./updateTaskImportanceQuery.js";
 import { taskContainerUpdateTaskTitle } from "./updateTaskTitleQuery.js";
 import { twoContainerTaskContainerUpdateTaskStatus } from "./updateTaskStatusQuery.js";
 import { displayTaskDetails } from "./displayTaskDetailsQuery.js";
@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
   /////////////////////////////////////////////////////////////////////////////////////
   const taskList = document.querySelector(".task-list");
   taskList.addEventListener("click", (event) => {
-    taskContainerUpdateTaskImportance(event, token);
+    updateTaskImportance(event, token);
     displayTaskDetails(event);
     taskContainerUpdateTaskTitle(event, token);
     twoContainerTaskContainerUpdateTaskStatus(event, token);
@@ -42,5 +42,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const detail__header = document.querySelector(".detail__header");
   detail__header.addEventListener("click", (event) => {
     twoContainerTaskContainerUpdateTaskStatus(event, token);
+    updateTaskImportance(event, token);
   });
 });

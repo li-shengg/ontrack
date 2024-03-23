@@ -252,8 +252,10 @@
       </div>
       <!--Search results container-->
       <div class="search-result">
-        <!--Display -->
-        <div class="task-list task-list--search-results">
+         <!--Display: Lists-->
+         <div class="search-results__list-list"></div>
+        <!--Display: Tasks-->
+        <div class="task-list search-results__task-list">
           <ul class="task-list__tasks">
             <!--Display all search results-->
           </ul>
@@ -264,14 +266,14 @@
     <!--Task detail Sideabr-->
     <div class="detail">
       <div class="detail__header">
-        <button class="detail__header-update-status-button"></button>
+        <button class="detail__header-update-status-button updateTaskStatusButton"></button>
         <!--Task Body-->
         <div class="detail__header-title">
           <span class="detail__header-title__text"></span>
           <input type="text" class="detail__header-title__input" />
         </div>
         <!--Button to mark task as important-->
-        <button class="detail__header-update-importance-button"></button>
+        <button class="detail__header-update-importance-button updateTaskImportanceButton"></button>
       </div>
       <div class="detail__body">
         <div id="taskNotesTextAreaContainer">

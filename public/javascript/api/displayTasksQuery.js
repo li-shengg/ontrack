@@ -50,9 +50,11 @@ export function displayAllUserTask(userId) {
                   }">
                 </div>
 
-             <button class="markTaskAsImportantButton">
+             <button class="updateTaskImportanceButton" data-task-id='${
+               task.task_id
+             }'>
                  <svg
-                 class="w-6 h-6 text-gray-800 dark:text-white markTaskAsImportantSvg"
+                 class="w-6 h-6 text-gray-800 dark:text-white"
                  aria-hidden="true"
                  xmlns="http://www.w3.org/2000/svg"
                  width="24"
@@ -61,7 +63,7 @@ export function displayAllUserTask(userId) {
                  viewBox="0 0 24 24"
                >
                  <path
-                   stroke=${task.is_important === "true" ? "#1175d3" : "black"}
+                   stroke="#1175d3"
                    stroke-width="1"
                    d="M11.083 5.104c.35-.8 1.485-.8 1.834 0l1.752 4.022a1 1 0 0 0 .84.597l4.463.342c.9.069 1.255 1.2.556 1.771l-3.33 2.723a1 1 0 0 0-.337 1.016l1.03 4.119c.214.858-.71 1.552-1.474 1.106l-3.913-2.281a1 1 0 0 0-1.008 0L7.583 20.8c-.764.446-1.688-.248-1.474-1.106l1.03-4.119A1 1 0 0 0 6.8 14.56l-3.33-2.723c-.698-.571-.342-1.702.557-1.771l4.462-.342a1 1 0 0 0 .84-.597l1.753-4.022Z"
                  />
@@ -108,9 +110,11 @@ export function displayAllUserTask(userId) {
                   }">
                 </div>
                 
-             <button class="markTaskAsImportantButton">
+             <button class="updateTaskImportanceButton" data-task-id='${
+               task.task_id
+             }'>
                  <svg
-                 class="w-6 h-6 text-gray-800 dark:text-white markTaskAsImportantSvg"
+                 class="w-6 h-6 text-gray-800 dark:text-white"
                  aria-hidden="true"
                  xmlns="http://www.w3.org/2000/svg"
                  width="24"
@@ -119,7 +123,7 @@ export function displayAllUserTask(userId) {
                  viewBox="0 0 24 24"
                >
                  <path
-                   stroke=${task.is_important === "true" ? "#1175d3" : "black"}
+                   stroke="#1175d3"
                    stroke-width="1"
                    d="M11.083 5.104c.35-.8 1.485-.8 1.834 0l1.752 4.022a1 1 0 0 0 .84.597l4.463.342c.9.069 1.255 1.2.556 1.771l-3.33 2.723a1 1 0 0 0-.337 1.016l1.03 4.119c.214.858-.71 1.552-1.474 1.106l-3.913-2.281a1 1 0 0 0-1.008 0L7.583 20.8c-.764.446-1.688-.248-1.474-1.106l1.03-4.119A1 1 0 0 0 6.8 14.56l-3.33-2.723c-.698-.571-.342-1.702.557-1.771l4.462-.342a1 1 0 0 0 .84-.597l1.753-4.022Z"
                  />
@@ -140,6 +144,14 @@ export function displayAllUserTask(userId) {
           ".task-list__completed-container"
         ).style.display = "block";
       }
+
+      const taskList__completedCount = document.querySelector(
+        ".task-list__completed-count"
+      );
+      taskList__completedCount.innerText =
+        parseInt(
+          taskList__completed.querySelectorAll(".taskContainer").length
+        );
     } else {
       console.log(responseData);
     }
@@ -203,9 +215,11 @@ export function displayTasksInCustomList(listId) {
                   }">
                 </div>
                 
-             <button class="markTaskAsImportantButton">
+             <button class="updateTaskImportanceButton" data-task-id='${
+               task.task_id
+             }'>
              <svg
-             class="w-6 h-6 text-gray-800 dark:text-white markTaskAsImportantSvg"
+             class="w-6 h-6 text-gray-800 dark:text-white"
              aria-hidden="true"
              xmlns="http://www.w3.org/2000/svg"
              width="24"
@@ -214,7 +228,7 @@ export function displayTasksInCustomList(listId) {
              viewBox="0 0 24 24"
            >
              <path
-               stroke=${task.is_important === "true" ? "#1175d3" : "black"}
+               stroke="#1175d3"
                stroke-width="1"
                d="M11.083 5.104c.35-.8 1.485-.8 1.834 0l1.752 4.022a1 1 0 0 0 .84.597l4.463.342c.9.069 1.255 1.2.556 1.771l-3.33 2.723a1 1 0 0 0-.337 1.016l1.03 4.119c.214.858-.71 1.552-1.474 1.106l-3.913-2.281a1 1 0 0 0-1.008 0L7.583 20.8c-.764.446-1.688-.248-1.474-1.106l1.03-4.119A1 1 0 0 0 6.8 14.56l-3.33-2.723c-.698-.571-.342-1.702.557-1.771l4.462-.342a1 1 0 0 0 .84-.597l1.753-4.022Z"
              />
@@ -261,9 +275,11 @@ export function displayTasksInCustomList(listId) {
                   }">
                 </div>
                 
-             <button class="markTaskAsImportantButton">
+             <button class="updateTaskImportanceButton" data-task-id='${
+               task.task_id
+             }'>
              <svg
-             class="w-6 h-6 text-gray-800 dark:text-white markTaskAsImportantSvg"
+             class="w-6 h-6 text-gray-800 dark:text-white"
              aria-hidden="true"
              xmlns="http://www.w3.org/2000/svg"
              width="24"
@@ -272,7 +288,7 @@ export function displayTasksInCustomList(listId) {
              viewBox="0 0 24 24"
            >
              <path
-               stroke=${task.is_important === "true" ? "#1175d3" : "black"}
+               stroke="#1175d3"
                stroke-width="1"
                d="M11.083 5.104c.35-.8 1.485-.8 1.834 0l1.752 4.022a1 1 0 0 0 .84.597l4.463.342c.9.069 1.255 1.2.556 1.771l-3.33 2.723a1 1 0 0 0-.337 1.016l1.03 4.119c.214.858-.71 1.552-1.474 1.106l-3.913-2.281a1 1 0 0 0-1.008 0L7.583 20.8c-.764.446-1.688-.248-1.474-1.106l1.03-4.119A1 1 0 0 0 6.8 14.56l-3.33-2.723c-.698-.571-.342-1.702.557-1.771l4.462-.342a1 1 0 0 0 .84-.597l1.753-4.022Z"
              />
@@ -293,6 +309,15 @@ export function displayTasksInCustomList(listId) {
           ".task-list__completed-container"
         ).style.display = "block";
       }
+
+      //Display Completed task count
+      const taskList__completedCount = document.querySelector(
+        ".task-list__completed-count"
+      );
+      taskList__completedCount.innerText =
+        parseInt(
+          taskList__completed.querySelectorAll(".taskContainer").length
+        );
     } else {
       alert(responseData.message);
     }
@@ -355,9 +380,9 @@ export function displayAllUserImportantTask(userId) {
               <input type="text" class = "updateTaskTitleInput" placeholder = "${task.task_title}">
             </div>
             
-            <button class="markTaskAsImportantButton">
+            <button class="updateTaskImportanceButton" data-task-id='${task.task_id}'>
             <svg
-            class="w-6 h-6 text-gray-800 dark:text-white markTaskAsImportantSvg"
+            class="w-6 h-6 text-gray-800 dark:text-white"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -386,21 +411,18 @@ export function displayAllUserImportantTask(userId) {
   );
 }
 
-
 ///////////////////////////////////////////////////////////////////////////////////
 // Display Task Search Result
 /////////////////////////////////////////////////////////////////////////////////////
-export function displayTaskSearchResult(token){
+export function displayTaskSearchResult(token) {
   const searchInput = document.getElementById("searchInput");
 
   searchInput.addEventListener("input", () => {
     const callbackForSearchUserTasks = (responseStatus, responseData) => {
-      const taskList__tasks = document.querySelector(
-        ".task-list__tasks"
-      );
+      const taskList__tasks = document.querySelector(".task-list__tasks");
 
       //Reset the display from the previous search
-      taskList__tasks.innerHTML = ''
+      taskList__tasks.innerHTML = "";
       if (responseStatus == 200) {
         responseData.forEach((task) => {
           //If task is incomplete
@@ -409,7 +431,9 @@ export function displayTaskSearchResult(token){
             incompleteTask.setAttribute("data-task-id", task.task_id);
             incompleteTask.classList += "taskContainer";
             incompleteTask.innerHTML += `
-                <button class="updateTaskStatusButton"  data-task-id='${task.task_id}'>
+                <button class="updateTaskStatusButton"  data-task-id='${
+                  task.task_id
+                }'>
                   <svg
                   height="21px"
                   width="21px"
@@ -444,9 +468,11 @@ export function displayTaskSearchResult(token){
                   }">
                 </div>
                 
-             <button class="markTaskAsImportantButton">
+             <button class="updateTaskImportanceButton" data-task-id='${
+               task.task_id
+             }'>
              <svg
-             class="w-6 h-6 text-gray-800 dark:text-white markTaskAsImportantSvg"
+             class="w-6 h-6 text-gray-800 dark:text-white"
              aria-hidden="true"
              xmlns="http://www.w3.org/2000/svg"
              width="24"
@@ -455,21 +481,23 @@ export function displayTaskSearchResult(token){
              viewBox="0 0 24 24"
            >
              <path
-               stroke=${task.is_important === "true" ? "#1175d3" : "black"}
+               stroke="#1175d3"
                stroke-width="1"
                d="M11.083 5.104c.35-.8 1.485-.8 1.834 0l1.752 4.022a1 1 0 0 0 .84.597l4.463.342c.9.069 1.255 1.2.556 1.771l-3.33 2.723a1 1 0 0 0-.337 1.016l1.03 4.119c.214.858-.71 1.552-1.474 1.106l-3.913-2.281a1 1 0 0 0-1.008 0L7.583 20.8c-.764.446-1.688-.248-1.474-1.106l1.03-4.119A1 1 0 0 0 6.8 14.56l-3.33-2.723c-.698-.571-.342-1.702.557-1.771l4.462-.342a1 1 0 0 0 .84-.597l1.753-4.022Z"
              />
            </svg>     
              </button>
           `;
-          taskList__tasks.append(incompleteTask);
+            taskList__tasks.append(incompleteTask);
           } else if (task.status == "Completed") {
             //If task is completed
             const completedTask = document.createElement("li");
             completedTask.setAttribute("data-task-id", task.task_id);
             completedTask.classList += "taskContainer";
             completedTask.innerHTML += `
-                <button class="updateTaskStatusButton"  data-task-id='${task.task_id}'>
+                <button class="updateTaskStatusButton"  data-task-id='${
+                  task.task_id
+                }'>
                   <svg
                   height="21px"
                   width="21px"
@@ -500,9 +528,11 @@ export function displayTaskSearchResult(token){
                   }">
                 </div>
                 
-             <button class="markTaskAsImportantButton">
+             <button class="updateTaskImportanceButton" data-task-id='${
+               task.task_id
+             }'>
              <svg
-             class="w-6 h-6 text-gray-800 dark:text-white markTaskAsImportantSvg"
+             class="w-6 h-6 text-gray-800 dark:text-white"
              aria-hidden="true"
              xmlns="http://www.w3.org/2000/svg"
              width="24"
@@ -511,14 +541,14 @@ export function displayTaskSearchResult(token){
              viewBox="0 0 24 24"
            >
              <path
-               stroke=${task.is_important === "true" ? "#1175d3" : "black"}
+               stroke="#1175d3"
                stroke-width="1"
                d="M11.083 5.104c.35-.8 1.485-.8 1.834 0l1.752 4.022a1 1 0 0 0 .84.597l4.463.342c.9.069 1.255 1.2.556 1.771l-3.33 2.723a1 1 0 0 0-.337 1.016l1.03 4.119c.214.858-.71 1.552-1.474 1.106l-3.913-2.281a1 1 0 0 0-1.008 0L7.583 20.8c-.764.446-1.688-.248-1.474-1.106l1.03-4.119A1 1 0 0 0 6.8 14.56l-3.33-2.723c-.698-.571-.342-1.702.557-1.771l4.462-.342a1 1 0 0 0 .84-.597l1.753-4.022Z"
              />
            </svg>     
              </button>
           `;
-          taskList__tasks.append(completedTask);
+            taskList__tasks.append(completedTask);
           }
         });
       } else {

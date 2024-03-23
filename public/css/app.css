@@ -398,7 +398,7 @@ main {
     display: none;
 }
 
-.taskCompleteButton:hover .incompleteTaskButtonTickSvg {
+.updateTaskStatusButton:hover .incompleteTaskButtonTickSvg {
     display: block;
 }
 
@@ -522,7 +522,7 @@ main {
     padding: 8px 0 0 0;
 }
 
-.task-list--search-results {
+.search-results__task-list {
     max-height: calc(100vh - 68px);
 }
 

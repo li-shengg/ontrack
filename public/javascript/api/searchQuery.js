@@ -1,7 +1,7 @@
 import { displayTaskSearchResult } from "./displayTasksQuery.js";
 import { displayTaskDetails } from "./displayTaskDetailsQuery.js";
 import { actionMenuDeleteTask } from "./deleteTaskQuery.js";
-import { taskContainerUpdateTaskImportance } from "./updateTaskImportanceQuery.js";
+import { updateTaskImportance } from "./updateTaskImportanceQuery.js";
 import { updateTaskStatus } from "./updateTaskStatusQuery.js";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -23,7 +23,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const taskList = document.querySelector(".task-list");
   taskList.addEventListener('click', (event)=>{
     displayTaskDetails(event)
-    taskContainerUpdateTaskImportance(event, token);
+    updateTaskImportance(event, token);
     updateTaskStatus(event, token);
+  })
+
+
+  ///////////////////////////////////////////////////////////////////////////////////
+  // Event Listener for details header
+  /////////////////////////////////////////////////////////////////////////////////////
+  const detail__header = document.querySelector('.detail__header')
+  detail__header.addEventListener('click', (event)=>{
+    updateTaskStatus(event, token);
+    updateTaskImportance(event, token);
   })
 });
