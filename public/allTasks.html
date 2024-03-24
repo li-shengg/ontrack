@@ -30,12 +30,20 @@
 </head>
 
 <body>
+  <!--================================================== IFrame ==================================================-->
+  <!--Settings IFrame-->
+  <iframe src="settingsModal.html" id="settingsModalFrame"></iframe>
   <!--================================================== Callout container ==================================================-->
   <div id="calloutContainer">
     <!--User action menu-->
     <div id="userActionMenu" class="actionMenu">
-      <ul>
+      
         <ul>
+          <li>
+            <button id="settingsButton">
+              Settings
+            </button>
+          </li>
           <li>
             <button id="signOutButton">
               <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -47,7 +55,7 @@
             </button>
           </li>
         </ul>
-      </ul>
+     
     </div>
     <!--List action menu-->
     <div id="listActionMenu" class="actionMenu">

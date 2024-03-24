@@ -106,4 +106,14 @@ document.addEventListener("DOMContentLoaded", () => {
   taskList.addEventListener("click", (event) => {
     toggleEditTaskInput(event);
   });
+
+  
+  ///////////////////////////////////////////////////////////////////////////////////
+  // Event listener for settings modal
+  /////////////////////////////////////////////////////////////////////////////////////
+  const settingsButton = document.getElementById('settingsButton')
+  settingsButton.addEventListener('click', ()=>{
+    const settingsModalFrame = document.getElementById('settingsModalFrame')
+    settingsModalFrame.style.display = 'block'
+  })
 });
