@@ -234,6 +234,34 @@ module.exports.deleteUserByUserId = (req,res) => {
   }
 }
 
+///////////////////////////////////////////////////////////////////////////////////
+// Update username by id user by user ID
+/////////////////////////////////////////////////////////////////////////////////////
+module.exports.updateUsernameByUserId = (req,res, next) =>{
+  try{
+    const data = {
+      userId: req.params.userId,
+      username: req.body.username,
+    }
+    usersModel.updateUsernameByUserId(data, (error,results)=>{
+      if(error){
+        console.log("Error updating user by username: ", error);
+        res.status(500).json({
+          message: "Internal Server Error updating username by user ID.",
+        });
+      }else{
+       next()
+      }
+    })
+
+  }catch(error){
+    console.log("Internal Server Error: ", error);
+    res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////////
 // Update user details by id user by user ID

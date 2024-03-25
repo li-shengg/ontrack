@@ -60,6 +60,18 @@ module.exports.deleteUserByUserId = (data, callback) => {
   pool.query(SQLSTATEMENT, VALUES, callback);
 };
 
+
+module.exports.updateUsernameByUserId = (data, callback) =>{
+  const SQLSTATEMENT = `
+  UPDATE Users SET username = ?
+  WHERE user_id = ?;
+  `;
+
+  const VALUES = [data.username, data.userId];
+
+  pool.query(SQLSTATEMENT, VALUES, callback);
+}
+
 module.exports.updateUserDetailsByUserId = (data, callback) => {
   const SQLSTATEMENT = `
   UPDATE Users SET username = ?, email = ? 

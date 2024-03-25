@@ -4,7 +4,7 @@ const router = express.Router();
 const usersController = require("../controllers/usersController");
 const listsController = require("../controllers/listsController");
 const userListController = require("../controllers/userListController");
-const tasksController = require('../controllers/tasksController')
+const tasksController = require("../controllers/tasksController");
 const jwtMiddleware = require("../middlewares/jwtMiddleware");
 const bcryptMiddleware = require("../middlewares/bcryptMiddleware");
 
@@ -36,9 +36,21 @@ router.put(
   usersController.updateUserPasswordByUserId
 );
 
+//Patch Username
+router.patch(
+  "/:userId/username",
+  jwtMiddleware.verifyToken,
+  usersController.checkUserExistsByUserId,
+  usersController.updateUsernameByUserId,
+  usersController.readUserCredentialsByUserId
+);
 
 //Read user credentials
-router.get('/:userId/credentials',   usersController.checkUserExistsByUserId, usersController.readUserCredentialsByUserId)
+router.get(
+  "/:userId/credentials",
+  usersController.checkUserExistsByUserId,
+  usersController.readUserCredentialsByUserId
+);
 
 //Read user lists
 router.get(
@@ -48,14 +60,11 @@ router.get(
 );
 
 //Read all user tasks
-router.get(
-  "/:userId/tasks/all",
-  tasksController.readTasksByUserId
-)
+router.get("/:userId/tasks/all", tasksController.readTasksByUserId);
 //Read all user important tasks
 router.get(
   "/:userId/tasks/important",
   tasksController.readImportantTasksByUserId
-)
+);
 
 module.exports = router;

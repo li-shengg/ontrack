@@ -1,78 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Settings</title>
-    <!--========================================================== CSS ==========================================================-->
-    <link rel="stylesheet" href="css/reset.css" />
-    <link rel="stylesheet" href="css/styles.css" />
-    <link rel="stylesheet" href="css/settingsModal.css" />
-    <!--========================================================== Javascript ==========================================================-->
-    <script src="./javascript/dom/settingsModal.js" defer></script>
-  </head>
 
-  <body>
-    <div class="settings-modal">
-      <div class="settings-modal__sidebar">
-        <div class="settings-modal__sidebar-header">
-          <h1>Settings</h1>
-        </div>
-        <div>
-          <ul class="settings-modal__sidebar-nav">
-            <li class="active">
-              <a href="#"
-                ><svg
-                  class="w-6 h-6 text-gray-800 dark:text-white"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1"
-                    d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Zm0 0a8.949 8.949 0 0 0 4.951-1.488A3.987 3.987 0 0 0 13 16h-2a3.987 3.987 0 0 0-3.951 3.512A8.948 8.948 0 0 0 12 21Zm3-11a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-                  />
-                </svg>
-                Account</a
-              >
-            </li>
-          </ul>
-        </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Settings</title>
+  <!--========================================================== CSS ==========================================================-->
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/settingsModal.css" />
+  <!--========================================================== Javascript ==========================================================-->
+  <script src="javascript/api/getCurrentUrl.js" defer></script>
+  <script src="javascript/api/queryCommands.js" defer></script>
+  <script src="./javascript/api/settingsQuery.js" defer></script>
+  <script src="./javascript/dom/settingsModal.js" defer></script>
+</head>
+
+<body>
+  <div class="settings-modal">
+    <div class="settings-modal__sidebar">
+      <div class="settings-modal__sidebar-header">
+        <h1>Settings</h1>
       </div>
-
-      <!--Main Contant-->
-      <div class="settings-modal__main">
-        <div class="settings-modal__main-header">
-          <button class="settings-modal__main-header-close-button">
-            <svg
-              class="w-6 h-6 text-gray-800 dark:text-white"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              fill="none"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="1"
-                d="M6 18 17.94 6M18 18 6.06 6"
-              />
-            </svg>
-          </button>
-        </div>
-        <div class="settings-modal__main-body">
-            
-        </div>
+      <div>
+        <ul class="settings-modal__sidebar-nav">
+          <li class="settings-modal__sidebar-item active">
+            <a class="settings-modal__sidebar-link" href="#" data-tab="account"><svg
+                class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+                  d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Zm0 0a8.949 8.949 0 0 0 4.951-1.488A3.987 3.987 0 0 0 13 16h-2a3.987 3.987 0 0 0-3.951 3.512A8.948 8.948 0 0 0 12 21Zm3-11a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+              </svg>
+              Account</a>
+          </li>
+          <li class="settings-modal__sidebar-item">
+            <a class="settings-modal__sidebar-link" href="#" data-tab="general"><svg
+                class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+                  d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Zm0 0a8.949 8.949 0 0 0 4.951-1.488A3.987 3.987 0 0 0 13 16h-2a3.987 3.987 0 0 0-3.951 3.512A8.948 8.948 0 0 0 12 21Zm3-11a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+              </svg>
+              General</a>
+          </li>
+        </ul>
       </div>
     </div>
-  </body>
+
+    <!--Main Contant-->
+    <div class="settings-modal__main">
+      <div class="settings-modal__main-header">
+        <button class="settings-modal__main-header-close-button">
+          <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+            width="24" height="24" fill="none" viewBox="0 0 24 24">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+              d="M6 18 17.94 6M18 18 6.06 6" />
+          </svg>
+        </button>
+      </div>
+      <div class="settings-modal__main-body">
+        <div class="settings-modal__main-body-content" id="tab-account">
+
+          <div class="tab-account__body">
+            <div class="user-credential">
+              <div class="user-credential__username">
+                <small>Username</small>
+                <div class="user-credential__username-display">
+                </div>
+                <input type="text" class="user-credential__username-input hidden">
+              </div>
+
+
+              <div class="user-credential__email">
+                <small>Email</small>
+                <div class="user-credential__email-content">
+                  <span class="user-credential__email-display"></span>
+                  <button>Change Email</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-account__footer hidden">
+            <button class="tab-account__footer-button tab-account__footer-button-cancle">Cancle</button>
+            <button class="tab-account__footer-button tab-account__footer-button-update">Update</button>
+          </div>
+        </div>
+
+        <div class="settings-modal__main-body-content hidden" id="tab-general">General</div>
+      </div>
+    </div>
+  </div>
+</body>
+
 </html>
