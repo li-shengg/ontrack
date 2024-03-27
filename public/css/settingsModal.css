@@ -46,6 +46,7 @@ body{
     align-items: center;
     gap: 8px;
     border-radius: inherit;
+    font-size: var(--fs-small);
 }
 .settings-modal__main{
     flex: 1;
@@ -72,7 +73,7 @@ body{
     display: flex;
     flex-direction: column;
 }
-.tab-account__body{
+.tab__body{
     padding: 0 8px;
     flex: 1;
 }
@@ -81,27 +82,37 @@ body{
     flex-direction: column;
     gap: 10px;
 }
-.user-credential__username-display{
-    cursor: pointer;
+.field-label{
+    font-weight: var(--fw-semi-bold);
+    font-size: var(--fs-normal);
+    margin-bottom: 5px;
 }
+
 .user-credential__username-input{
     height: 30px;
-    padding: 6px  0;
-    border: none;
-    border-bottom: 1px solid;
-    font-size: var(--fs-normal);
+    padding: 8px  12px;
+    border: 1px solid #cccccc;
+    border-radius: 7px;
+    font-size: var(--fs-small);
 }
 .user-credential__username-input:focus {
     outline: none;
-    border-color: transparent;
-    border-bottom: 1px solid;
+    border-color:  1px solid #cccccc;
 }
 
 .user-credential__email-content{
     display: flex;
     justify-content: space-between;
+    font-size: var(--fs-small);
 }
-.tab-account__footer{
+.user-credential__button{
+    height: 32px;
+    padding: 0 12px;
+    border-radius: 7px;
+    font-size: var(--fs-small);
+    background-color: #f0f0f0;
+}
+.tab__footer{
     height: 56px;
     display: flex;
     justify-content: end;
@@ -111,16 +122,55 @@ body{
     border-top: 1px solid #cccccc;
 }
 
-.tab-account__footer-button{
+.footer__button--cancle,  .footer__button--save{
     height: 32px;
     padding: 0 12px;
     border-radius: 7px;
+    font-size: var(--fs-small);
 }
 
-.tab-account__footer-button-cancle{
+.footer__button--cancle{
     background-color: #f0f0f0;
 }
-.tab-account__footer-button-update{
+.footer__button--save{
     background-color: #1175d3;
     color: white;
+}
+
+#tab-change-password{
+    display: flex;
+    flex-direction: column;
+}
+
+.change-password{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.change-password__input-group label{
+    font-weight: var(--fw-semi-bold);
+    font-size: var(--fs-small);
+    margin-bottom: 5px;
+}
+.change-password__input-group input{
+    height: 32px;
+    width: 50%;
+    padding: 0 12px;
+    font-size: var(--fs-small);
+    border:  1px solid #cccccc;
+    border-radius: 7px;
+
+}
+.change-password__input-group input:focus{
+    outline: none;
+    border-color:#cccccc;
+}
+.tab-change-password__footer-button-save:disabled{
+    background-color: #94a7c0; 
+    color: #d1d1d1; 
+    cursor: not-allowed; 
+}
+.change-password__warning-text{
+    color: red;
+    font-size: var(--fs-small);
 }

@@ -26,7 +26,7 @@ router.put(
 );
 
 //Update user password
-router.put(
+router.patch(
   "/:userId/password",
   jwtMiddleware.verifyToken,
   usersController.checkUserExistsByUserId,

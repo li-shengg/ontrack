@@ -31,9 +31,9 @@
 <body>
   <!--================================================== IFrame ==================================================-->
   <!--Settings IFrame-->
-  <iframe src="settingsModal.html" id="settingsModalFrame"></iframe>
+  <iframe src="settingsModal.html" class="d-none position-absolute w-100 h-100 border-none z-2" id="settingsModalFrame"></iframe>
   <!--================================================== Callout container ==================================================-->
-  <div id="calloutContainer">
+  <div class="w-100 h-0 overflow-hidden">
     <!--User action menu-->
     <div id="userActionMenu" class="actionMenu">
 
@@ -146,7 +146,7 @@
         </button>
       </div>
 
-      <div id="sidebarNavBody">
+      <div class="flex-1">
         <!--Search-->
         <a id="searchButton" href="search.html">
           <!--Search svg-->
@@ -271,7 +271,7 @@
       </div>
 
       <!--Tasks-->
-      <div id="mainBackground">
+      <div class="flex-grow-1 d-flex flex-column">
 
 
         <div id="createTask">
@@ -305,14 +305,14 @@
       <div class="detail__header">
         <button class="detail__header-update-status-button updateTaskStatusButton"></button>
         <!--Task Body-->
-        <div class="detail__header-title">
+        <div class="d-flex justify-content-center align-items-start flex-column flex-1 h-100">
           <span class="detail__header-title__text"></span>
           <input type="text" class="detail__header-title__input" />
         </div>
         <!--Button to mark task as important-->
         <button class="detail__header-update-importance-button updateTaskImportanceButton"></button>
       </div>
-      <div class="detail__body">
+      <div class="flex-1">
         <div id="taskNotesTextAreaContainer">
           <textarea rows="auto" placeholder="Add Notes" id="taskNotesTextArea"></textarea>
         </div>

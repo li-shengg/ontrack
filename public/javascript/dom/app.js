@@ -114,6 +114,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const settingsButton = document.getElementById('settingsButton')
   settingsButton.addEventListener('click', ()=>{
     const settingsModalFrame = document.getElementById('settingsModalFrame')
-    settingsModalFrame.style.display = 'block'
+    settingsModalFrame.classList.replace('d-none', 'd-block');
   })
 });
