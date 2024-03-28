@@ -26,9 +26,7 @@ body{
 .settings-modal__sidebar-header h1{
     font-size: var(--fs-normal);
 }
-.settings-modal__sidebar-nav{
-    padding: 0 8px;
-}
+
 .settings-modal__sidebar-item{
     height: 32px;
     border-radius: 7px;
@@ -48,11 +46,7 @@ body{
     border-radius: inherit;
     font-size: var(--fs-small);
 }
-.settings-modal__main{
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
+
 .settings-modal__main-header{
     padding: 12px 8px;
     display: flex;
@@ -69,19 +63,12 @@ body{
     width: 100%;
     height: 100%;
 }
-#tab-account{
-    display: flex;
-    flex-direction: column;
-}
+
 .tab__body{
     padding: 0 8px;
     flex: 1;
 }
-.user-credential{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
+
 .field-label{
     font-weight: var(--fw-semi-bold);
     font-size: var(--fs-normal);
@@ -137,16 +124,7 @@ body{
     color: white;
 }
 
-#tab-change-password{
-    display: flex;
-    flex-direction: column;
-}
 
-.change-password{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
 .change-password__input-group label{
     font-weight: var(--fw-semi-bold);
     font-size: var(--fs-small);

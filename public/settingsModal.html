@@ -22,7 +22,7 @@
           <h1>Settings</h1>
         </div>
         <div>
-          <ul class="settings-modal__sidebar-nav">
+          <ul class="px-2">
             <li class="settings-modal__sidebar-item active">
               <a
                 class="settings-modal__sidebar-link"
@@ -73,12 +73,35 @@
                 General</a
               >
             </li>
+            <li class="settings-modal__sidebar-item">
+              <a class="settings-modal__sidebar-link" href="#" data-tab="theme"
+                ><svg
+                  class="w-[21px] h-[21px] text-gray-800 dark:text-white"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="21"
+                  height="21"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1"
+                    d="M12 7h.01m3.486 1.513h.01m-6.978 0h.01M6.99 12H7m9 4h2.706a1.957 1.957 0 0 0 1.883-1.325A9 9 0 1 0 3.043 12.89 9.1 9.1 0 0 0 8.2 20.1a8.62 8.62 0 0 0 3.769.9 2.013 2.013 0 0 0 2.03-2v-.857A2.036 2.036 0 0 1 16 16Z"
+                  />
+                </svg>
+
+                Theme</a
+              >
+            </li>
           </ul>
         </div>
       </div>
 
       <!--Main Contant-->
-      <div class="settings-modal__main">
+      <div class="d-flex flex-column flex-1">
         <div class="settings-modal__main-header">
           <button class="settings-modal__main-header-close-button">
             <svg
@@ -101,9 +124,10 @@
           </button>
         </div>
         <div class="settings-modal__main-body">
-          <div class="settings-modal__main-body-content" id="tab-account">
+          <!--Account Tab-->
+          <div class="settings-modal__main-body-content d-flex flex-column" id="tab-account">
             <div class="tab__body">
-              <div class="user-credential">
+              <div class="d-flex flex-column gap-3">
                 <div class="user-credential__username">
                   <label class="field-label">Username</label>
                   <input type="text" class="user-credential__username-input" />
@@ -148,19 +172,13 @@
             </div>
           </div>
 
+          <!--Change password Tab-->
           <div
-            class="settings-modal__main-body-content hidden"
-            id="tab-general"
-          >
-            General
-          </div>
-
-          <div
-            class="settings-modal__main-body-content hidden"
+            class="settings-modal__main-body-content d-flex flex-column hidden"
             id="tab-change-password"
           >
             <form class="tab__body">
-              <div class="change-password">
+              <div class="d-flex flex-column gap-3">
                 <div class="change-password__input-group">
                   <label>New Password</label>
                   <input
@@ -189,7 +207,6 @@
                   <span class="change-password__warning-text"></span>
                 </div>
               </div>
-
             </form>
             <div class="tab__footer">
               <button
@@ -206,11 +223,30 @@
             </div>
           </div>
 
+          <!--Chaneg Email Tab-->
           <div
             class="settings-modal__main-body-content hidden"
             id="tab-change-email"
           >
             Change Email
+          </div>
+
+          <!--General Tab-->
+          <div
+            class="settings-modal__main-body-content hidden"
+            id="tab-general"
+          >
+            General
+          </div>
+
+          <!--Theme Tab-->
+          <div class="settings-modal__main-body-content d-flex flex-column hidden" id="tab-theme">
+            <div class="tab__body">
+              <div class="d-flex gap-2">
+                <span>Follow system theme</span>
+                <div>das</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
