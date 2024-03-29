@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function closeSettingsModalFrame() {
     const settingsModalFrame =
       window.parent.document.getElementById("settingsModalFrame");
-      settingsModalFrame.classList.replace('d-block', 'd-none');
+    settingsModalFrame.classList.replace("d-block", "d-none");
   }
   const settingsModal__mainHeaderCloseButton = document.querySelector(
     ".settings-modal__main-header-close-button"
@@ -177,4 +177,75 @@ document.addEventListener("DOMContentLoaded", () => {
   document
     .querySelector(".change-password__old-password-input")
     .addEventListener("input", enableSavePasswordChangesButton);
+
+  ///////////////////////////////////////////////////////////////////////////////////
+  // Display Dark Mode Toggler
+  /////////////////////////////////////////////////////////////////////////////////////
+  function displayDarkModeSwitch() {
+    const localSettings = JSON.parse(localStorage.getItem("localSettings"));
+    const switchThumbContainer = document.querySelector(`#darkModeSwitch> div`);
+    if (localSettings) {
+      if (localSettings.mode == "dark") {
+        switchThumbContainer.classList.replace(
+          "justify-content-start",
+          "justify-content-end"
+        );
+        switchThumbContainer.classList.add("bg-brand");
+        switchThumbContainer.classList.remove("border");
+      } else if (localSettings.mode == "light") {
+        switchThumbContainer.classList.replace(
+          "justify-content-end",
+          "justify-content-start"
+        );
+        switchThumbContainer.classList.remove("bg-brand");
+        switchThumbContainer.classList.add("border");
+      }
+    }
+  }
+
+  displayDarkModeSwitch()
+
+  ///////////////////////////////////////////////////////////////////////////////////
+  // Toggle Dark Mode
+  /////////////////////////////////////////////////////////////////////////////////////
+  document.getElementById("darkModeSwitch").addEventListener("click", () => {
+    //Read Current Mode
+    const currentMode =
+      window.parent.document.querySelector("html").dataset.mode;
+    const switchThumbContainer = document.querySelector(`#darkModeSwitch> div`);
+    console.log(switchThumbContainer.classList);
+    if (currentMode == "light") {
+      switchThumbContainer.classList.replace(
+        "justify-content-start",
+        "justify-content-end"
+      );
+      switchThumbContainer.classList.add("bg-brand");
+      switchThumbContainer.classList.remove("border");
+
+      //Store current mode into the local storage
+      // Update local settings
+      let localSettings =
+        JSON.parse(localStorage.getItem("localSettings")) || {};
+      localSettings.mode = "dark";
+      localStorage.setItem("localSettings", JSON.stringify(localSettings));
+
+      //Set the mode to dark
+      window.parent.document.querySelector("html").dataset.mode = "dark";
+    } else if (currentMode == "dark") {
+      switchThumbContainer.classList.replace(
+        "justify-content-end",
+        "justify-content-start"
+      );
+      switchThumbContainer.classList.remove("bg-brand");
+      switchThumbContainer.classList.add("border");
+
+      // Update local settings
+      let localSettings =
+        JSON.parse(localStorage.getItem("localSettings")) || {};
+      localSettings.mode = "light";
+      localStorage.setItem("localSettings", JSON.stringify(localSettings));
+      //Set the mode to light
+      window.parent.document.querySelector("html").dataset.mode = "light";
+    }
+  });
 });

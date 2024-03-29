@@ -43,6 +43,7 @@
   max-width: 500px;
   height: 100vh;
   border-right: solid 1px #cccccc;
+  background-color: var(--bg-primary);
 }
 
 /*============================================== sidebar resize Draggable ==============================================*/
@@ -152,6 +153,7 @@
   border: none;
   font-size: var(--fs-normal);
   border-radius: 7px;
+  background-color: var(--bg-primary);
 }
 
 #newListInputContainer input::placeholder {
@@ -234,6 +236,7 @@ main {
   padding: 10px;
   flex-grow: 1;
   font-size: var(--fs-normal);
+  background-color: var(--bg-primary);
 }
 
 .createTaskInput::placeholder {
@@ -356,6 +359,7 @@ main {
   width: 370px;
   padding: 20px 16px 0 16px;
   flex-direction: column;
+  background-color: var(--bg-primary);
 }
 
 /* Task details Header*/
@@ -465,6 +469,7 @@ main {
   font-size: var(--fs-h4);
   height: 100%;
   border: none;
+  background-color: var(--bg-secondary);
 }
 
 #searchInput:focus {
