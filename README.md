@@ -31,7 +31,7 @@ npm run start
 ```
 
 ## Running in development
-- Run frontend, backend and mySQL
+- Run frontend, backend and MySQL
 ```
 npm run dev
 ```
