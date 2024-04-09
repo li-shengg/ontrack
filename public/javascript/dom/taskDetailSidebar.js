@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         //Set the background color of the clicked task container
-        taskContainer.style.backgroundColor = "#E4E4E4";
+        taskContainer.style.backgroundColor = "var(--bg-tertiary)";
       }
     }
   }

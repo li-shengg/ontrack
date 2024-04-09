@@ -143,7 +143,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const buttonLeft = buttonRect.left + window.scrollX;
   
       //Set the profile controls button background color
-      profileControlsButton.style.backgroundColor = '#f0f0f0'
+      profileControlsButton.style.backgroundColor = 'var(--bg-tertiary)'
       // Set the position of the action menu
       userActionMenu.style.display = 'block';
       userActionMenu.style.top = `${buttonTop - userActionMenu.offsetHeight}px`; // Adjust as needed

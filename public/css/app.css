@@ -24,7 +24,6 @@
   display: flex;
   align-items: center;
   gap: 17px;
-  color: red;
 }
 
 .actionMenu button:hover {
@@ -91,7 +90,7 @@
 }
 
 #searchButton:hover {
-  background-color: #f0f0f0;
+  background-color: var(--bg-hover);
 }
 
 #defaultListsContainer {
@@ -125,11 +124,11 @@
 }
 
 .taskTabContainer li:hover {
-  background-color: #f0f0f0;
+  background-color: var(--bg-hover);
 }
 
 .activeTaskTab {
-  background-color: #e6f0ff;
+  background-color: var(--bg-active);
 }
 
 #newListInputContainer {
@@ -143,7 +142,7 @@
 
 #newListInputContainer:hover,
 #newListInputContainer:hover input {
-  background-color: #f0f0f0;
+  background-color: var(--bg-hover);
 }
 
 #newListInputContainer input {
@@ -178,7 +177,7 @@
 }
 
 #profileControlsButton:hover {
-  background-color: #f0f0f0;
+  background-color: var(--bg-hover);
 }
 
 /*=================================================================================================================*/
@@ -199,7 +198,7 @@ main {
 }
 
 #listOptionsButton:hover {
-  background-color: #f0f0f0;
+  background-color: var(--bg-hover);
 }
 
 #sortingOptionsButton {
@@ -208,7 +207,7 @@ main {
 }
 
 #sortingOptionsButton:hover {
-  background-color: #f0f0f0;
+  background-color: var(--bg-hover);
 }
 
 #createTaskInputContainer {
@@ -253,7 +252,7 @@ main {
 /*=================================================================================================================*/
 .task-list {
   padding: 0 24px;
-  max-height: calc(100vh - 122px);
+  max-height: calc(100vh - 129px);
   overflow-y: overlay;
 }
 
@@ -296,7 +295,7 @@ main {
 }
 
 .taskContainer:hover {
-  background-color: #e4e4e4;
+  background-color: var(--bg-hover);
 }
 
 .taskBody {
@@ -325,7 +324,7 @@ main {
 }
 
 .updateTaskTitleInput::placeholder {
-  color: black;
+  color:  var(--font-color-primary);;
 }
 
 .updateTaskTitleInput:focus {

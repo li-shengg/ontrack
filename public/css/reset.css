@@ -1,4 +1,9 @@
 /*========================================================== Reset default browser settings ==========================================================*/
+@font-face {
+    font-family: 'Lato';
+    src: url(../ttf/Lato-Regular.ttf);
+}
+
 
 * {
     padding: 0;
